@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "todap": "odjfhgjdnbij",
+    "nottoday": "konvijdnbijfnb",
+    "tod123ap": "3434324"
+  },
+  "login":[
+    {
+      "name": 1,
+      "username": "1qwe",
+      "password": "1qwe"
+    },
+    {
+      "name": 2,
+      "username": "2qwe",
+      "password": "2qwe"
+    }
+  ]
+}
