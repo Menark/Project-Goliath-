@@ -12,6 +12,7 @@
 
 <script>
 import { getPublicComments, getPrivateProfile } from '../utils/api'
+import { HTTP } from '../main'
 
 export default {
   name: 'LolOfLol',
@@ -21,7 +22,7 @@ export default {
     }
   },
   mounted () {
-    this.axios.get('http://localhost:3000')
+    HTTP.get()
       .then((response) => {
         this.info = response.data
       })
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     getPosts: function () {
-      this.axios.get('http://localhost:3000/posts')
+      HTTP.get('/posts')
         .then((response) => {
           this.info = response.data
         })
@@ -50,7 +51,7 @@ export default {
       })
     },
     getUsers: function () {
-      this.axios.get('http://localhost:3000/login')
+      HTTP.get('/login')
         .then((response) => {
           this.info = response.data
         })
@@ -59,10 +60,7 @@ export default {
         })
     },
     logOut: function () {
-      this.$store.dispatch('logOut')
-        .then(() => {
-          this.$router.push('/login')
-        })
+      this.$router.push('/login')
     }
   }
 }

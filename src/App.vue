@@ -1,10 +1,5 @@
 <template>
   <div id="app">
-    <div>
-      <router-link to="/lol">About</router-link><span v-if="isLoggedIn"> | <a @click="logout">Logout</a></span> |
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Registration</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
@@ -14,23 +9,15 @@ export default {
   name: 'App',
   data () {
     return {
-      projects: ''
+      authenticated: false,
+      username: '12345',
+      password: '12345'
     }
   },
-  computed: {
-    isLoggedIn: function () {
-      return this.$store.getters.isLoggedIn
+  mounted () {
+    if (!this.authenticated) {
+      this.$router.push('/logIn')
     }
-  },
-  created: function () {
-    this.$http.interceptors.response.use(undefined, function (err) {
-      return new Promise(function (resolve, reject) {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch('logout')
-        }
-        throw err
-      })
-    })
   }
 }
 </script>

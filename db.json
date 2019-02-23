@@ -18,16 +18,10 @@
     "nottoday": "konvijdnbijfnb",
     "tod123ap": "3434324"
   },
-  "login":[
+  "login": [
     {
-      "name": 1,
       "username": "1qwe",
       "password": "1qwe"
-    },
-    {
-      "name": 2,
-      "username": "2qwe",
-      "password": "2qwe"
     }
   ]
 }

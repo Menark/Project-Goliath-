@@ -3,13 +3,19 @@ import Router from 'vue-router'
 import LolOfLol from '@/components/LolOfLol'
 import FormlogIn from '@/components/FormlogIn'
 import Register from '@/components/Register'
-import store from '../store'
+// import store from '../store'
 
 Vue.use(Router)
 
-let router = new Router({
+export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/',
+      redirect: {
+        name: 'FormlogIn'
+      }
+    },
     {
       path: '/lol',
       name: 'LolOfLol',
@@ -27,17 +33,3 @@ let router = new Router({
     }
   ]
 })
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (store.getters.isLoggedIn) {
-      next()
-      return
-    }
-    next('/login')
-  } else {
-    next()
-  }
-})
-
-export default router
