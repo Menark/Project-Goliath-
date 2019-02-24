@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { HTTP } from '../main'
+
 export default {
   name: 'FormLogIn',
   data () {
@@ -23,11 +25,16 @@ export default {
   },
   methods: {
     logIn: function () {
-      if (this.username === this.$parent.username && this.password === this.$parent.password) {
-        this.$router.push('/lol')
-      } else {
-        console.log('The username and / or password is incorrect')
-      }
+      HTTP.get('/login')
+        .then((response) => {
+          if (this.username === response.data.username && this.password === response.data.password) {
+            this.$router.push('/lol')
+          } else if (this.username === response.data.username && this.password !== response.data.password) {
+            alert('Dear boy, did you forgot your password? So go and fucking recall it!')
+          } else {
+            alert('The username and / or password is incorrect')
+          }
+        })
     }
   }
 }

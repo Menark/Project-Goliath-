@@ -53,7 +53,7 @@ export default {
     getUsers: function () {
       HTTP.get('/login')
         .then((response) => {
-          this.info = response.data
+          this.info = response.data.username
         })
         .catch(function (error) {
           console.log(error)
