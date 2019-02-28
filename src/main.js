@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-// import store from './store'
+import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
@@ -17,14 +17,15 @@ export const HTTP = axios.create({
   }
 })
 
-// const token = localStorage.getItem('token')
-// if (token) {
-//   axios.defaults.headers.common['Authorization'] = token
-// }
+const token = localStorage.getItem('access_token')
+if (token) {
+  axios.defaults.headers.common['Authorization'] = token
+}
 
 //* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   axios,
   render: h => h(App)}).$mount('#app')

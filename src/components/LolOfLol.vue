@@ -13,6 +13,7 @@
 <script>
 import { getPublicComments, getPrivateProfile } from '../utils/api'
 import { HTTP } from '../main'
+import {AUTH_LOGOUT} from '../store/index'
 
 export default {
   name: 'LolOfLol',
@@ -60,7 +61,10 @@ export default {
         })
     },
     logOut: function () {
-      this.$router.push('/login')
+      this.$store.dispatch(AUTH_LOGOUT)
+        .then(() => {
+          this.$router.push('/login')
+        })
     }
   }
 }

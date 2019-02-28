@@ -13,27 +13,25 @@
 </template>
 
 <script>
-import { HTTP } from '../main'
+import {AUTH_REQUEST} from '../store/index'
 
 export default {
   name: 'FormLogIn',
   data () {
     return {
-      username: '',
-      password: ''
+      username: '123',
+      password: '123'
     }
   },
   methods: {
     logIn: function () {
-      HTTP.get('/login')
-        .then((response) => {
-          if (this.username === response.data.username && this.password === response.data.password) {
-            this.$router.push('/lol')
-          } else if (this.username === response.data.username && this.password !== response.data.password) {
-            alert('Dear boy, did you forgot your password? So go and fucking recall it!')
-          } else {
-            alert('The username and / or password is incorrect')
-          }
+      const { username, password } = this
+      this.$store.dispatch(AUTH_REQUEST, { username, password })
+        .then(() => {
+          this.$router.push('/lol')
+        })
+        .catch(function (error) {
+          console.log(error)
         })
     }
   }
