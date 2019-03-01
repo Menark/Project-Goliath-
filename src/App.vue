@@ -9,14 +9,6 @@ export default {
   name: 'App',
   data () {
     return {
-      authenticated: false,
-      username: '12345',
-      password: '12345'
-    }
-  },
-  mounted () {
-    if (!this.authenticated) {
-      this.$router.push('/logIn')
     }
   }
 }

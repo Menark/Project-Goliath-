@@ -3,27 +3,12 @@ import Router from 'vue-router'
 import LolOfLol from '@/components/LolOfLol'
 import FormlogIn from '@/components/FormlogIn'
 import Register from '@/components/Register'
+import ChooseWisely from '@/components/ChooseWisely'
 import store from '../store'
 
 Vue.use(Router)
 
-const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated) {
-    next()
-    return
-  }
-  next('/lol')
-}
-
-const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isAuthenticated) {
-    next()
-    return
-  }
-  next('/login')
-}
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -35,19 +20,33 @@ export default new Router({
     {
       path: '/lol',
       name: 'LolOfLol',
-      component: LolOfLol,
-      beforeEnter: ifAuthenticated
+      component: LolOfLol
     },
     {
       path: '/login',
       name: 'FormlogIn',
-      component: FormlogIn,
-      beforeEnter: ifNotAuthenticated
+      component: FormlogIn
     },
     {
       path: '/register',
       name: 'Register',
       component: Register
+    },
+    {
+      path: '/choose',
+      name: 'ChooseWisely',
+      component: ChooseWisely
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (!store.getters.isAuthenticated) {
+    console.log('Token is out')
+    next('/login')
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -7,6 +7,7 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 const jwt = require('jsonwebtoken')
+// "token": "hello"
 
 Vue.use(Vuex)
 
@@ -34,14 +35,18 @@ export default new Vuex.Store({
     [AUTH_REQUEST]: ({commit, dispatch}, user) => {
       return new Promise((resolve, reject) => {
         commit(AUTH_REQUEST)
-        axios({url: 'http://localhost:3000/login', data: user, method: 'POST'})
+        axios({url: 'http://localhost:3000/login', data: user, method: 'GET'})
           .then((response) => {
-            const token = response.data.token
-            localStorage.setItem('access_token', token)
-            axios.defaults.headers.common['Authorization'] = token
-            commit(AUTH_SUCCESS, response)
-            console.log(token)
-            resolve(response)
+            if (response.data.username === user.username && response.data.password === user.password) {
+              const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: '1m' })
+              console.log(token)
+              localStorage.setItem('access_token', token)
+              axios.defaults.headers.common['Authorization'] = token
+              commit(AUTH_SUCCESS, response)
+              resolve(response)
+            } else {
+              console.log('You are not allowed!')
+            }
           }).catch((err) => {
             commit(AUTH_ERROR, err)
             localStorage.removeItem('user-token')

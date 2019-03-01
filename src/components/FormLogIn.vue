@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import {AUTH_REQUEST} from '../store/index'
+import {AUTH_REQUEST, AUTH_SUCCESS} from '../store/index'
 
 export default {
   name: 'FormLogIn',
   data () {
     return {
-      username: '123',
-      password: '123'
+      username: '',
+      password: ''
     }
   },
   methods: {
@@ -28,7 +28,7 @@ export default {
       const { username, password } = this
       this.$store.dispatch(AUTH_REQUEST, { username, password })
         .then(() => {
-          this.$router.push('/lol')
+          if (AUTH_SUCCESS) this.$router.push('/choose')
         })
         .catch(function (error) {
           console.log(error)

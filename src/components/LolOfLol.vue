@@ -54,7 +54,7 @@ export default {
     getUsers: function () {
       HTTP.get('/login')
         .then((response) => {
-          this.info = response.data.username
+          this.info = response.data.token
         })
         .catch(function (error) {
           console.log(error)
