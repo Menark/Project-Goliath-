@@ -10,18 +10,6 @@ Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
 
-export const HTTP = axios.create({
-  baseURL: 'http://localhost:3000',
-  headers: {
-    Authorization: 'Bearer (token)'
-  }
-})
-
-const token = localStorage.getItem('access_token')
-if (token) {
-  axios.defaults.headers.common['Authorization'] = token
-}
-
 //* eslint-disable no-new */
 new Vue({
   el: '#app',

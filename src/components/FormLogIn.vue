@@ -1,15 +1,17 @@
 <template>
   <div>
-   <form @submit.prevent="login">
-     <h1>Sign in</h1>
-     <label>User name</label>
-     <input required v-model="username" type="text" placeholder="Snoopy"/>
-     <label>Password</label>
-     <input required v-model="password" type='password' placeholder="Password"/>
-     <hr/>
-     <button type="button" v-on:click="logIn">Login</button>
-   </form>
- </div>
+    <form @submit.prevent="login">
+      <h1>Sign in</h1>
+      <!--<label>Name</label>
+      <input class="indenT" required v-model="name" type="text" placeholder="Your name"/><br> -->
+      <label>User name</label>
+      <input class="indenT" required v-model="username" type="text" placeholder="Your login"/><br>
+      <label>Password</label>
+      <input class="indenT" required v-model="password" type='password' placeholder="Your Password"/><br>
+      <hr/>
+      <button type="button" v-on:click="logIn">Login</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -19,6 +21,7 @@ export default {
   name: 'FormLogIn',
   data () {
     return {
+      name: '',
       username: '',
       password: ''
     }
@@ -39,5 +42,7 @@ export default {
 </script>
 
 <style>
-
+  .indenT {
+    margin: 10px
+  }
 </style>

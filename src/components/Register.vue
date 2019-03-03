@@ -22,6 +22,7 @@
           <button type="submit">Register</button>
       </div>
     </form>
+    <button v-on:click="goToLol">GET IT!!!</button>
   </div>
 </template>
 
@@ -36,6 +37,9 @@ export default {
     }
   },
   methods: {
+    goToLol: function () {
+      this.$router.push('/lol')
+    }
     // register: function () {
     //   let data = {
     //     name: this.name,

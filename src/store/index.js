@@ -1,20 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import { HTTP } from '../utils/api'
 
 export const AUTH_REQUEST = 'AUTH_REQUEST'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const AUTH_LOGOUT = 'AUTH_LOGOUT'
+export const CHECK_SUCCESS = 'CHECK_SUCCESS'
 const jwt = require('jsonwebtoken')
-// "token": "hello"
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     status: '',
-    token: localStorage.getItem('access_token') || ''
+    token: localStorage.getItem('access_token')
   },
   mutations: {
     [AUTH_REQUEST]: (state) => {
@@ -29,19 +30,22 @@ export default new Vuex.Store({
     },
     [AUTH_LOGOUT]: (state) => {
       state.token = ''
+    },
+    [CHECK_SUCCESS]: (state, token) => {
+      state.status = 'success'
+      state.token = token
     }
   },
   actions: {
     [AUTH_REQUEST]: ({commit, dispatch}, user) => {
       return new Promise((resolve, reject) => {
         commit(AUTH_REQUEST)
-        axios({url: 'http://localhost:3000/login', data: user, method: 'GET'})
+        HTTP({url: '/login', data: user, method: 'GET'})
           .then((response) => {
             if (response.data.username === user.username && response.data.password === user.password) {
-              const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: '1m' })
+              const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: 60 })
               console.log(token)
               localStorage.setItem('access_token', token)
-              axios.defaults.headers.common['Authorization'] = token
               commit(AUTH_SUCCESS, response)
               resolve(response)
             } else {
@@ -59,12 +63,14 @@ export default new Vuex.Store({
         commit(AUTH_LOGOUT)
         localStorage.removeItem('access_token')
         delete axios.defaults.headers.common['Authorization']
+        console.log('Removed token succesful bitch')
+        console.log(localStorage.getItem('access_token'))
         resolve()
       })
     }
   },
   getters: {
-    isAuthenticated: state => !!state.token,
+    isAuthenticated: state => state.token === '',
     authStatus: state => state.status
   }
 })
