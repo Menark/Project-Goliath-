@@ -1,9 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import LolOfLol from '@/components/LolOfLol'
-import FormlogIn from '@/components/FormlogIn'
-import Register from '@/components/Register'
-import ChooseWisely from '@/components/ChooseWisely'
 
 Vue.use(Router)
 
@@ -18,23 +14,19 @@ export default new Router({
     },
     {
       path: '/lol',
-      name: 'LolOfLol',
-      component: LolOfLol
+      component: () => import('@/components/LolOfLol')
     },
     {
       path: '/login',
-      name: 'FormlogIn',
-      component: FormlogIn
+      component: () => import('@/components/FormlogIn')
     },
     {
       path: '/register',
-      name: 'Register',
-      component: Register
+      component: () => import('@/components/Register')
     },
     {
       path: '/choose',
-      name: 'ChooseWisely',
-      component: ChooseWisely
+      component: () => import('@/components/ChooseWisely')
     }
   ]
 })

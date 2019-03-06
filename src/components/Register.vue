@@ -22,7 +22,7 @@
           <button type="submit">Register</button>
       </div>
     </form>
-    <button v-on:click="goToLol">GET IT!!!</button>
+    <button @click="goToLol">GET IT!!!</button>
   </div>
 </template>
 

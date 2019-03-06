@@ -9,13 +9,13 @@
       <label>Password</label>
       <input class="indenT" required v-model="password" type='password' placeholder="Your Password"/><br>
       <hr/>
-      <button type="button" v-on:click="logIn">Login</button>
+      <button type="button" @click="logIn">Login</button>
     </form>
   </div>
 </template>
 
 <script>
-import {AUTH_REQUEST, AUTH_SUCCESS} from '../store/index'
+import {AUTH_REQUEST, AUTH_SUCCESS} from '../services/login'
 
 export default {
   name: 'FormLogIn',

@@ -2,18 +2,18 @@
  <div id='turn'>
     <p> {{ info }} </p><br>
     <hr>
-    <button type="button" v-on:click="getPosts">Posts!!!</button>
-    <button v-on:click="getPublicComments">Comments!!!</button>
-    <button v-on:click="getPrivateProfile">Profile!!!</button>
-    <button v-on:click="logOut">LOG OUT</button>
-    <button v-on:click="getUsers">WE need More USERS!!</button>
-    <button v-on:click="goToChooseWisely">tokennnn</button>
+    <button type="button" @click="getPosts">Posts!!!</button>
+    <button @click="getPublicComments">Comments!!!</button>
+    <button @click="getPrivateProfile">Profile!!!</button>
+    <button @click="logOut">LOG OUT</button>
+    <button @click="getUsers">WE need More USERS!!</button>
+    <button @click="goToChooseWisely">tokennnn</button>
  </div>
 </template>
 
 <script>
 import { HTTP } from '../utils/api'
-import {AUTH_LOGOUT} from '../store/index'
+import {AUTH_LOGOUT} from '../services/login'
 
 export default {
   name: 'LolOfLol',
