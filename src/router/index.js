@@ -9,7 +9,7 @@ export default new Router({
     {
       path: '/',
       redirect: {
-        name: 'FormlogIn'
+        component: () => import('@/components/FormlogIn')
       }
     },
     {
