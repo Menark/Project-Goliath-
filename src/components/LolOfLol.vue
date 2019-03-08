@@ -13,7 +13,8 @@
 
 <script>
 import { HTTP } from '../utils/api'
-import {AUTH_LOGOUT} from '../services/login'
+import {getPosts, getPublicComments, getPrivateProfile, getUsers} from '../services/contentServera'
+import { AUTH_LOGOUT } from '../services/logout'
 
 export default {
   name: 'LolOfLol',
@@ -30,40 +31,24 @@ export default {
   },
   methods: {
     getPosts: function () {
-      HTTP.get('/posts')
-        .then((response) => {
-          this.info = response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      getPosts().then((posts) => {
+        this.info = posts
+      })
     },
     getPublicComments: function () {
-      HTTP.get('/comments')
-        .then((response) => {
-          this.info = response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      getPublicComments().then((comments) => {
+        this.info = comments
+      })
     },
     getPrivateProfile: function () {
-      HTTP.get('/profile')
-        .then((response) => {
-          this.info = response.data
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      getPrivateProfile().then((profile) => {
+        this.info = profile
+      })
     },
     getUsers: function () {
-      HTTP.get('/login')
-        .then((response) => {
-          this.info = response.data.username
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      getUsers().then((users) => {
+        this.info = users
+      })
     },
     goToChooseWisely: function () {
       this.info = localStorage.getItem('access_token')

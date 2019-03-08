@@ -8,9 +8,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: {
-        component: () => import('@/components/FormlogIn')
-      }
+      redirect: '/login'
     },
     {
       path: '/lol',

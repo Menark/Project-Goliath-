@@ -2,10 +2,6 @@
   <div>
     <h4>Register</h4>
     <form @submit.prevent="register">
-      <label for="name">Name</label>
-      <div>
-          <input id="name" type="text" v-model="name" required autofocus>
-      </div>
       <label for="email" >E-Mail Address</label>
       <div>
           <input id="email" type="email" v-model="email" required>
@@ -19,7 +15,7 @@
           <input id="password-confirm" type="password" v-model="password_confirmation" required>
       </div>
       <div>
-          <button type="submit">Register</button>
+          <button type="submit" @click="register">Register</button>
       </div>
     </form>
     <button @click="goToLol">GET IT!!!</button>
@@ -30,7 +26,6 @@
 export default {
   data () {
     return {
-      name: '',
       email: '',
       password: '',
       password_confirmation: ''
@@ -39,18 +34,13 @@ export default {
   methods: {
     goToLol: function () {
       this.$router.push('/lol')
+    },
+    register: function () {
+      const { email, password } = this
+      this.$store.dispatch('register', { email, password })
+        .then(() => this.$router.push('/login'))
+        .catch(err => console.log(err))
     }
-    // register: function () {
-    //   let data = {
-    //     name: this.name,
-    //     email: this.email,
-    //     password: this.password,
-    //     is_admin: this.is_admin
-    //   }
-    //   this.$store.dispatch('register', data)
-    //     .then(() => this.$router.push('/login'))
-    //     .catch(err => console.log(err))
-    // }
   }
 }
 </script>

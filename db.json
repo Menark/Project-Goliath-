@@ -11,6 +11,11 @@
       "id": 1,
       "body": "some comment",
       "postId": 1
+    },
+    {
+      "id": 2,
+      "body": "the very comment",
+      "postId": 1
     }
   ],
   "profile": {
@@ -18,9 +23,14 @@
     "nottoday": "konvijdnbijfnb",
     "tod123ap": "3434324"
   },
-  "login": {
-    "name": "123",
-    "username": "123",
-    "password": "123"
-  }
+  "login": [
+    {
+      "email": "123",
+      "password": "123"
+    },
+    {
+      "email": "456",
+      "password": "456"
+    }
+  ]
 }
