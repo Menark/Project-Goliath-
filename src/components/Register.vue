@@ -7,20 +7,21 @@
         <input class="inputTreesome" type="email" v-model="email" required placeholder="Email Address">
       </div>
       <div class="tooltipEmail">
-          {{ misEmail }}
+          {{ wrongEmail }}
       </div>
       <div class="inputPassword">
         <input class="inputTreesome" type="password" v-model="password" required placeholder="Password">
       </div>
       <div class="tooltipPassword">
-        {{ misPassword }}
+        {{ wrongPassword }}
       </div>
       <div class="inputConfirmPassword">
         <input class="inputTreesome" type="password" v-model="password_confirm" required placeholder="Confirm password">
       </div>
       <div class="tooltipConfirmPassword">
-        {{ misPassword }}
+        {{ wrongConfirmPassword }}
       </div>
+      <button class="reset" type="button" @click="resetInputs">RESET</button>
       <button class="vspishka" type="submit" @click="register">REGISTER</button>
     </form>
     <button @click="goToLol">GET IT!!!</button>
@@ -33,7 +34,10 @@ export default {
     return {
       email: '',
       password: '',
-      password_confirm: ''
+      password_confirm: '',
+      wrongEmail: '',
+      wrongPassword: '',
+      wrongConfirmPassword: ''
     }
   },
   methods: {
@@ -41,10 +45,62 @@ export default {
       this.$router.push('/lol')
     },
     register: function () {
+      this.wrongEmail = ''
+      this.wrongPassword = ''
+      this.wrongConfirmPassword = ''
+      if (!this.email) {
+        this.wrongEmail = 'Укажите электронную почту'
+        this.showEmail()
+      } else if (!this.validEmail(this.email)) {
+        this.wrongEmail = 'Укажите корректный адрес электронной почты'
+        this.showEmail()
+      }
+      if (!this.password) {
+        this.wrongPassword = 'Укажите пароль'
+        this.showPassword()
+      } else if (!this.validPassword(this.password)) {
+        this.wrongPassword = 'Укажите корректный пароль'
+        this.showPassword()
+      }
+      if (this.password_confirm.length && this.password !== this.password_confirm) {
+        this.wrongConfirmPassword = 'Пароли не совпадают!'
+        this.showConfirmPassword()
+      }
       const { email, password } = this
       this.$store.dispatch('register', { email, password })
         .then(() => this.$router.push('/login'))
         .catch(err => console.log(err))
+    },
+    validEmail: function (email) {
+      var mail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+      return mail.test(email)
+    },
+    validPassword: function (password) {
+      var pass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+      return pass.test(password)
+    },
+    resetInputs: function () {
+      this.email = ''
+      this.password = ''
+      this.password_confirm = ''
+    },
+    showEmail: function () {
+      document.getElementsByClassName('tooltipEmail')[0].style.visibility = 'visible'
+      setTimeout(function () {
+        document.getElementsByClassName('tooltipEmail')[0].style.visibility = 'hidden'
+      }, 1500)
+    },
+    showPassword: function () {
+      document.getElementsByClassName('tooltipPassword')[0].style.visibility = 'visible'
+      setTimeout(function () {
+        document.getElementsByClassName('tooltipPassword')[0].style.visibility = 'hidden'
+      }, 1500)
+    },
+    showConfirmPassword: function () {
+      document.getElementsByClassName('tooltipConfirmPassword')[0].style.visibility = 'visible'
+      setTimeout(function () {
+        document.getElementsByClassName('tooltipConfirmPassword')[0].style.visibility = 'hidden'
+      }, 1500)
     }
   }
 }
@@ -67,30 +123,30 @@ export default {
     position: relative;
     border: 1px solid black;
     width: 350px;
-    height: 350px;
+    height: 400px;
     margin: 60px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
-    opacity: 0.9;
+    opacity: 1;
   }
 
   .inputEmail {
     position: absolute;
-    top: 25%;
+    top: 18%;
     left: 10%;
     width: 80%;
   }
 
   .inputPassword {
     position: absolute;
-    top: 40%;
+    top: 36%;
     left: 10%;
     width: 80%;
   }
 
   .inputConfirmPassword {
     position: absolute;
-    top: 55%;
+    top: 54%;
     left: 10%;
     width: 80%;
   }
@@ -98,7 +154,7 @@ export default {
   .inputTreesome {
     padding-left: 10px;
     font-size: 15px;
-    height: 40px;
+    height: 45px;
     width: 100%;
     outline: none;
     border: 1px solid white;
@@ -110,7 +166,7 @@ export default {
 
   .tooltipEmail {
     position: absolute;
-    top: 36%;
+    top: 33%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
@@ -122,7 +178,7 @@ export default {
 
   .tooltipPassword {
     position: absolute;
-    top: 56%;
+    top: 51%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
@@ -132,7 +188,7 @@ export default {
 
   .tooltipConfirmPassword {
     position: absolute;
-    top: 76%;
+    top: 69%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
@@ -196,10 +252,10 @@ export default {
 
   .vspishka {
     position: absolute;
-    top: 80%;
+    top: 85%;
     left: 10%;
     width: 80%;
-    padding: 20px;
+    padding: 15px;
     background-color: rgb(30, 110, 32);
     border: none;
     font-size: 15px;
@@ -234,11 +290,30 @@ export default {
   }
 
   .vspishka:hover {
-    background-color: rgb(91, 211, 76);
-    top: 78%;
-    left: 5%;
-    width: 90%;
-    padding: 25px;
+    background-color: rgb(18, 75, 20);
+  }
+
+  .reset {
+    position: absolute;
+    top: 73%;
+    left: 20%;
+    width: 60%;
+    padding: 10px;
+    background-color: rgb(110, 30, 30);
+    border: none;
+    font-size: 15px;
+    color: #FFFFFF;
+    text-align: center;
+    transition-duration: 0.4s;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    box-sizing: border-box;
+  }
+
+  .reset:hover {
+    left: 10%;
+    width: 80%;
   }
 
   .labelSignIn {

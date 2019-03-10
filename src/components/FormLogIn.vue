@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    logIn: function (e) {
+    logIn: function () {
       this.misPassword = ''
       this.misEmail = ''
       if (!this.email) {
@@ -103,23 +103,22 @@ export default {
     position: relative;
     border: 1px solid black;
     width: 350px;
-    height: 300px;
+    height: 320px;
     margin: 60px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
-    opacity: 0.9;
   }
 
   .inputEmail {
     position: absolute;
-    top: 30%;
+    top: 27%;
     left: 10%;
     width: 80%;
   }
 
   .inputPassword {
     position: absolute;
-    top: 50%;
+    top: 52%;
     left: 10%;
     width: 80%;
   }
@@ -127,7 +126,7 @@ export default {
   .inputBoth {
     padding-left: 10px;
     font-size: 15px;
-    height: 40px;
+    height: 45px;
     width: 100%;
     outline: none;
     border: 1px solid white;
@@ -139,7 +138,7 @@ export default {
 
   .tooltipEmail {
     position: absolute;
-    top: 46%;
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
@@ -151,7 +150,7 @@ export default {
 
   .tooltipPassword {
     position: absolute;
-    top: 66%;
+    top: 67%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;
@@ -204,7 +203,7 @@ export default {
 
   .vspishka {
     position: absolute;
-    top: 70%;
+    top: 79%;
     left: 10%;
     width: 80%;
     padding: 20px;
@@ -245,7 +244,7 @@ export default {
     color: white;
     font-size: 20px;
     position: absolute;
-    top: 10%;
+    top: 5%;
     left: 10%;
     width: 39%;
     padding: 10px;
@@ -261,7 +260,7 @@ export default {
     color: white;
     font-size: 20px;
     position: absolute;
-    top: 10%;
+    top: 5%;
     right: 10%;
     width: 39%;
     padding: 10px;
