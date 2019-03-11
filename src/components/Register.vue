@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import {AUTH_REGISTER, AUTH_SUCCESS} from '../services/register'
+
 export default {
   data () {
     return {
@@ -66,10 +68,14 @@ export default {
         this.wrongConfirmPassword = 'Пароли не совпадают!'
         this.showConfirmPassword()
       }
-      const { email, password } = this
-      this.$store.dispatch('register', { email, password })
-        .then(() => this.$router.push('/login'))
-        .catch(err => console.log(err))
+      if (!this.wrongEmail.length && !this.wrongPassword.length && !this.wrongConfirmPassword.length) {
+        const { email, password } = this
+        this.$store.dispatch(AUTH_REGISTER, { email, password })
+          .then(() => {
+            if (AUTH_SUCCESS) this.$router.push('/choose')
+          })
+          .catch(err => console.log(err))
+      }
     },
     validEmail: function (email) {
       var mail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
@@ -128,6 +134,7 @@ export default {
     padding: 10px;
     background-color: rgb(0, 0, 63);
     opacity: 1;
+    border-radius: 10px;
   }
 
   .inputEmail {

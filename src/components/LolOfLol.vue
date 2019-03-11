@@ -8,6 +8,7 @@
     <button @click="logOut">LOG OUT</button>
     <button @click="getUsers">WE need More USERS!!</button>
     <button @click="goToChooseWisely">tokennnn</button>
+    <button @click="goNewData">Push data</button>
  </div>
 </template>
 
@@ -52,6 +53,16 @@ export default {
     },
     goToChooseWisely: function () {
       this.info = localStorage.getItem('access_token')
+    },
+    goNewData: function () {
+      HTTP.post('/comments', {
+        'id': 4,
+        'body': 'У vtyz получилось!!!'
+      })
+        .then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
     },
     logOut: function () {
       this.$store.dispatch(AUTH_LOGOUT)

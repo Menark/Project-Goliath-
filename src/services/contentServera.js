@@ -13,7 +13,7 @@ function getPosts () {
 
 function getPublicComments () {
   return HTTP.get('/comments')
-    .then(response => response.data.some(el => el.id === 2 && el.body === 'the very comment'))
+    .then(response => response.data.some(el => el.id === 4 && el.body === 'У vtyz получилось!!!'))
     .catch(function (error) {
       console.log(error)
     })

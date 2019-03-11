@@ -107,6 +107,7 @@ export default {
     margin: 60px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
+    border-radius: 10px;
   }
 
   .inputEmail {
