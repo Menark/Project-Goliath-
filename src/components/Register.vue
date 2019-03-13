@@ -29,7 +29,8 @@
 </template>
 
 <script>
-import {AUTH_REGISTER, AUTH_SUCCESS} from '../services/register'
+// import {AUTH_REGISTER, AUTH_SUCCESS} from '../services/register'
+import {AUTH_REGISTER} from '../services/register'
 
 export default {
   data () {
@@ -71,9 +72,9 @@ export default {
       if (!this.wrongEmail.length) { // && !this.wrongPassword.length && !this.wrongConfirmPassword.length
         const { email, password } = this
         this.$store.dispatch(AUTH_REGISTER, { email, password })
-          .then(() => {
-            if (AUTH_SUCCESS) this.$router.push('/choose')
-          })
+          .then(() => this.$router.push('/choose')
+            // if (AUTH_SUCCESS) this.$router.push('/choose')
+          )
           .catch(err => console.log(err))
       }
     },

@@ -88,6 +88,16 @@
       "id": 1,
       "email": "123@12.ru",
       "password": "Qq123123123"
+    },
+    {
+      "email": "qwe123rt4@ertr.rt",
+      "password": "ASDzxc321",
+      "id": 2
+    },
+    {
+      "email": "qwe123rt4@ertr.rt",
+      "password": "ASDzxc321",
+      "id": 3
     }
   ]
 }

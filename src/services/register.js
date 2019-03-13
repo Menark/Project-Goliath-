@@ -5,7 +5,7 @@ import { HTTP } from '../utils/api'
 export const AUTH_REGISTER = 'AUTH_REGISTER'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_ERROR = 'AUTH_ERROR'
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')
 
 const state = {
   status: '',
@@ -15,10 +15,6 @@ const state = {
 const mutations = {
   [AUTH_REGISTER]: (state) => {
     state.status = 'loading'
-  },
-  [AUTH_SUCCESS]: (state, token) => {
-    state.status = 'success'
-    state.token = token
   },
   [AUTH_ERROR]: (state) => {
     state.status = 'error'
@@ -30,24 +26,10 @@ const actions = {
     return new Promise((resolve, reject) => {
       console.log(user)
       HTTP.post('/users', {
-        'email': this.user.email,
-        'password': this.user.password
+        'email': user.email,
+        'password': user.password
       })
-        .then(response => {})
-      HTTP({url: '/users', data: user, method: 'GET'})
-        .then((response) => {
-          const array = response.data
-          const found = array.some(el => el.email === user.email && el.password === user.password)
-          if (found) {
-            const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: 60 })
-            console.log(token)
-            localStorage.setItem('access_token', token)
-            commit(AUTH_SUCCESS, response)
-            resolve(response)
-          } else {
-            console.log('You are not allowed!')
-          }
-        }).catch((err) => {
+        .catch((err) => {
           commit(AUTH_ERROR, err)
           // localStorage.removeItem('access_token')
           reject(err)
