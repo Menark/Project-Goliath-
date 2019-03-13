@@ -68,7 +68,7 @@ export default {
         this.wrongConfirmPassword = 'Пароли не совпадают!'
         this.showConfirmPassword()
       }
-      if (!this.wrongEmail.length && !this.wrongPassword.length && !this.wrongConfirmPassword.length) {
+      if (!this.wrongEmail.length) { // && !this.wrongPassword.length && !this.wrongConfirmPassword.length
         const { email, password } = this
         this.$store.dispatch(AUTH_REGISTER, { email, password })
           .then(() => {

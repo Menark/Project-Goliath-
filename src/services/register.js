@@ -28,11 +28,10 @@ const mutations = {
 const actions = {
   [AUTH_REGISTER]: ({commit, dispatch}, user) => {
     return new Promise((resolve, reject) => {
-      commit(AUTH_REGISTER)
       console.log(user)
       HTTP.post('/users', {
-        'email': user.email,
-        'password': user.password
+        'email': this.user.email,
+        'password': this.user.password
       })
         .then(response => {})
       HTTP({url: '/users', data: user, method: 'GET'})
@@ -50,7 +49,7 @@ const actions = {
           }
         }).catch((err) => {
           commit(AUTH_ERROR, err)
-          localStorage.removeItem('access_token')
+          // localStorage.removeItem('access_token')
           reject(err)
         })
     })

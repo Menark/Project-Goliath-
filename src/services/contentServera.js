@@ -13,7 +13,7 @@ function getPosts () {
 
 function getPublicComments () {
   return HTTP.get('/comments')
-    .then(response => response.data.some(el => el.id === 4 && el.body === 'У vtyz получилось!!!'))
+    .then(response => response.data)
     .catch(function (error) {
       console.log(error)
     })
@@ -28,7 +28,7 @@ function getPrivateProfile () {
 }
 
 function getUsers () {
-  return HTTP.get('/login')
+  return HTTP.get('/users')
     .then(response => response.data)
     .catch(function (error) {
       console.log(error)
