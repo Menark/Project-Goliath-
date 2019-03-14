@@ -1,21 +1,20 @@
 <template>
   <div>
-    <form @submit.prevent="login" class="form" novalidate="true">
-      <button class="labelSignIn">Sign in</button>
-      <button class="labelSignUp">Sign up</button>
-      <div class="inputEmail">
-        <input class="inputBoth" required v-model="email" type="email" placeholder="Email Address"/><br>
+    <form @submit.prevent="login" class="form1" novalidate="true">
+      <router-link to="/register" class="labelSignUp1">Регистрация</router-link>
+      <div class="inputEmail1">
+        <input class="inputBoth1" required v-model="email" type="email" placeholder="Email Address"/><br>
       </div>
-      <div class="tooltipEmail">
+      <div class="tooltipEmail1">
           {{ misEmail }}
       </div>
-      <div class="inputPassword">
-        <input class="inputBoth" required v-model="password" type='password' placeholder="Password"/><br>
+      <div class="inputPassword1">
+        <input class="inputBoth1" required v-model="password" type='password' placeholder="Password"/><br>
       </div>
-      <div class="tooltipPassword">
+      <div class="tooltipPassword1">
         {{ misPassword }}
       </div>
-      <button class="vspishka" type="submit" @click="logIn">LOGIN</button>
+      <button class="vspishka1" type="submit" @click="logIn">LOGIN</button>
     </form>
   </div>
 </template>
@@ -30,7 +29,8 @@ export default {
       email: '',
       password: '',
       misEmail: '',
-      misPassword: ''
+      misPassword: '',
+      error: false
     }
   },
   methods: {
@@ -71,17 +71,29 @@ export default {
       return wordpass.test(password)
     },
     showEmail: function () {
-      document.getElementsByClassName('tooltipEmail')[0].style.visibility = 'visible'
+      document.getElementsByClassName('tooltipEmail1')[0].style.visibility = 'visible'
       setTimeout(function () {
-        document.getElementsByClassName('tooltipEmail')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('tooltipEmail1')[0].style.visibility = 'hidden'
       }, 1500)
     },
     showPassword: function () {
-      document.getElementsByClassName('tooltipPassword')[0].style.visibility = 'visible'
+      document.getElementsByClassName('tooltipPassword1')[0].style.visibility = 'visible'
       setTimeout(function () {
-        document.getElementsByClassName('tooltipPassword')[0].style.visibility = 'hidden'
+        document.getElementsByClassName('tooltipPassword1')[0].style.visibility = 'hidden'
       }, 1500)
     }
+    // showDiv () {
+    //   document.getElementsByClassName('hidd')[0].style.display = 'block'
+    //   setTimeout(function () {
+    //     document.getElementsByClassName('hidd')[0].style.opacity = 1
+    //   }, 1)
+    // }
+    // resetDiv() {
+    //   document.getElementsByClassName("hidd")[0].style.opacity = 0;
+    //   setTimeout(function() {
+    //     document.getElementsByClassName("hidd")[0].style.display = "none";
+    //   }, 1000)
+    // }
   }
 }
 </script>
@@ -99,7 +111,7 @@ export default {
     background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
   }
 
-  .form {
+  .form1 {
     position: relative;
     border: 1px solid black;
     width: 350px;
@@ -110,21 +122,21 @@ export default {
     border-radius: 10px;
   }
 
-  .inputEmail {
+  .inputEmail1 {
     position: absolute;
     top: 27%;
     left: 10%;
     width: 80%;
   }
 
-  .inputPassword {
+  .inputPassword1 {
     position: absolute;
     top: 52%;
     left: 10%;
     width: 80%;
   }
 
-  .inputBoth {
+  .inputBoth1 {
     padding-left: 10px;
     font-size: 15px;
     height: 45px;
@@ -137,7 +149,7 @@ export default {
     opacity: 1;
   }
 
-  .tooltipEmail {
+  .tooltipEmail1 {
     position: absolute;
     top: 42%;
     left: 50%;
@@ -149,7 +161,7 @@ export default {
     width: 70%;
   }
 
-  .tooltipPassword {
+  .tooltipPassword1 {
     position: absolute;
     top: 67%;
     left: 50%;
@@ -159,7 +171,7 @@ export default {
     width: 70%;
   }
 
-   .tooltipEmail, .tooltipPassword {
+   .tooltipEmail1, .tooltipPassword1 {
     background-color: black;
     height: auto;
     color: white;
@@ -171,7 +183,7 @@ export default {
     box-sizing: border-box;
   }
 
-  .tooltipEmail::after {
+  .tooltipEmail1::after {
     content: " ";
     position: absolute;
     bottom: 100%;
@@ -182,7 +194,7 @@ export default {
     border-color: transparent transparent black transparent;
   }
 
-  .tooltipPassword::after {
+  .tooltipPassword1::after {
     content: " ";
     position: absolute;
     bottom: 100%;
@@ -193,7 +205,7 @@ export default {
     border-color: transparent transparent black transparent;
   }
 
-  .inputBoth:focus {
+  .inputBoth1:focus {
     background-color: white;
     color: black;
   }
@@ -202,7 +214,7 @@ export default {
     color: rgb(255, 255, 255);
   }
 
-  .vspishka {
+  .vspishka1 {
     position: absolute;
     top: 79%;
     left: 10%;
@@ -221,7 +233,7 @@ export default {
     opacity: 1;
   }
 
-  .vspishka:after {
+  .vspishka1:after {
     content: "";
     background: #f1f1f1;
     display: block;
@@ -234,38 +246,23 @@ export default {
     transition: all 0.8s
 }
 
-  .vspishka:active:after {
+  .vspishka1:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
     transition: 0s
   }
 
-  .labelSignIn {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    width: 39%;
-    padding: 10px;
-    background-color: rgb(30, 110, 32);
-    border: none;
-    overflow: hidden;
-    cursor: pointer;
-    outline: none;
-    box-sizing: border-box;
-  }
-
-  .labelSignUp {
+  .labelSignUp1 {
+    text-decoration: none;
     color: white;
     font-size: 20px;
     position: absolute;
     top: 5%;
     right: 10%;
-    width: 39%;
+    width: 80%;
     padding: 10px;
-    background-color: rgb(30, 110, 32);
+    background-color: rgb(160, 39, 39);
     border: none;
     overflow: hidden;
     cursor: pointer;
@@ -273,7 +270,7 @@ export default {
     box-sizing: border-box;
   }
 
-  .labelSignIn:hover, .labelSignUp:hover {
+  .labelSignUp1:hover {
     border: 1px solid black;
   }
 </style>

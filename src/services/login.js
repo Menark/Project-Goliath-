@@ -31,15 +31,16 @@ const actions = {
         .then((response) => {
           const arr = response.data
           const found = arr.some(el => el.email === user.email && el.password === user.password)
-          if (found) {
+          if (found === true) {
             const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: 3600 })
             console.log(token)
             localStorage.setItem('access_token', token)
             commit(AUTH_SUCCESS, response)
             resolve(response)
           } else {
+            commit(AUTH_ERROR, response)
             console.log('You are not allowed!')
-            // this.$router.push('/register')
+            reject(response)
           }
         }).catch((err) => {
           commit(AUTH_ERROR, err)

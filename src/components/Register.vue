@@ -1,8 +1,7 @@
 <template>
   <div>
     <form @submit.prevent="register" class="form" novalidate="true">
-      <button class="labelSignIn">Sign in</button>
-      <button class="labelSignUp">Sign up</button>
+      <router-link to="/login" class="labelSignIn">Авторизация</router-link>
       <div class="inputEmail">
         <input class="inputTreesome" type="email" v-model="email" required placeholder="Email Address">
       </div>
@@ -22,14 +21,14 @@
         {{ wrongConfirmPassword }}
       </div>
       <button class="reset" type="button" @click="resetInputs">RESET</button>
-      <button class="vspishka" type="submit" @click="register">REGISTER</button>
+      <button class="vspishka" type="submit" @click.once="register">REGISTER</button>
     </form>
     <button @click="goToLol">GET IT!!!</button>
   </div>
 </template>
 
 <script>
-// import {AUTH_REGISTER, AUTH_SUCCESS} from '../services/register'
+import {AUTH_REQUEST, AUTH_SUCCESS} from '../services/login'
 import {AUTH_REGISTER} from '../services/register'
 
 export default {
@@ -72,9 +71,10 @@ export default {
       if (!this.wrongEmail.length) { // && !this.wrongPassword.length && !this.wrongConfirmPassword.length
         const { email, password } = this
         this.$store.dispatch(AUTH_REGISTER, { email, password })
-          .then(() => this.$router.push('/choose')
-            // if (AUTH_SUCCESS) this.$router.push('/choose')
-          )
+        this.$store.dispatch(AUTH_REQUEST, { email, password })
+          .then(() => {
+            if (AUTH_SUCCESS) this.$router.push('/choose')
+          })
           .catch(err => console.log(err))
       }
       e.preventDefault()
@@ -326,30 +326,15 @@ export default {
   }
 
   .labelSignIn {
-    color: white;
-    font-size: 20px;
-    position: absolute;
-    top: 5%;
-    left: 10%;
-    width: 39%;
-    padding: 10px;
-    background-color: rgb(30, 110, 32);
-    border: none;
-    overflow: hidden;
-    cursor: pointer;
-    outline: none;
-    box-sizing: border-box;
-  }
-
-  .labelSignUp {
+    text-decoration: none;
     color: white;
     font-size: 20px;
     position: absolute;
     top: 5%;
     right: 10%;
-    width: 39%;
+    width: 80%;
     padding: 10px;
-    background-color: rgb(30, 110, 32);
+    background-color: rgb(160, 39, 39);
     border: none;
     overflow: hidden;
     cursor: pointer;
@@ -357,7 +342,7 @@ export default {
     box-sizing: border-box;
   }
 
-  .labelSignIn:hover, .labelSignUp:hover {
+  .labelSignIn:hover {
     border: 1px solid black;
   }
 </style>

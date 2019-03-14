@@ -28,7 +28,7 @@ const actions = {
       HTTP.post('/users', {
         'email': user.email,
         'password': user.password
-      })
+      }).then(response => {})
         .catch((err) => {
           commit(AUTH_ERROR, err)
           // localStorage.removeItem('access_token')

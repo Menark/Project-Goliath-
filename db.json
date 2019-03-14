@@ -84,15 +84,5 @@
     }
   ],
   "users": [
-    {
-      "id": 1,
-      "email": "123@12.ru",
-      "password": "Qq123123123"
-    },
-    {
-      "email": "123sdf@gh.kl",
-      "password": "iopIOP123",
-      "id": 2
-    }
   ]
 }
