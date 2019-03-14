@@ -47,7 +47,7 @@ export default {
     goToLol: function () {
       this.$router.push('/lol')
     },
-    register: function () {
+    register: function (e) {
       this.wrongEmail = ''
       this.wrongPassword = ''
       this.wrongConfirmPassword = ''
@@ -77,6 +77,7 @@ export default {
           )
           .catch(err => console.log(err))
       }
+      e.preventDefault()
     },
     validEmail: function (email) {
       var mail = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/

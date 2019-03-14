@@ -2,7 +2,7 @@ import axios from 'axios'
 // const jwt = require('jsonwebtoken')
 
 export const HTTP = axios.create({
-  baseURL: 'http://localhost:3004'
+  baseURL: 'http://localhost:3000'
 })
 
 HTTP.interceptors.request.use(
