@@ -99,6 +99,10 @@ export default {
 </script>
 
 <style>
+  * {
+    border-radius: 10px;
+  }
+
   body {
     background:
       radial-gradient(black 3px, transparent 4px),
@@ -116,7 +120,7 @@ export default {
     border: 1px solid black;
     width: 350px;
     height: 320px;
-    margin: 60px auto;
+    margin: 40px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
     border-radius: 10px;

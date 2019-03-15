@@ -23,7 +23,6 @@
       <button class="reset" type="button" @click="resetInputs">RESET</button>
       <button class="vspishka" type="submit" @click.once="register">REGISTER</button>
     </form>
-    <button @click="goToLol">GET IT!!!</button>
   </div>
 </template>
 
@@ -43,9 +42,6 @@ export default {
     }
   },
   methods: {
-    goToLol: function () {
-      this.$router.push('/lol')
-    },
     register: function (e) {
       this.wrongEmail = ''
       this.wrongPassword = ''
@@ -115,6 +111,10 @@ export default {
 </script>
 
 <style>
+    * {
+    border-radius: 10px;
+  }
+
   body {
     background:
       radial-gradient(black 3px, transparent 4px),
@@ -132,11 +132,9 @@ export default {
     border: 1px solid black;
     width: 350px;
     height: 400px;
-    margin: 60px auto;
+    margin: 40px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
-    opacity: 1;
-    border-radius: 10px;
   }
 
   .inputEmail {
@@ -170,7 +168,6 @@ export default {
     background-color: grey;
     box-sizing: border-box;
     color: white;
-    opacity: 1;
   }
 
   .tooltipEmail {

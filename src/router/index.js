@@ -8,8 +8,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      component: () => import('../App')
-      // redirect: '/login'
+      // component: () => import('../App')
+      redirect: '/startpage'
     },
     {
       path: '/lol',
@@ -26,6 +26,10 @@ export default new Router({
     {
       path: '/choose',
       component: () => import('@/components/ChooseWisely')
+    },
+    {
+      path: '/startpage',
+      component: () => import('@/components/StartPage')
     }
   ]
 })
