@@ -116,11 +116,13 @@ export default {
   }
 
   .form1 {
-    position: relative;
-    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
     width: 350px;
     height: 320px;
-    margin: 40px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
     border-radius: 10px;

@@ -2,7 +2,9 @@
   <div>
     <router-link to="/login" class="btnSignIn">LOGIN</router-link>
     <router-link to="/register" class="btnSignUp">REGISTER</router-link>
-    <img src="../images/Мербиус.jpg" alt="Выбери свою таблетку!" class="immageMerbius">
+    <div>
+      <img src="../images/Мербиус.jpg" alt="Выбери свою таблетку!" class="immageMerbius">
+    </div>
   </div>
 </template>
 

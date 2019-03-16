@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="reg">
     <form @submit.prevent="register" class="form" novalidate="true">
       <router-link to="/login" class="labelSignIn">Авторизация</router-link>
       <div class="inputEmail">
@@ -111,7 +111,7 @@ export default {
 </script>
 
 <style>
-    * {
+  * {
     border-radius: 10px;
   }
 
@@ -128,11 +128,13 @@ export default {
   }
 
   .form {
-    position: relative;
-    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
     width: 350px;
     height: 400px;
-    margin: 40px auto;
     padding: 10px;
     background-color: rgb(0, 0, 63);
   }
