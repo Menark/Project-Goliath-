@@ -3,7 +3,7 @@
     <router-link to="/login" class="btnSignIn">LOGIN</router-link>
     <router-link to="/register" class="btnSignUp">REGISTER</router-link>
     <div>
-      <img src="../images/Мербиус.jpg" alt="Выбери свою таблетку!" class="immageMerbius">
+      <img src="../images/Мербиус.png" alt="Выбери свою таблетку!" class="immageMerbius">
     </div>
   </div>
 </template>
@@ -23,6 +23,9 @@ export default {
 </script>
 
 <style>
+  body {
+    background-color: aliceblue;
+  }
 
   .immageMerbius {
     position: absolute;
@@ -39,7 +42,7 @@ export default {
     position: absolute;
     top: 60%;
     width: 10%;
-    padding: 10px;
+    padding: 5px;
     border: none;
     border-radius: 30px;
     overflow: hidden;
@@ -50,12 +53,12 @@ export default {
   }
 
   .btnSignIn {
-    right: 55%;
+    right: 54%;
     background-color: rgb(160, 39, 39);
 }
 
 .btnSignUp {
-    right: 35%;
+    right: 36%;
     background-color: rgb(11, 10, 104);
 }
 

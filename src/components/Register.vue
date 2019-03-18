@@ -1,7 +1,7 @@
 <template>
   <div id="reg">
     <form @submit.prevent="register" class="form" novalidate="true">
-      <router-link to="/login" class="labelSignIn">Авторизация</router-link>
+      <router-link to="/lol" class="labelSignIn">Авторизация</router-link>
       <div class="inputEmail">
         <input class="inputTreesome" type="email" v-model="email" required placeholder="Email Address">
       </div>
@@ -111,10 +111,6 @@ export default {
 </script>
 
 <style>
-  * {
-    border-radius: 10px;
-  }
-
   body {
     background:
       radial-gradient(black 3px, transparent 4px),
@@ -137,6 +133,7 @@ export default {
     height: 400px;
     padding: 10px;
     background-color: rgb(0, 0, 63);
+    border-radius: 10px;
   }
 
   .inputEmail {
@@ -167,6 +164,7 @@ export default {
     width: 100%;
     outline: none;
     border: 1px solid white;
+    border-radius: 10px;
     background-color: grey;
     box-sizing: border-box;
     color: white;
@@ -266,6 +264,7 @@ export default {
     padding: 15px;
     background-color: rgb(30, 110, 32);
     border: none;
+    border-radius: 10px;
     font-size: 15px;
     color: #FFFFFF;
     text-align: center;
@@ -309,6 +308,7 @@ export default {
     padding: 10px;
     background-color: rgb(110, 30, 30);
     border: none;
+    border-radius: 10px;
     font-size: 15px;
     color: #FFFFFF;
     text-align: center;
@@ -335,6 +335,7 @@ export default {
     padding: 10px;
     background-color: rgb(160, 39, 39);
     border: none;
+    border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     outline: none;

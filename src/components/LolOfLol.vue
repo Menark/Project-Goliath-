@@ -8,9 +8,6 @@
     <button @click="logOut">LOG OUT</button>
     <button @click="getUsers">WE need More USERS!!</button>
     <button @click="goToChooseWisely">tokennnn</button>
-    <button @click="goNewData">Push data</button>
-    <input required v-model="input1" type='text' placeholder="input1"/><br>
-    <input required v-model="input2" type='text' placeholder="input2"/><br>
  </div>
 </template>
 
@@ -57,16 +54,6 @@ export default {
     },
     goToChooseWisely: function () {
       this.info = localStorage.getItem('access_token')
-    },
-    goNewData: function () {
-      HTTP.post('/users', {
-        'email': this.input1,
-        'password': this.input2
-      })
-        .then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
     },
     logOut: function () {
       this.$store.dispatch(AUTH_LOGOUT)

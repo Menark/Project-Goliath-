@@ -84,5 +84,10 @@
     }
   ],
   "users": [
+    {
+      "email": "123@123.ru",
+      "password": "QWEqwe123",
+      "id": 1
+    }
   ]
 }

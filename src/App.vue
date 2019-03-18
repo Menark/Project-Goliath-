@@ -3,6 +3,7 @@
     <link href='https://fonts.googleapis.com/css?family=Butcherman' rel='stylesheet'>
     <header>
       <div>Project &#8810;GOLIATH&#8811;</div>
+      <button @click="logOut">LOG OUT</button>
     </header>
     <main>
       <router-view></router-view>
@@ -21,10 +22,20 @@
 </template>
 
 <script>
+import { AUTH_LOGOUT } from './services/logout'
+
 export default {
   name: 'App',
   data () {
     return {
+    }
+  },
+  methods: {
+    logOut: function () {
+      this.$store.dispatch(AUTH_LOGOUT)
+        .then(() => {
+          this.$router.push('/login')
+        })
     }
   }
 }
@@ -60,6 +71,14 @@ export default {
     transform: translate(-50%, -50%);
   }
 
+  header button {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+  }
+
   footer {
     background-color: rgb(90, 167, 170);
     border-radius: 0;
@@ -70,7 +89,7 @@ export default {
     box-sizing: border-box;
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: 50% 50%;
     grid-template-rows: auto;
     grid-gap: 50px;
     justify-content: center;
