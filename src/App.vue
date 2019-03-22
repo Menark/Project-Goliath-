@@ -2,8 +2,18 @@
   <div id="app">
     <link href='https://fonts.googleapis.com/css?family=Butcherman' rel='stylesheet'>
     <header>
+      <ul>
+        <li id="dropdown">
+          MENU
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>
+        </li>
+      </ul>
       <div>Project &#8810;GOLIATH&#8811;</div>
-      <button @click="logOut">LOG OUT</button>
+      <button id="buttLOG" @click="qwertY" v-if="divLogOut">LOG OUT</button>
     </header>
     <main>
       <router-view></router-view>
@@ -22,12 +32,17 @@
 </template>
 
 <script>
-import { AUTH_LOGOUT } from './services/logout'
+import { AUTH_LOGOUT } from './services/auth.js'
 
 export default {
   name: 'App',
   data () {
     return {
+    }
+  },
+  computed: {
+    divLogOut: function () {
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {
@@ -36,6 +51,12 @@ export default {
         .then(() => {
           this.$router.push('/login')
         })
+    },
+    qwertY: function () {
+      console.log(this.$store.getters.isAuthenticated)
+      console.log(this.$store)
+      console.log(localStorage.getItem('access_token'))
+      //  v-if="divLogOut"
     }
   }
 }
@@ -71,12 +92,50 @@ export default {
     transform: translate(-50%, -50%);
   }
 
-  header button {
+  #buttLOG {
     position: absolute;
     top: 50%;
-    left: 10%;
+    right: 10%;
     transform: translate(-50%, -50%);
-    visibility: hidden;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a:hover, #dropdown:hover {
+    background-color: red;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: black;
+    padding: 6px 8px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+  }
+
+  .dropdown-content a:hover {background-color: #357235}
+
+  #dropdown:hover .dropdown-content {
+    display: block;
   }
 
   footer {

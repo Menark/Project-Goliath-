@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import {AUTH_REQUEST, AUTH_SUCCESS} from '../services/login'
-import {AUTH_REGISTER} from '../services/register'
+import {AUTH_REQUEST, AUTH_SUCCESS, AUTH_REGISTER} from '../services/auth.js'
 
 export default {
   data () {

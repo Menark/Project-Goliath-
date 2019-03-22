@@ -14,15 +14,13 @@
 <script>
 import { HTTP } from '../utils/api'
 import {getPosts, getPublicComments, getPrivateProfile, getUsers} from '../services/contentServera'
-import { AUTH_LOGOUT } from '../services/logout'
+import { AUTH_LOGOUT } from '../services/auth.js'
 
 export default {
   name: 'LolOfLol',
   data () {
     return {
-      info: '',
-      input1: '',
-      input2: ''
+      info: ''
     }
   },
   mounted () {

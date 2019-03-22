@@ -1,25 +1,36 @@
 import { HTTP } from '../utils/api'
+import axios from 'axios'
 
+export const AUTH_LOGOUT = 'AUTH_LOGOUT'
 export const AUTH_REQUEST = 'AUTH_REQUEST'
 export const AUTH_SUCCESS = 'AUTH_SUCCESS'
 export const AUTH_ERROR = 'AUTH_ERROR'
+export const AUTH_REGISTER = 'AUTH_REGISTER'
+
 const jwt = require('jsonwebtoken')
 
 const state = {
   status: '',
-  token: localStorage.getItem('access_token')
+  IsLogined: false
 }
 
 const mutations = {
   [AUTH_REQUEST]: (state) => {
     state.status = 'loading'
   },
-  [AUTH_SUCCESS]: (state, token) => {
+  [AUTH_SUCCESS]: (state) => {
     state.status = 'success'
-    state.token = token
+    state.IsLogined = true
   },
   [AUTH_ERROR]: (state) => {
     state.status = 'error'
+  },
+  [AUTH_LOGOUT]: (state) => {
+    state.status = ''
+    state.IsLogined = false
+  },
+  [AUTH_REGISTER]: (state) => {
+    state.status = 'success'
   }
 }
 
@@ -48,17 +59,38 @@ const actions = {
           reject(err)
         })
     })
+  },
+  [AUTH_LOGOUT]: ({commit}) => {
+    localStorage.removeItem('access_token')
+    delete axios.defaults.headers.common['Authorization']
+    commit(AUTH_LOGOUT)
+    console.log('Removed token succesful bitch')
+    console.log(localStorage.getItem('access_token'))
+  },
+  [AUTH_REGISTER]: ({commit, dispatch}, user) => {
+    return new Promise((resolve, reject) => {
+      console.log(user)
+      HTTP.post('/users', {
+        'email': user.email,
+        'password': user.password
+      }).then(response => {})
+        .catch((err) => {
+          commit(AUTH_ERROR, err)
+          // localStorage.removeItem('access_token')
+          reject(err)
+        })
+    })
   }
 }
 
 const getters = {
-  isAuthenticated: state => state.token,
+  isAuthenticated: state => state.IsLogined,
   authStatus: state => state.status
 }
 
 export default {
   state,
-  getters,
+  mutations,
   actions,
-  mutations
+  getters
 }

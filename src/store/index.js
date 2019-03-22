@@ -1,15 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import login from '../services/login'
-import logout from '../services/logout'
-import register from '../services/register'
+import auth from '../services/auth'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   modules: {
-    login,
-    logout,
-    register
+    auth
   }
 })

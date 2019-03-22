@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {AUTH_REQUEST, AUTH_SUCCESS} from '../services/login'
+import { AUTH_REQUEST, AUTH_SUCCESS } from '../services/auth.js'
 
 export default {
   name: 'FormLogIn',
