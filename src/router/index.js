@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import {store} from '../store'
+// import {store} from '../store'
 
 Vue.use(Router)
 
@@ -11,13 +11,6 @@ const router = new Router({
       path: '/',
       // component: () => import('../App')
       redirect: '/startpage'
-    },
-    {
-      path: '/lol',
-      component: () => import('@/components/LolOfLol'),
-      meta: {
-        requiredAuth: true
-      }
     },
     {
       path: '/login',
@@ -37,13 +30,20 @@ const router = new Router({
     {
       path: '/startpage',
       component: () => import('@/components/StartPage')
+    },
+    {
+      path: '/profile',
+      component: () => import('@/components/Profile'),
+      meta: {
+        requiredAuth: true
+      }
     }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiredAuth) {
-    if (store.getters.isAuthenticated) {
+    if (localStorage.getItem('access_token')) {
       next()
     } else {
       console.log('Вы не авторизованы!')

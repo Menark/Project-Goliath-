@@ -1,38 +1,35 @@
 <template>
   <div id="app">
-    <link href='https://fonts.googleapis.com/css?family=Butcherman' rel='stylesheet'>
     <header>
-      <div class="underHeader">
-        <div id="name">
-          Project &#8810;GOLIATH&#8811;
-        </div>
-        <div style="width: 40%">
-        </div>
-        <div id="threeButt" style="display: inline-flex">
+      <div id="name">
+        Project &#8810;GOLIATH&#8811;
+      </div>
+      <div id="threeButt" style="display: inline-flex">
+        <div  v-if="divLogOut">
+          <button id="buttLOG" class="firstButt" @click="logOut">
+            Выйти
+          </button>
+      </div>
+      <div v-else style="display: inline-flex">
           <div>
             <router-link to="/login" class="firstButt roulink">LOGIN</router-link>
           </div>
           <div>
             <router-link to="/register" class="secondButt roulink">REGISTER</router-link>
           </div>
-          <div>
-            <button class="thirdButt roulink"  @click="toggle=!toggle" >
-              MENU
-            </button>
-          </div>
-          <div id="hideMenu" v-show='toggle'>
-            <div>
-              <router-link to="/lol" class="roulink">Lol</router-link>
-            </div>
-            <div>
-              <router-link to="/choose" class="roulink">CHOOSE</router-link>
-            </div>
-          </div>
-        </div>
+      </div>
         <div>
-          <button id="buttLOG" v-if="divLogOut">
-            LOG OUT
+          <button class="thirdButt roulink"  @click="toggle=!toggle" >
+            MENU
           </button>
+        </div>
+        <div id="hideMenu" v-show="toggle">
+          <div>
+            <router-link to="/choose" class="roulink">CHOOSE</router-link>
+          </div>
+          <div>
+            <router-link to="/profile" class="roulink">Профиль</router-link>
+          </div>
         </div>
       </div>
     </header>
@@ -64,7 +61,7 @@ export default {
   },
   computed: {
     divLogOut: function () {
-      return this.$store.getters.isAuthenticated
+      return localStorage.getItem('access_token')
     }
   },
   methods: {
@@ -87,26 +84,62 @@ export default {
     color: #2c3e50;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+  }
+
+  #app {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
   header {
-    font-family: 'Butcherman';
-    font-size: 30px;
-    text-align: center;
     background-color: rgb(255, 255, 255);
-    position: absolute;
-    top: 0;
-    width: 100%;
-    border-radius: 0;
-    border-bottom: 1px solid rgb(107, 126, 126);
-  }
-
-  .underHeader {
+    height: 10vh;
+    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
+    justify-content: space-between;
     align-items: center;
-    height: 60px;
-    margin: 0 16px;;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  main {
+    height: 80vh;
+    box-sizing: border-box;
+  }
+
+  footer {
+    background-color: rgb(255, 255, 255);
+    align-content: center;
+    height: 10vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .linkToSocial {
+    width: 40px;
+    height: 40px;
+  }
+
+  .gridItem {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    justify-self: center;
+    align-self: center;
+    transform: scale(0.8);
+  }
+
+  .gridItem a, .gridItem p {
+    float: left;
+    line-height: 50%;
+    padding: 5px;
   }
 
   .roulink {
@@ -140,58 +173,24 @@ export default {
   #hideMenu {
     position: absolute;
     top: 60px;
+    margin: 0 24px;
     right: 0px;
-    width: 150px;
+    border: 1px solid black;
+    min-width: 150px;
     background-color: azure;
-    border: 1px solid rgb(32, 29, 29);
-    border-radius: 8px;
+    border-radius: 20px 0 50px 25px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, .18);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
-    font-size: 20px;
+    font-size: 18px;
+    z-index: 1;
   }
 
   #hideMenu div {
     margin-left: 10px;
     padding: 0;
-    border: 1px solid rgb(32, 29, 29);
-  }
-
-  footer {
-    background-color: rgb(90, 167, 170);
-    border-radius: 0;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 8%;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: auto;
-    grid-gap: 50px;
-    justify-content: center;
-    align-content: center;
-  }
-
-  .linkToSocial {
-    width: 40px;
-    height: 40px;
-  }
-
-  .gridItem {
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-    justify-self: center;
-    align-self: center;
-    transform: scale(0.8);
-  }
-
-  .gridItem a, .gridItem p {
-    float: left;
-    line-height: 50%;
-    padding: 5px;
+    color: rgb(0, 0, 0);
   }
 </style>

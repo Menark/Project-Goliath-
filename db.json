@@ -2,72 +2,35 @@
   "posts": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "body": "This is the 1111 post",
+      "author": "me"
     },
     {
-      "email": "sdfsdf",
-      "password": "sdfsdfsdf",
-      "id": 2
+      "id": 2,
+      "body": "This is the 2222 post",
+      "author": "me"
     },
     {
-      "email": "sdfsdf123",
-      "password": "sdfsdfsdfsdew3",
-      "id": 3
+      "id": 3,
+      "body": "This is the 33333 post",
+      "author": "me"
     }
   ],
   "comments": [
     {
       "id": 1,
-      "body": "some comment",
+      "body": "This",
       "postId": 1
     },
     {
       "id": 2,
-      "body": "the very comment",
+      "body": "some comment2",
       "postId": 1
     },
     {
       "id": 3,
-      "body": "У тебя получилось!!!"
-    },
-    {
-      "id": 4,
-      "body": "У vtyz получилось!!!"
-    },
-    {
-      "id": "23",
-      "body": "123123"
-    },
-    {
-      "id": "123",
-      "body": "31"
-    },
-    {
-      "id": "ghjghjg",
-      "body": "ghjghjg"
-    },
-    {
-      "id": "56",
-      "body": "ghjghjg"
-    },
-    {
-      "id": "564",
-      "body": "ghjghjg456456"
-    },
-    {
-      "id": "5645",
-      "body": "rthhfg"
-    },
-    {
-      "email": "sdfsdfsd",
-      "password": "sdfsdfs",
-      "id": "67_Lxz9"
-    },
-    {
-      "email": "sdfsdf12313",
-      "password": "sdfqwr321",
-      "id": "nefWVN-"
+      "body": "some comment3",
+      "postId": 1
     }
   ],
   "profile": [

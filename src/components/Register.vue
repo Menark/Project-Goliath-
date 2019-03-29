@@ -1,7 +1,7 @@
 <template>
   <div id="reg">
     <form @submit.prevent="register" class="form" novalidate="true">
-      <router-link to="/lol" class="labelSignIn">Авторизация</router-link>
+      <router-link to="/login" class="labelSignIn">Авторизация</router-link>
       <div class="inputEmail">
         <input class="inputTreesome" type="email" v-model="email" required placeholder="Email Address">
       </div>
@@ -68,7 +68,7 @@ export default {
         this.$store.dispatch(AUTH_REGISTER, { email, password })
         this.$store.dispatch(AUTH_REQUEST, { email, password })
           .then(() => {
-            if (AUTH_SUCCESS) this.$router.push('/choose')
+            if (AUTH_SUCCESS) this.$router.push('/profile')
           })
           .catch(err => console.log(err))
       }
@@ -111,15 +111,7 @@ export default {
 
 <style>
   body {
-    background:
-      radial-gradient(black 3px, transparent 4px),
-      radial-gradient(black 3px, transparent 4px),
-      linear-gradient(#fff 4px, transparent 0),
-      linear-gradient(45deg, transparent 74px, transparent 75px, #a4a4a4 75px, #a4a4a4 76px, transparent 77px, transparent 109px),
-      linear-gradient(-45deg, transparent 75px, transparent 76px, #a4a4a4 76px, #a4a4a4 77px, transparent 78px, transparent 109px),
-    #fff;
-    background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
-    background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
+    background-color: rgb(169, 169, 197);
   }
 
   .form {
@@ -162,11 +154,11 @@ export default {
     height: 45px;
     width: 100%;
     outline: none;
-    border: 1px solid white;
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 10px;
-    background-color: grey;
+    background-color: rgb(255, 255, 255);
     box-sizing: border-box;
-    color: white;
+    color: rgb(0, 0, 0);
   }
 
   .tooltipEmail {
@@ -204,7 +196,7 @@ export default {
    .tooltipEmail, .tooltipPassword, .tooltipConfirmPassword {
     background-color: black;
     height: auto;
-    color: white;
+    color: rgb(255, 255, 255);
     text-align: center;
     line-height: 25px;
     border-radius: 6px;
@@ -247,12 +239,12 @@ export default {
   }
 
   .inputTreesome:focus {
-    background-color: white;
-    color: black;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
   }
 
   ::placeholder {
-    color: rgb(255, 255, 255);
+    color: rgb(112, 112, 112);
   }
 
   .vspishka {

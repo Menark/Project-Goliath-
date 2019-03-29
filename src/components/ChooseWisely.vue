@@ -1,8 +1,7 @@
 <template>
   <div>
     <h1>{{ 'CHOOSE WISELY!!!!' }}</h1>
-    <router-link to="/lol" class="rlink">LINK TO CONTENT</router-link>
-    <router-link to="/register" class="rlink2">LINK TO REGISTRATION</router-link>
+    <router-link to="/profile" class="rlink">LINK TO CONTENT</router-link>
   </div>
 </template>
 
@@ -13,7 +12,7 @@ export default {
 </script>
 
 <style>
-  .rlink, .rlink2 {
+  .rlink {
     text-decoration: none;
     padding: 10px;
     background-color: rgb(110, 30, 30);
@@ -30,25 +29,12 @@ export default {
   .rlink {
     position: absolute;
     top: 50%;
-    left: 20%;
-    width: 19%;
-  }
-
-  .rlink2 {
-    position: absolute;
-    top: 50%;
-    right: 20%;
-    width: 19%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 
   .rlink:hover {
     left: 15%;
     width: 24%;
   }
-
-  .rlink2:hover {
-    right: 15%;
-    width: 24%;
-  }
-
 </style>

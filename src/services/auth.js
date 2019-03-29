@@ -43,7 +43,7 @@ const actions = {
           const arr = response.data
           const found = arr.some(el => el.email === user.email && el.password === user.password)
           if (found === true) {
-            const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: 3600 })
+            const token = jwt.sign({ user }, 'ssfghyjhh', { expiresIn: 60 })
             console.log(token)
             localStorage.setItem('access_token', token)
             commit(AUTH_SUCCESS, response)
