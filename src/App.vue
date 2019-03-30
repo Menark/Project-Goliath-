@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     divLogOut: function () {
-      return localStorage.getItem('access_token')
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {
@@ -109,6 +109,7 @@ export default {
   main {
     height: 80vh;
     box-sizing: border-box;
+    overflow: auto;
   }
 
   footer {
@@ -120,7 +121,6 @@ export default {
     grid-template-columns: 50% 50%;
     grid-template-rows: auto;
     justify-content: center;
-    align-content: center;
   }
 
   .linkToSocial {

@@ -1,68 +1,92 @@
 <template>
  <div id='gridContainer'>
     <header>
-      <p> Здесь просто пустое поле! </p><br>
+      <p> Здесь просто пустое поле! </p>
     </header>
     <aside>
-      <p> Евгений Сегодня март 2019 </p><br>
+      <p> Евгений Сегодня март 2019 </p>
     </aside>
     <article>
-      <p> {{ info }} </p><br>
+      <div id="post">
+        <twitter-post
+          v-for="(post,i) in info"
+          :post="post"
+          :key="i"
+          > {{ post }} </twitter-post>
+      </div>
     </article>
     <aside>
-      <p> Евгений Сегодня март 2019 </p><br>
+      <div>
+        <input type="text" v-model="message">
+        <button type="button" @click="sendPost">Post</button>
+      </div>
     </aside>
  </div>
 </template>
 
 <script>
 import { HTTP } from '../utils/api'
-import {getPosts} from '../services/contentServera'
+import TwitterPost from './TwitterPost'
 
 export default {
   name: 'LolOfLol',
   data () {
     return {
-      info: ''
+      info: '',
+      message: ''
     }
+  },
+  components: {
+    'twitter-post': TwitterPost
   },
   mounted () {
     HTTP.get('/posts')
       .then((response) => {
-        this.info = response.data[0].body
+        this.info = response.data
       })
   },
   methods: {
-    getPosts: function () {
-      getPosts().then((posts) => {
-        this.info = posts
-      })
+    sendPost: function () {
+      HTTP.post('/posts', {
+        'body': this.message
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
     }
   }
 }
 </script>
 
 <style scoped>
-  body {
-    background-color: rgb(83, 83, 83);
-  }
-
   #gridContainer {
-    background-color: rgb(82, 82, 82);
+    background-color: #e6ecf0;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 7fr;
     box-sizing: border-box;
   }
 
-  #gridContainer > * {
+  header, aside, article {
     display: flex;
-    align-items: center;
     justify-content: center;
-    background-color: rgb(86, 97, 194);
     text-align: center;
     font-size: 20px;
     border: 1px solid black;
+  }
+
+  article, header {
+    background-color: rgb(255, 255, 255);
+  }
+
+  article > div {
+    width: 100%;
+  }
+
+  aside, article {
+    align-items: start;
+    margin-top: 5px;
+    box-sizing: border-box;
   }
 
   header {

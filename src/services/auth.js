@@ -11,7 +11,7 @@ const jwt = require('jsonwebtoken')
 
 const state = {
   status: '',
-  IsLogined: false
+  IsLogined: localStorage.getItem('access_token')
 }
 
 const mutations = {
@@ -20,14 +20,14 @@ const mutations = {
   },
   [AUTH_SUCCESS]: (state) => {
     state.status = 'success'
-    state.IsLogined = true
+    state.IsLogined = localStorage.getItem('access_token')
   },
   [AUTH_ERROR]: (state) => {
     state.status = 'error'
   },
   [AUTH_LOGOUT]: (state) => {
     state.status = ''
-    state.IsLogined = false
+    state.IsLogined = localStorage.getItem('access_token')
   },
   [AUTH_REGISTER]: (state) => {
     state.status = 'success'
