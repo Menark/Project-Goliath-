@@ -1,0 +1,55 @@
+@import 'main';
+
+.formlogin {
+  background-color: rgb(135, 185, 160);
+  height: 100%;
+  width: 100%;
+}
+
+.form1 {
+  @extend %perfectCenter;
+  @extend %formLoginRegister;
+  height: 320px;
+}
+
+.inputEmail1 {
+  @extend %inputPosition;
+  top: 27%;
+}
+
+.inputPassword1 {
+  @extend %inputPosition;
+  top: 52%;
+}
+
+.inputBoth1 {
+  @extend %inputLoginRegister;
+}
+
+.tooltipEmail1 {
+  top: 42%;
+}
+
+.tooltipPassword1 {
+  top: 67%;
+}
+
+.tooltipEmail1,
+.tooltipPassword1 {
+  @extend %tooltip;
+}
+
+::placeholder {
+  color: rgb(112, 112, 112);
+}
+
+.vspishka1 {
+  @extend %flashButton;
+  @extend %button;
+  top: 79%;
+}
+
+.labelSignUp1 {
+  @extend %labelSignInUp;
+  @extend %button;
+}

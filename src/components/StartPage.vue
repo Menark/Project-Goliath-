@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="startpage">
     <div>
       <img src="../images/Мербиус.png" alt="Выбери свою таблетку!" class="immageMerbius">
     </div>
@@ -20,15 +20,6 @@ export default {
 }
 </script>
 
-<style>
-  body {
-    background-color: rgb(215, 224, 233);
-  }
-
-  .immageMerbius {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.8);
-  }
+<style lang="scss">
+  @import "../scss/startpage"
 </style>

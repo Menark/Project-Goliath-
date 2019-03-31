@@ -7,10 +7,12 @@
         {{ post.body }}
       </main>
       <aside>
-        <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="immageMerbius">
+        <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
       </aside>
       <footer>
-        {{ post.author }}
+        <img class="svg" src="../images/retweet.svg"  alt="Выбери свою таблетку!">
+        <img class="svg" src="../images/heart.svg"  alt="Выбери свою таблетку!">
+        <img class="svg" src="../images/speech.svg"  alt="Выбери свою таблетку!">
       </footer>
   </div>
 </template>
@@ -24,39 +26,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  .tweet {
-    /*border-bottom: 1px solid rgb(170, 170, 170);*/
-    box-sizing: border-box;
-    font-size: 15px;
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    grid-template-rows: 1fr auto 1fr;
-    font-family: "Segoe UI",Arial,sans-serif;
-    font-size: 14px;
-  }
-
-  header, main, aside, footer {
-    height: auto;
-    border: 1px solid rgb(170, 170, 170);
-    display: flex;
-    text-align: left;
-  }
-
-  aside {
-    grid-row: 1/4;
-    justify-content: center;
-    align-items: start;
-  }
-
-  header, main, footer {
-    justify-content: start;
-    align-items: center;
-    padding-left: 10px;
-  }
-
-  img {
-    width: 50px;
-    height: 50px;
-  }
+<style lang="scss" scoped>
+  @import "../scss/twitterpost"
 </style>

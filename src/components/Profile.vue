@@ -58,38 +58,6 @@ export default {
 }
 </script>
 
-<style scoped>
-  #gridContainer {
-    background-color: #e6ecf0;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 7fr;
-    box-sizing: border-box;
-  }
-
-  header, aside, article {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    font-size: 20px;
-    border: 1px solid black;
-  }
-
-  article, header {
-    background-color: rgb(255, 255, 255);
-  }
-
-  article > div {
-    width: 100%;
-  }
-
-  aside, article {
-    align-items: start;
-    margin-top: 5px;
-    box-sizing: border-box;
-  }
-
-  header {
-    grid-column: 1/4;
-  }
+<style lang="scss" scoped>
+  @import "../scss/profile"
 </style>
