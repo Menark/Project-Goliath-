@@ -41,11 +41,17 @@ footer {
 .svg {
   width: 15px;
   height: 15px;
-  fill: rgb(18, 30, 139);
   z-index: 1;
+  cursor: pointer;
 }
 
-.svg:hover {
-  fill: rgb(10, 224, 56);
+.logo1 {
+  z-index: 1;
+  fill: yellow;
   cursor: pointer;
+    &:hover {
+      .logo {
+        fill: green;
+      }
+    }
 }
