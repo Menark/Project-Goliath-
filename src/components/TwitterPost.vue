@@ -10,26 +10,36 @@
         <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
       </aside>
       <footer>
-        <img class="svg" src="../images/heart.svg"  alt="Выбери свою таблетку!">
-        <img class="svg" src="../images/speech.svg"  alt="Выбери свою таблетку!">
-        <re-tweet class="logo" />
-        <p>
-          <!-- вы можете передать меньшую `width` и `height` во входные данные -->
-          <icon-base
-            class="logo1"
-            width="20"
-            height="20"
-            icon-name="write"
-          ><icon-write class="logo" /></icon-base>
-        </p>
+        <icon-base
+          class="logo1"
+          viewBox="0 0 64 64"
+          width="20"
+          height="20"
+          icon-name="write"
+        ><icon-retweet class="logo" /></icon-base>
+        <icon-base
+          class="logo1"
+          viewBox="0 0 33 33"
+          width="20"
+          height="20"
+          icon-name="speech"
+        ><icon-speech class="logo" /></icon-base>
+        <icon-base
+          class="logo1"
+          viewBox="0 0 51.997 51.997"
+          width="20"
+          height="20"
+          icon-name="speech"
+        ><icon-like class="logo" /></icon-base>
       </footer>
   </div>
 </template>
 
 <script>
-import ReTweet from '../images/like.svg'
 import IconBase from './IconBase'
-import IconWrite from './IconWrite'
+import IconRetweet from './icons/IconRetweet'
+import IconSpeech from './icons/IconSpeech'
+import IconLike from './icons/IconLike'
 
 export default {
   name: 'TwitterPost',
@@ -37,9 +47,10 @@ export default {
     post: Object
   },
   components: {
-    ReTweet,
     IconBase,
-    IconWrite
+    IconRetweet,
+    IconSpeech,
+    IconLike
   }
 }
 </script>
