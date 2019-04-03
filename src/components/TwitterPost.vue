@@ -11,26 +11,25 @@
       </aside>
       <footer>
         <icon-base
-          class="logo1"
+          class="logoContainer"
+          viewBox="0 0 511.626 511.627"
+          icon-name="speech"
+        ><icon-speech class="logoSpeech" /></icon-base>
+        <icon-base
+          class="logoContainer"
           viewBox="0 0 64 64"
-          width="20"
-          height="20"
           icon-name="write"
-        ><icon-retweet class="logo" /></icon-base>
+        ><icon-retweet class="logoRetweet" /></icon-base>
         <icon-base
-          class="logo1"
-          viewBox="0 0 33 33"
-          width="20"
-          height="20"
+          class="logoContainer"
+          viewBox="0 0 512 512"
           icon-name="speech"
-        ><icon-speech class="logo" /></icon-base>
+        ><icon-like class="logoLike" /></icon-base>
         <icon-base
-          class="logo1"
-          viewBox="0 0 51.997 51.997"
-          width="20"
-          height="20"
-          icon-name="speech"
-        ><icon-like class="logo" /></icon-base>
+          class="logoContainer"
+          viewBox="-20 -30 640 640"
+          icon-name="Stat"
+        ><icon-stat class="logoStat" /></icon-base>
       </footer>
   </div>
 </template>
@@ -40,6 +39,7 @@ import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
+import IconStat from './icons/IconStat'
 
 export default {
   name: 'TwitterPost',
@@ -50,7 +50,8 @@ export default {
     IconBase,
     IconRetweet,
     IconSpeech,
-    IconLike
+    IconLike,
+    IconStat
   }
 }
 </script>

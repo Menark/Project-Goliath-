@@ -1,21 +1,22 @@
+.profile {
+  background-color: rgb(230, 236, 240);
+  height: 100%;
+  width: 100%;
+}
+
 #gridContainer {
-  background-color: #c4d5e0;
+  background-color: rgb(230, 236, 240);
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 7fr;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: auto auto;
   box-sizing: border-box;
 }
 
-header, aside, article {
+.top, aside, article {
   display: flex;
   justify-content: center;
   text-align: center;
   font-size: 20px;
-  border: 1px solid black;
-}
-
-article, header {
-  background-color: rgb(255, 255, 255);
 }
 
 article > div {
@@ -24,10 +25,22 @@ article > div {
 
 aside, article {
   align-items: start;
-  margin-top: 5px;
+  margin-top: 10px;
   box-sizing: border-box;
 }
 
-header {
+.top {
   grid-column: 1/4;
+  height: 25vh;
+  background-color: rgb(29, 161, 242);
+  border: 1px solid black;
+}
+
+.logotwitter {
+  padding: 20px 0;
+  background-color: rgb(255, 255, 255);
+    &img {
+      width: 20px;
+      height: 20px;
+    }
 }

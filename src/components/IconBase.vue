@@ -33,7 +33,7 @@ export default {
     },
     iconColor: {
       type: String,
-      default: 'blue'
+      default: '#606060'
     },
     viewBox: {
       type: String,

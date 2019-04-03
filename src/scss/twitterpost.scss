@@ -1,9 +1,10 @@
 .tweet {
-  border-bottom: 1px solid rgb(170, 170, 170);
+  border-bottom: 1px solid rgb(230, 227, 227);
+  background-color: rgb(255, 255, 255);
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 6fr;
-  grid-template-rows: 1fr auto 1fr;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: auto;
   font-family: "Segoe UI",Arial,sans-serif;
   font-size: 14px;
 }
@@ -18,19 +19,25 @@ header, main, aside, footer {
 aside {
   grid-row: 1/4;
   justify-content: center;
-  align-items: start;
+  align-items: center;
 }
 
-header, main {
+header, main, footer {
   justify-content: start;
   align-items: center;
   padding-left: 5px;
 }
 
 footer {
-  justify-content: space-around;
-  align-items: center;
-  padding: 5px 0;
+  padding-top: 15px;
+  padding-bottom: 10px;
+    &
+    :first-child {
+      padding-left: 0;
+    }
+    :last-child {
+      padding-right: 0;
+    }
 }
 
 .icon {
@@ -38,20 +45,21 @@ footer {
   height: 50px;
 }
 
-.svg {
-  width: 15px;
-  height: 15px;
-  z-index: 1;
+.logoContainer {
   cursor: pointer;
-}
-
-.logo1 {
-  z-index: 1;
-  fill: yellow;
-  cursor: pointer;
+  padding: 0 30px;
     &:hover {
-      .logo {
-        fill: green;
+      .logoSpeech {
+        fill: rgb(30, 51, 238);
+      }
+      .logoRetweet {
+        fill: rgb(20, 192, 20);
+      }
+      .logoLike {
+        fill: rgb(226, 35, 35);
+      }
+      .logoStat {
+        fill: rgb(44, 41, 228);
       }
     }
 }
