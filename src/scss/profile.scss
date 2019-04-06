@@ -36,11 +36,24 @@ aside, article {
   border: 1px solid black;
 }
 
-.logotwitter {
-  padding: 20px 0;
-  background-color: rgb(255, 255, 255);
-    &img {
-      width: 20px;
-      height: 20px;
+.textareaNewTweet {
+  padding: 0;
+  width: 100%;
+  height: 30px;
+  transition: 1s;
+  background-color: rgb(203, 236, 206);
+  resize: none;
+    &:focus {
+      height: 60px;
+      background-color: rgb(248, 248, 248);
+        &::placeholder {
+          color: transparent;
+        }
     }
+}
+
+::placeholder {
+  color: rgb(112, 112, 112);
+  padding: 8px 0 0 5px;
+  text-align: center;
 }

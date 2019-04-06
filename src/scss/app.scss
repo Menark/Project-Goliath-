@@ -1,3 +1,6 @@
+$header-height: 7vh;
+$header-font-size: 15px;
+
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -11,107 +14,161 @@ body {
 
 #app {
   display: grid;
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
+}
+
+.buttMenu {
+  height: $header-height;
+  background-color: rgb(48, 214, 98);
+    .svg {
+      width: 25px;
+      height: inherit;
+      margin: 0 20px;
+    }
 }
 
 header {
   background-color: rgb(255, 255, 255);
-  height: 7vh;
+  height: $header-height;
   box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  margin: 0;
   box-sizing: border-box;
 }
 
+.nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nameProject {
+  margin-left: 10px;
+  text-shadow: 2px 3px 3px;
+  font-size: $header-font-size+5px;
+}
+
 main {
-  height: 86vh;
+  height: 100-$header-height;
   box-sizing: border-box;
   overflow: auto;
 }
 
-footer {
-  background-color: rgb(255, 255, 255);
-  align-content: center;
-  height: 7vh;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: auto;
-  justify-content: center;
-}
-
 .linkToSocial {
-  width: 40px;
-  height: 40px;
+  width: 20px;
+  height: 20px;
 }
 
-.gridItem {
-  background-color: rgb(255, 255, 255);
-  border-radius: 20px;
-  justify-self: center;
-  align-self: center;
-  transform: scale(0.8);
-}
-
-.gridItem a, .gridItem p {
-  float: left;
-  line-height: 50%;
-  padding: 5px;
-}
+// .gridItem {
+//   background-color: rgb(113, 184, 130);
+//   display: flex;
+//   flex-flow: row wrap;
+//   justify-content: space-between;
+//   align-items: center;
+//   font-size: $header-font-size;
+//   // line-height: 0%;
+// }
 
 .roulink {
   text-decoration: none;
+  line-height: $header-height;
 }
 
 .firstButt, .secondButt, .thirdButt {
   border: 0px;
-  height: 30px;
+  height: $header-height;
   display: inline-block;
-  border-radius: 4px;
-  padding: 0px;
-  font-size: 15px;
+  font-size: $header-font-size;
   outline: none;
   box-shadow: none;
   cursor: pointer;
-  margin-top: 0px;
-  vertical-align: middle;
   background-color: rgb(219, 51, 76);
   color: rgb(0, 0, 0);
-  line-height: 30px;
   width: 88px;
-  margin-right: 8px;
   box-sizing: border-box;
 }
 
-.firstButt:hover, .secondButt:hover, .thirdButt:hover {
+.twoButt {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.threeButt {
+  height: inherit;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.firstButt:hover, .secondButt:hover {
   background-color: rgb(168, 28, 49);
 }
 
-#hideMenu {
-  position: absolute;
-  top: 60px;
-  margin: 0 24px;
-  right: 0px;
-  border: 1px solid black;
-  min-width: 150px;
-  background-color: azure;
-  border-radius: 20px 0 50px 25px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .18);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-sizing: border-box;
-  font-size: 18px;
-  z-index: 1;
+.buttMenu:hover {
+  .hideMenu {
+    visibility: visible;
+  }
+  .thirdButt {
+    background-color: rgb(168, 28, 49);
+  }
 }
 
-#hideMenu div {
-  margin-left: 10px;
+ul {
+  list-style-type: none;
+  margin: 0;
   padding: 0;
-  color: rgb(0, 0, 0);
+  min-width: inherit;
+}
+
+li a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+  text-align: left;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 10px;
+}
+
+li a::before {
+  content: "";
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+}
+
+a img {
+  vertical-align: middle;
+}
+
+li:hover {
+  background-color: rgb(177, 206, 151);
+    a {
+      color: rgb(5, 6, 110);
+      text-shadow: 2px 3px 3px;
+    }
+}
+
+.hideMenu {
+  visibility: hidden;
+  position: absolute;
+  top: $header-height;
+  right: 0;
+  min-width: 200px;
+  background-color: azure;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, .18);
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: $header-font-size + 1px;
+  z-index: 1;
 }

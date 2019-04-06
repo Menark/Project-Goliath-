@@ -8,22 +8,27 @@
         <p> Евгений Сегодня март 2019 </p>
       </aside>
       <article>
-        <div id="post">
+        <div>
+          <div >
+            <textarea
+              class="textareaNewTweet"
+              v-model="message"
+              placeholder="Write your fabulous tweet!"
+              maxlength="300">
+            </textarea>
+            <br>
+            <button type="button" @click="sendPost">Post</button>
+          </div>
           <twitter-post
             v-for="(post,i) in info"
             :post="post"
             :key="i"
-            > {{ post }} </twitter-post>
-          <div class="logotwitter">
-            <img class="logotwitterimg" src="../images/twitterdark.svg">
-          </div>
+            > {{ post }}
+          </twitter-post>
         </div>
       </article>
       <aside>
-        <div>
-          <input type="text" v-model="message">
-          <button type="button" @click="sendPost">Post</button>
-        </div>
+        Hello!
       </aside>
     </div>
   </div>

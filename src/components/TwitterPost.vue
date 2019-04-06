@@ -25,11 +25,6 @@
           viewBox="0 0 512 512"
           icon-name="speech"
         ><icon-like class="logoLike" /></icon-base>
-        <icon-base
-          class="logoContainer"
-          viewBox="-20 -30 640 640"
-          icon-name="Stat"
-        ><icon-stat class="logoStat" /></icon-base>
       </footer>
   </div>
 </template>
@@ -39,7 +34,6 @@ import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
-import IconStat from './icons/IconStat'
 
 export default {
   name: 'TwitterPost',
@@ -50,8 +44,7 @@ export default {
     IconBase,
     IconRetweet,
     IconSpeech,
-    IconLike,
-    IconStat
+    IconLike
   }
 }
 </script>

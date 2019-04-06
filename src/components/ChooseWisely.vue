@@ -1,6 +1,6 @@
 <template>
   <div class="choosewisely">
-    <router-link to="/profile" class="rlink">LINK TO CONTENT</router-link>
+    <router-link to="/profile" class="rlink">LINK TO PROFILE</router-link>
   </div>
 </template>
 
