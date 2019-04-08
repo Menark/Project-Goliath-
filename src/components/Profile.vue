@@ -14,9 +14,9 @@
               class="textareaNewTweet"
               v-model="message"
               placeholder="Write your fabulous tweet!"
-              maxlength="300">
+              maxlength="140">
             </textarea>
-            <br>
+            <file-preview/>
             <button type="button" @click="sendPost">Post</button>
           </div>
           <twitter-post
@@ -37,9 +37,10 @@
 <script>
 import { HTTP } from '../utils/api'
 import TwitterPost from './TwitterPost'
+import FilePreview from './FilePreview'
 
 export default {
-  name: 'LolOfLol',
+  name: 'imageUpload',
   data () {
     return {
       info: '',
@@ -47,7 +48,8 @@ export default {
     }
   },
   components: {
-    'twitter-post': TwitterPost
+    'twitter-post': TwitterPost,
+    'file-preview': FilePreview
   },
   mounted () {
     HTTP.get('/posts')
