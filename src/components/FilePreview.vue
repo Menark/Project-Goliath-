@@ -1,42 +1,43 @@
 <template>
   <div class="container">
     <div>
-      <label>File Preview
+      <br>
+      <div>
+        <div class="imagePreview">
+          <div
+            v-for="(file, key) in files"
+            v-bind:key="key">
+            <img class="preview" v-bind:ref="'image'+parseInt( key )"/>
+            <img src="../images/remove.svg" class="close" @click="removeImage"/>
+          </div>
+        </div>
+      </div>
+      <label for="fileses">
+        <img class="uploadImage" src="../images/photo.svg"/>
+      </label>
         <input
           type="file"
-          id="files"
+          id="fileses"
           ref="files"
           accept="image/*"
           multiple
           v-on:change="handleFileUpload()"/>
-      </label>
-      <img v-bind:src="imagePreview" v-show="showPreview"/>
-      <div>
-        <div>
-          <div
-            v-for="(file, key) in files"
-            v-bind:key="key">
-              {{ file.name }}
-            <span
-            class="remove-file"
-            v-on:click="removeImage( key )">
-              Remove
-            </span>
-            <img class="preview" v-bind:ref="'image'+parseInt( key )"/>
-          </div>
-        </div>
-      </div>
       <br>
-      <button v-on:click="submitFile()">Submit</button>
+      <p> {{ this.array.length }} </p>
+      <br>
+      <button v-on:click="submitFiles">Submit</button>
     </div>
   </div>
 </template>
 
 <script>
+import { HTTP } from '../utils/api'
+
 export default {
   data () {
     return {
       files: [],
+      array: [],
       showPreview: false,
       imagePreview: ''
     }
@@ -51,31 +52,44 @@ export default {
     },
     getImagePreviews: function () {
       for (let i = 0; i < this.files.length; i++) {
+        if (this.files[9]) {
+          document.getElementById('fileses').disabled = true
+        }
         if (/\.(jpe?g|png|gif)$/i.test(this.files[i].name)) {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
             this.$refs['image' + parseInt(i)][0].src = reader.result
+            if (!this.array.includes(reader.result)) {
+              this.array.push(reader.result)
+            }
           }.bind(this), false)
           reader.readAsDataURL(this.files[i])
+          this.$emit('send-post', this.array)
         }
       }
     },
-    removeImage (key) {
+    removeImage: function (key) {
       this.files.splice(key, 1)
+      this.array.splice(key, 1)
+    },
+    submitFiles: function () {
+      HTTP.post('/posts', {
+        'photos': this.array
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
     }
+    // compDecomp: function () {
+    //   const lzma = require('lzma')
+    //   lzma.compress(this.qwerty, 9, function (result) {
+    //     console.log('Compressed: ' + result)
+    //   })
+    // }
   }
 }
 </script>
 
-<style>
-  .container img{
-    max-width: 200px;
-    max-height: 200px;
-  }
-
-  .remove-file{
-    color: red;
-    cursor: pointer;
-    float: right;
-  }
+<style lang="scss" scoped>
+  @import "../scss/filepreview"
 </style>

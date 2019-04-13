@@ -9,14 +9,16 @@
       </aside>
       <article>
         <div>
-          <div >
-            <textarea
-              class="textareaNewTweet"
-              v-model="message"
-              placeholder="Write your fabulous tweet!"
-              maxlength="140">
-            </textarea>
-            <file-preview/>
+          <div>
+            <div>
+              <textarea
+                class="textareaNewTweet"
+                v-model="message"
+                placeholder="Write your fabulous tweet!"
+                maxlength="140">
+              </textarea>
+              <file-preview/>
+            </div>
             <button type="button" @click="sendPost">Post</button>
           </div>
           <twitter-post
@@ -44,7 +46,8 @@ export default {
   data () {
     return {
       info: '',
-      message: ''
+      message: '',
+      arr: []
     }
   },
   components: {
@@ -58,9 +61,10 @@ export default {
       })
   },
   methods: {
-    sendPost: function () {
+    sendPost: function (e) {
       HTTP.post('/posts', {
-        'body': this.message
+        'body': this.message,
+        'photos': e
       }).then(response => {})
         .catch(function (error) {
           console.log(error)
