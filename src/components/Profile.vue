@@ -12,14 +12,13 @@
           <div>
             <div>
               <textarea
-                class="textareaNewTweet"
+                class="newTweet"
                 v-model="message"
                 placeholder="Write your fabulous tweet!"
                 maxlength="140">
               </textarea>
-              <file-preview/>
+              <file-preview :message="message"/>
             </div>
-            <button type="button" @click="sendPost">Post</button>
           </div>
           <twitter-post
             v-for="(post,i) in info"
@@ -45,9 +44,8 @@ export default {
   name: 'imageUpload',
   data () {
     return {
-      info: '',
       message: '',
-      arr: []
+      info: ''
     }
   },
   components: {
@@ -59,17 +57,6 @@ export default {
       .then((response) => {
         this.info = response.data
       })
-  },
-  methods: {
-    sendPost: function (e) {
-      HTTP.post('/posts', {
-        'body': this.message,
-        'photos': e
-      }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
-    }
   }
 }
 </script>

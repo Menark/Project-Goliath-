@@ -36,13 +36,15 @@ aside, article {
   border: 1px solid black;
 }
 
-.textareaNewTweet {
-  padding: 0;
+.newTweet {
+  padding: 10px;
   width: 100%;
   height: 30px;
   border: none;
   transition: 1s;
+  box-sizing: border-box;
   background-color: rgb(203, 236, 206);
+  overflow: hidden;
   resize: none;
     &:focus {
       height: 60px;
@@ -55,6 +57,5 @@ aside, article {
 
 ::placeholder {
   color: rgb(112, 112, 112);
-  padding: 8px 0 0 5px;
   text-align: center;
 }
