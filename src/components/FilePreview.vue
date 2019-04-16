@@ -18,7 +18,7 @@
         <input
           type="file"
           id="fileses"
-          ref="files"
+          ref="previewFiles"
           accept="image/*"
           multiple
           v-on:change="handleFileUpload()"/>
@@ -44,13 +44,12 @@ export default {
     return {
       imagesArr: [],
       arrayBase64: [],
-      showPreview: false,
-      imagePreview: ''
+      maxImage: 3
     }
   },
   methods: {
     handleFileUpload: function () {
-      let uploadedFiles = this.$refs.files.files
+      let uploadedFiles = this.$refs.previewFiles.files
       for (var i = 0; i < uploadedFiles.length; i++) {
         this.imagesArr.push(uploadedFiles[i])
       }
@@ -58,9 +57,12 @@ export default {
     },
     getImagePreviews: function () {
       for (let i = 0; i < this.imagesArr.length; i++) {
-        // if (this.files[3]) {
-        //   document.getElementById('fileses').disabled = true
-        // }
+        if (this.imagesArr.length > this.maxImage) {
+          this.imagesArr.splice(this.maxImage + 1)
+          document.getElementById('fileses').disabled = true
+        } else {
+          document.getElementById('fileses').disabled = false
+        }
         if (/\.(jpe?g|png|gif)$/i.test(this.imagesArr[i].name)) {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
