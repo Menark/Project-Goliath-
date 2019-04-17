@@ -2,13 +2,13 @@
   <div class="container">
     <div>
       <br>
-      <div>
+      <div v-if="vision">
         <div class="imagePreview">
           <div
             v-for="(file, key) in imagesArr"
-            v-bind:key="key">
-            <img class="preview" v-bind:ref="'image'+parseInt( key )"/>
-            <img src="../images/remove.svg" class="close" @click="removeImage"/>
+            :key="key">
+            <img class="preview" :ref="'image'+parseInt( key )"/>
+            <img src="../images/remove.svg" class="close" @click="removeImage(key)"/>
           </div>
         </div>
       </div>
@@ -19,13 +19,18 @@
           type="file"
           id="fileses"
           ref="previewFiles"
-          accept="image/*"
+          accept="image/*, video/*"
           multiple
           v-on:change="handleFileUpload()"/>
       <br>
       <p> {{ this.arrayBase64.length }} </p>
       <br>
       <button type="button" @click="sendPost">Post</button>
+      <div>
+        <p>Taken from wikpedia</p>
+        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+          AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +49,8 @@ export default {
     return {
       imagesArr: [],
       arrayBase64: [],
-      maxImage: 3
+      maxImage: 2,
+      vision: false
     }
   },
   methods: {
@@ -53,6 +59,7 @@ export default {
       for (var i = 0; i < uploadedFiles.length; i++) {
         this.imagesArr.push(uploadedFiles[i])
       }
+      this.vision = true
       this.getImagePreviews()
     },
     getImagePreviews: function () {
@@ -63,12 +70,13 @@ export default {
         } else {
           document.getElementById('fileses').disabled = false
         }
-        if (/\.(jpe?g|png|gif)$/i.test(this.imagesArr[i].name)) {
+        if (/\.(jpe?g|png|gif|mp4)$/i.test(this.imagesArr[i].name)) {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
             this.$refs['image' + parseInt(i)][0].src = reader.result
             if (!this.arrayBase64.includes(reader.result)) {
               this.arrayBase64.push(reader.result)
+              console.log(reader.result)
             }
           }.bind(this), false)
           reader.readAsDataURL(this.imagesArr[i])
@@ -78,6 +86,10 @@ export default {
     removeImage: function (key) {
       this.imagesArr.splice(key, 1)
       this.arrayBase64.splice(key, 1)
+      if (this.imagesArr.length === 0) {
+        this.vision = false
+      }
+      this.getImagePreviews()
     },
     sendPost: function () {
       HTTP.post('/posts', {
