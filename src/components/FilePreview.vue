@@ -5,9 +5,10 @@
       <div v-if="vision">
         <div class="imagePreview">
           <div
-            v-for="(file, key) in imagesArr"
+            v-for="(file, key) in arrayOfFiles"
             :key="key">
-            <img class="preview" :ref="'image'+parseInt( key )"/>
+            <img v-if="file.type.startsWith('image')" class="previewImages" :ref="'image'+parseInt( key )"/>
+            <video v-else class="previewVideos" :ref="'video'+parseInt( key )" controls></video>
             <img src="../images/remove.svg" class="close" @click="removeImage(key)"/>
           </div>
         </div>
@@ -23,15 +24,12 @@
           multiple
           v-on:change="handleFileUpload()"/>
       <br>
-      <p> {{ this.arrayBase64.length }} </p>
+      <p> Images: {{ this.base64OfImages.length }} </p>
+      <p> Videos: {{ this.base64OfVideos.length }} </p>
       <br>
       <button type="button" @click="sendPost">Post</button>
-      <div>
-        <p>Taken from wikpedia</p>
-        <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
-          AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
-      </div>
     </div>
+    <br>
   </div>
 </template>
 
@@ -47,8 +45,9 @@ export default {
   },
   data () {
     return {
-      imagesArr: [],
-      arrayBase64: [],
+      arrayOfFiles: [],
+      base64OfImages: [],
+      base64OfVideos: [],
       maxImage: 2,
       vision: false
     }
@@ -57,48 +56,70 @@ export default {
     handleFileUpload: function () {
       let uploadedFiles = this.$refs.previewFiles.files
       for (var i = 0; i < uploadedFiles.length; i++) {
-        this.imagesArr.push(uploadedFiles[i])
+        if (uploadedFiles[i].size > 1024 * 1024 * 5) {
+          console.log('File is too big!')
+        } else {
+          this.arrayOfFiles.push(uploadedFiles[i])
+          this.vision = true
+        }
       }
-      this.vision = true
       this.getImagePreviews()
     },
     getImagePreviews: function () {
-      for (let i = 0; i < this.imagesArr.length; i++) {
-        if (this.imagesArr.length > this.maxImage) {
-          this.imagesArr.splice(this.maxImage + 1)
+      for (let i = 0; i < this.arrayOfFiles.length; i++) {
+        if (this.arrayOfFiles.length > this.maxImage) {
+          this.arrayOfFiles.splice(this.maxImage + 1)
           document.getElementById('fileses').disabled = true
         } else {
           document.getElementById('fileses').disabled = false
         }
-        if (/\.(jpe?g|png|gif|mp4)$/i.test(this.imagesArr[i].name)) {
+        if (this.arrayOfFiles[i].type.startsWith('image')) {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
             this.$refs['image' + parseInt(i)][0].src = reader.result
-            if (!this.arrayBase64.includes(reader.result)) {
-              this.arrayBase64.push(reader.result)
+            if (!this.base64OfImages.includes(reader.result)) {
+              this.base64OfImages.push(reader.result)
               console.log(reader.result)
             }
           }.bind(this), false)
-          reader.readAsDataURL(this.imagesArr[i])
+          reader.readAsDataURL(this.arrayOfFiles[i])
+        } else {
+          let reader = new FileReader()
+          reader.addEventListener('load', function () {
+            this.$refs['video' + parseInt(i)][0].src = reader.result
+            if (!this.base64OfVideos.includes(reader.result)) {
+              this.base64OfVideos.push(reader.result)
+              console.log(reader.result)
+            }
+          }.bind(this), false)
+          reader.readAsDataURL(this.arrayOfFiles[i])
         }
       }
     },
     removeImage: function (key) {
-      this.imagesArr.splice(key, 1)
-      this.arrayBase64.splice(key, 1)
-      if (this.imagesArr.length === 0) {
+      if (this.arrayOfFiles[key].type.startsWith('image')) {
+        this.arrayOfFiles.splice(key, 1)
+        this.base64OfImages.splice(key, 1)
+        this.getImagePreviews()
+      } else {
+        this.arrayOfFiles.splice(key, 1)
+        this.base64OfVideos.splice(key, 1)
+        this.getImagePreviews()
+      }
+      if (this.arrayOfFiles.length === 0) {
         this.vision = false
       }
-      this.getImagePreviews()
     },
     sendPost: function () {
       HTTP.post('/posts', {
         'body': this.message,
-        'photos': this.arrayBase64
+        'photos': this.base64OfImages,
+        'videos': this.base64OfVideos
       }).then(response => {})
         .catch(function (error) {
           console.log(error)
         })
+      this.arrayOfFiles.length = 0
     }
     // compDecomp: function () {
     //   const lzma = require('lzma')

@@ -4,10 +4,11 @@
         {{ post.id }}
       </header>
       <main>
+        <img v-if="post.photos" class="postPhoto" :src="post.photos"/>
+        <video v-if="post.videos" class="postPhoto" :src="post.videos"></video>
         <div>
           {{ post.body }}
         </div>
-        <img v-if="post.photos" class="postPhoto" :src="post.photos"/>
       </main>
       <aside>
         <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
