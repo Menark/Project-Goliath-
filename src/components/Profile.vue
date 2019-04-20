@@ -17,10 +17,15 @@
                 placeholder="Write your fabulous tweet!"
                 maxlength="140">
               </textarea>
-              <file-preview :message="message"/>
+              <file-preview
+                v-on:add-new="renewPosts()"
+                :message="message"
+                >
+              </file-preview>
             </div>
           </div>
           <twitter-post
+            v-on:re-new="renewPosts()"
             v-for="(post,i) in info"
             :post="post"
             :key="i"
@@ -57,6 +62,14 @@ export default {
       .then((response) => {
         this.info = response.data
       })
+  },
+  methods: {
+    renewPosts: function () {
+      HTTP.get('/posts')
+        .then((response) => {
+          this.info = response.data
+        })
+    }
   }
 }
 </script>

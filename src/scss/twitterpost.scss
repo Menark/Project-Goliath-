@@ -9,23 +9,39 @@
   font-size: 14px;
 }
 
-header, main, aside, footer {
+header, main, footer {
+  position: relative;
   height: auto;
-  /*border: 1px solid rgb(170, 170, 170);*/
-  display: inline-flex;
+  display: flex;
   text-align: left;
+  align-items: center;
+  padding-left: 5px;
+  margin-right: 5px;
+  box-sizing: border-box;
+}
+
+.main {
+  flex-flow: column wrap;
+}
+
+.postPhotoAndVideo {
+  display: flex;
+  flex-flow: row wrap;
+  align-self: flex-start;
+    .postPhotoAndVideo_Video, .postPhotoAndVideo_Image {
+      padding-right: 5px;
+    }
+}
+
+.postMessage {
+  align-self: flex-start;
+  justify-content: flex-start;
 }
 
 aside {
   grid-row: 1/4;
   justify-content: center;
   align-items: center;
-}
-
-header, main, footer {
-  justify-content: start;
-  align-items: center;
-  padding-left: 5px;
 }
 
 footer {
@@ -65,6 +81,21 @@ footer {
 }
 
 .postPhoto {
-  width: 40px;
-  height: 40px;
+  width: 200px;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+.close {
+  position: absolute;
+  top: 50%;
+  background-color: rgb(114, 31, 31);
+  border-radius: 15px;
+  right: 1%;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }

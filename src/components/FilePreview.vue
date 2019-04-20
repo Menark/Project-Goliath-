@@ -14,7 +14,7 @@
         </div>
       </div>
       <label for="fileses">
-        <img class="uploadImage" src="../images/photo.svg"/>
+        <img class="uploadImageButton" src="../images/photo.svg"/>
       </label>
         <input
           type="file"
@@ -119,14 +119,14 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-      this.arrayOfFiles.length = 0
+      this.$emit('add-new')
+    },
+    deleteItemsAll: function () {
+      this.arrayOfFiles.splice(0)
+      this.base64OfImages.splice(0)
+      this.base64OfVideos.splice(0)
+      this.vision = false
     }
-    // compDecomp: function () {
-    //   const lzma = require('lzma')
-    //   lzma.compress(this.qwerty, 9, function (result) {
-    //     console.log('Compressed: ' + result)
-    //   })
-    // }
   }
 }
 </script>

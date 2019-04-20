@@ -172,3 +172,9 @@ li:hover {
   font-size: $header-font-size + 1px;
   z-index: 1;
 }
+
+video::-webkit-media-controls-panel {
+  border-radius: 10px;
+  object-fit: cover;
+  background-image: linear-gradient(transparent, transparent) !important;
+}

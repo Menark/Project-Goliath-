@@ -2,11 +2,22 @@
   <div class="tweet">
       <header>
         {{ post.id }}
+        <img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(post.id)"/>
       </header>
-      <main>
-        <img v-if="post.photos" class="postPhoto" :src="post.photos"/>
-        <video v-if="post.videos" class="postPhoto" :src="post.videos"></video>
-        <div>
+      <main class="main">
+        <div class="postPhotoAndVideo">
+          <div class="postPhotoAndVideo_Image"
+            v-for="(photo, y) in post.photos"
+            :key="y+'photo'">
+            <img v-if="post.photos" class="postPhoto" :src="photo"/>
+          </div>
+          <div  class="postPhotoAndVideo_Video"
+            v-for="(video, i) in post.videos"
+            :key="i+'video'">
+            <video v-if="post.videos" class="postPhoto" :src="video" controls></video>
+          </div>
+        </div>
+        <div class="postMessage">
           {{ post.body }}
         </div>
       </main>
@@ -38,6 +49,7 @@ import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
+import { HTTP } from '../utils/api'
 
 export default {
   name: 'TwitterPost',
@@ -49,6 +61,20 @@ export default {
     IconRetweet,
     IconSpeech,
     IconLike
+  },
+  methods: {
+    deleteTheVeryPost: function (id) {
+      HTTP.delete('/posts/' + id)
+        .then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$emit('re-new')
+      // HTTP.get('/posts')
+      //   .then((response) => {
+      //     this.post = response.data
+      //   })
+    }
   }
 }
 </script>
