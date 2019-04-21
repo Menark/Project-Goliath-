@@ -1,6 +1,14 @@
 <template>
   <div class="container">
     <div>
+      <div>
+        <textarea
+          class="newTweet"
+          v-model="message"
+          placeholder="Write your fabulous tweet!"
+          maxlength="140">
+        </textarea>
+      </div>
       <br>
       <div v-if="vision">
         <div class="imagePreview">
@@ -37,14 +45,10 @@
 import { HTTP } from '../utils/api'
 
 export default {
-  props: {
-    message: {
-      type: String,
-      required: true
-    }
-  },
+  name: 'FilePreview',
   data () {
     return {
+      message: '',
       arrayOfFiles: [],
       base64OfImages: [],
       base64OfVideos: [],
@@ -125,7 +129,7 @@ export default {
       this.arrayOfFiles.splice(0)
       this.base64OfImages.splice(0)
       this.base64OfVideos.splice(0)
-      this.vision = false
+      this.messagr = ''
     }
   }
 }

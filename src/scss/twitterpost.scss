@@ -80,6 +80,13 @@ footer {
     }
 }
 
+.buttonLikes {
+  background: transparent;
+  border: none !important;
+  font-size:0;
+  outline: none;
+}
+
 .postPhoto {
   width: 200px;
   height: auto;
@@ -91,10 +98,10 @@ footer {
 
 .close {
   position: absolute;
-  top: 50%;
+  top: 0%;
   background-color: rgb(114, 31, 31);
-  border-radius: 15px;
-  right: 1%;
+  border-radius: 25px;
+  right: 0%;
   width: 25px;
   height: 25px;
   cursor: pointer;

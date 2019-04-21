@@ -11,15 +11,8 @@
         <div>
           <div>
             <div>
-              <textarea
-                class="newTweet"
-                v-model="message"
-                placeholder="Write your fabulous tweet!"
-                maxlength="140">
-              </textarea>
               <file-preview
                 v-on:add-new="renewPosts()"
-                :message="message"
                 >
               </file-preview>
             </div>
@@ -46,10 +39,9 @@ import TwitterPost from './TwitterPost'
 import FilePreview from './FilePreview'
 
 export default {
-  name: 'imageUpload',
+  name: 'Profile',
   data () {
     return {
-      message: '',
       info: ''
     }
   },
@@ -61,6 +53,7 @@ export default {
     HTTP.get('/posts')
       .then((response) => {
         this.info = response.data
+        this.info.reverse()
       })
   },
   methods: {
@@ -68,6 +61,7 @@ export default {
       HTTP.get('/posts')
         .then((response) => {
           this.info = response.data
+          this.info.reverse()
         })
     }
   }

@@ -28,18 +28,26 @@
         <icon-base
           class="logoContainer"
           viewBox="0 0 511.626 511.627"
-          icon-name="speech"
-        ><icon-speech class="logoSpeech" /></icon-base>
+          icon-name="speech">
+          <icon-speech class="logoSpeech" />
+        </icon-base>
         <icon-base
           class="logoContainer"
           viewBox="0 0 64 64"
-          icon-name="write"
-        ><icon-retweet class="logoRetweet" /></icon-base>
-        <icon-base
-          class="logoContainer"
-          viewBox="0 0 512 512"
-          icon-name="speech"
-        ><icon-like class="logoLike" /></icon-base>
+          icon-name="write">
+          <icon-retweet class="logoRetweet" />
+        </icon-base>
+        <button
+          @click="increaseLikes"
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 512 512"
+            icon-name="speech">
+            <icon-like class="logoLike" />
+          </icon-base>
+        </button>
+        <p> {{ counterLikes }} </p>
       </footer>
   </div>
 </template>
@@ -56,6 +64,11 @@ export default {
   props: {
     post: Object
   },
+  data () {
+    return {
+      counterLikes: 0
+    }
+  },
   components: {
     IconBase,
     IconRetweet,
@@ -70,10 +83,9 @@ export default {
           console.log(error)
         })
       this.$emit('re-new')
-      // HTTP.get('/posts')
-      //   .then((response) => {
-      //     this.post = response.data
-      //   })
+    },
+    increaseLikes: function () {
+      this.counterLikes++
     }
   }
 }
