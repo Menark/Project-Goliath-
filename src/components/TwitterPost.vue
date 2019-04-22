@@ -25,18 +25,24 @@
         <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
       </aside>
       <footer>
-        <icon-base
-          class="logoContainer"
-          viewBox="0 0 511.626 511.627"
-          icon-name="speech">
-          <icon-speech class="logoSpeech" />
-        </icon-base>
-        <icon-base
-          class="logoContainer"
-          viewBox="0 0 64 64"
-          icon-name="write">
-          <icon-retweet class="logoRetweet" />
-        </icon-base>
+        <button
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 511.626 511.627"
+            icon-name="speech">
+            <icon-speech class="logoSpeech" />
+          </icon-base>
+        </button>
+        <button
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 64 64"
+            icon-name="write">
+            <icon-retweet class="logoRetweet" />
+          </icon-base>
+        </button>
         <button
           @click="increaseLikes"
           class="buttonLikes">
@@ -46,9 +52,15 @@
             icon-name="speech">
             <icon-like class="logoLike" />
           </icon-base>
+          {{ counterLikes }}
         </button>
-        <p> {{ counterLikes }} </p>
       </footer>
+      <!--<comments
+        v-for="(comment,i) in com"
+        :comment="comment"
+        :key="i"
+        >  {{ comment }}
+      </comments>-->
   </div>
 </template>
 
@@ -58,6 +70,7 @@ import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
 import { HTTP } from '../utils/api'
+import Comments from './Comments'
 
 export default {
   name: 'TwitterPost',
@@ -66,14 +79,22 @@ export default {
   },
   data () {
     return {
-      counterLikes: 0
+      counterLikes: 0,
+      com: ''
     }
   },
   components: {
     IconBase,
     IconRetweet,
     IconSpeech,
-    IconLike
+    IconLike,
+    Comments
+  },
+  mounted () {
+    HTTP.get('/comments')
+      .then((response) => {
+        this.com = response.data
+      })
   },
   methods: {
     deleteTheVeryPost: function (id) {

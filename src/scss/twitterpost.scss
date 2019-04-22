@@ -61,9 +61,17 @@ footer {
   height: 50px;
 }
 
-.logoContainer {
-  cursor: pointer;
+.buttonLikes {
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  outline: none;
   padding: 0 30px;
+  cursor: pointer;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
     &:hover {
       .logoSpeech {
         fill: rgb(30, 51, 238);
@@ -73,18 +81,12 @@ footer {
       }
       .logoLike {
         fill: rgb(226, 35, 35);
+        vertical-align: middle;
       }
       .logoStat {
         fill: rgb(44, 41, 228);
       }
     }
-}
-
-.buttonLikes {
-  background: transparent;
-  border: none !important;
-  font-size:0;
-  outline: none;
 }
 
 .postPhoto {
