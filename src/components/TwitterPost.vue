@@ -33,6 +33,7 @@
             icon-name="speech">
             <icon-speech class="logoSpeech" />
           </icon-base>
+          <p>{{ counterSpeech }}</p>
         </button>
         <button
           class="buttonLikes">
@@ -42,9 +43,10 @@
             icon-name="write">
             <icon-retweet class="logoRetweet" />
           </icon-base>
+          <p>{{ counterRetweet }}</p>
         </button>
         <button
-          @click="increaseLikes"
+          @click="increaseLikes(post.id)"
           class="buttonLikes">
           <icon-base
             class="logoContainer"
@@ -52,7 +54,7 @@
             icon-name="speech">
             <icon-like class="logoLike" />
           </icon-base>
-          {{ counterLikes }}
+          <p>{{ post.likes }}</p>
         </button>
       </footer>
       <!--<comments
@@ -80,6 +82,8 @@ export default {
   data () {
     return {
       counterLikes: 0,
+      counterSpeech: 0,
+      counterRetweet: 0,
       com: ''
     }
   },
@@ -105,8 +109,15 @@ export default {
         })
       this.$emit('re-new')
     },
-    increaseLikes: function () {
-      this.counterLikes++
+    increaseLikes: function (id) {
+      this.post.likes++
+      HTTP.put(('/posts/' + id), {
+        'likes': this.post.likes
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$emit('re-new')
     }
   }
 }

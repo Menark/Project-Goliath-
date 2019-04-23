@@ -64,6 +64,7 @@ footer {
 .buttonLikes {
   background: transparent;
   border: none;
+  box-sizing: border-box;
   font-size: 12px;
   outline: none;
   padding: 0 30px;
@@ -72,7 +73,7 @@ footer {
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-    &:hover {
+      &:hover {
       .logoSpeech {
         fill: rgb(30, 51, 238);
       }
@@ -81,11 +82,13 @@ footer {
       }
       .logoLike {
         fill: rgb(226, 35, 35);
-        vertical-align: middle;
       }
       .logoStat {
         fill: rgb(44, 41, 228);
       }
+    }
+    .logoContainer {
+      margin-right: 5px;
     }
 }
 
