@@ -118,7 +118,8 @@ export default {
       HTTP.post('/posts', {
         'body': this.message,
         'photos': this.base64OfImages,
-        'videos': this.base64OfVideos
+        'videos': this.base64OfVideos,
+        'likes': 0
       }).then(response => {})
         .catch(function (error) {
           console.log(error)

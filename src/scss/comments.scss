@@ -1,4 +1,4 @@
-.tweet {
+.tweet1 {
   border-bottom: 1px solid rgb(230, 227, 227);
   background-color: rgb(255, 255, 255);
   box-sizing: border-box;
@@ -20,20 +20,20 @@ header, main, footer {
   box-sizing: border-box;
 }
 
-.main {
+.main1 {
   flex-flow: column wrap;
 }
 
-.postPhotoAndVideo {
+.postPhotoAndVideo1 {
   display: flex;
   flex-flow: row wrap;
   align-self: flex-start;
-    .postPhotoAndVideo_Video, .postPhotoAndVideo_Image {
+    .postPhotoAndVideo_Image1 {
       padding-right: 5px;
     }
 }
 
-.postMessage {
+.postMessage1 {
   align-self: flex-start;
   justify-content: flex-start;
 }
@@ -56,12 +56,12 @@ footer {
     }
 }
 
-.icon {
-  width: 50px;
-  height: 50px;
+.icon1 {
+  width: 10px;
+  height: 10px;
 }
 
-.buttonLikes {
+.buttonLikes1 {
   background: transparent;
   border: none;
   box-sizing: border-box;
@@ -74,25 +74,19 @@ footer {
   justify-content: center;
   align-items: center;
       &:hover {
-      .logoSpeech {
-        fill: rgb(30, 51, 238);
-      }
-      .logoRetweet {
+      .logoRetweet1 {
         fill: rgb(20, 192, 20);
       }
-      .logoLike {
+      .logoLike1 {
         fill: rgb(226, 35, 35);
       }
-      .logoStat {
-        fill: rgb(44, 41, 228);
-      }
     }
-    .logoContainer {
+    .logoContainer1 {
       margin-right: 5px;
     }
 }
 
-.postPhoto {
+.postPhoto1 {
   width: 200px;
   height: auto;
   overflow: hidden;
@@ -101,7 +95,7 @@ footer {
   outline: none;
 }
 
-.close {
+.close1 {
   position: absolute;
   top: 0%;
   background-color: rgb(114, 31, 31);

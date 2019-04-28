@@ -11,7 +11,7 @@
             :key="y+'photo'">
             <img v-if="post.photos" class="postPhoto" :src="photo"/>
           </div>
-          <div  class="postPhotoAndVideo_Video"
+          <div class="postPhotoAndVideo_Video"
             v-for="(video, i) in post.videos"
             :key="i+'video'">
             <video v-if="post.videos" class="postPhoto" :src="video" controls></video>
@@ -57,12 +57,14 @@
           <p>{{ post.likes }}</p>
         </button>
       </footer>
-      <!--<comments
-        v-for="(comment,i) in com"
-        :comment="comment"
-        :key="i"
-        >  {{ comment }}
-      </comments>-->
+      <div v-if="show" >
+        <comments
+          v-for="(comment,i) in commentsFilter(com, post.id)"
+          :comment="comment"
+          :key="i"
+          >  {{ comment }}
+        </comments>
+      </div>
   </div>
 </template>
 
@@ -84,7 +86,8 @@ export default {
       counterLikes: 0,
       counterSpeech: 0,
       counterRetweet: 0,
-      com: ''
+      com: '',
+      show: false
     }
   },
   components: {
@@ -110,14 +113,19 @@ export default {
       this.$emit('re-new')
     },
     increaseLikes: function (id) {
-      this.post.likes++
-      HTTP.put(('/posts/' + id), {
-        'likes': this.post.likes
+      let lk = this.post.likes++
+      HTTP.post('/posts/' + id, {
+        'likes': lk
       }).then(response => {})
         .catch(function (error) {
           console.log(error)
         })
       this.$emit('re-new')
+    },
+    commentsFilter: function (com, numb) {
+      return com.filter(function (el) {
+        return el.postId === numb
+      })
     }
   }
 }
