@@ -5,18 +5,12 @@
         <!--<img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(comment.id)"/>-->
       </header>
       <main class="main1">
-        <div class="postPhotoAndVideo1">
-          <div class="postPhotoAndVideo_Image1"
-            v-for="(photo, y) in comment.photos"
-            :key="y+'photo'">
-            <img v-if="comment.photos" class="postPhoto1" :src="photo"/>
-          </div>
-        </div>
         <div class="postMessage1">
           {{ comment.body }}
         </div>
       </main>
       <aside>
+        <img src="../images/student.svg" alt="Выбери свою таблетку!" class="icon1">
       </aside>
       <footer>
         <button

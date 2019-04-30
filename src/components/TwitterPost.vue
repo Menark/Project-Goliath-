@@ -56,15 +56,72 @@
           </icon-base>
           <p>{{ post.likes }}</p>
         </button>
+        <button id="show-modal" @click="showModal = true">Show Modal</button>
       </footer>
-      <div v-if="show" >
-        <comments
-          v-for="(comment,i) in commentsFilter(com, post.id)"
-          :comment="comment"
-          :key="i"
-          >  {{ comment }}
-        </comments>
-      </div>
+      <modal
+        v-bind:id="post.id"
+        v-bind:body="post.body"
+        v-if="showModal"
+        @close="showModal = false">
+          <div class="tweet" slot="header">
+      <header>
+        {{ post.id }}
+      </header>
+      <main class="main">
+        <div class="postPhotoAndVideo">
+          <div class="postPhotoAndVideo_Image"
+            v-for="(photo, y) in post.photos"
+            :key="y+'photo'">
+            <img v-if="post.photos" class="postPhoto" :src="photo"/>
+          </div>
+          <div class="postPhotoAndVideo_Video"
+            v-for="(video, i) in post.videos"
+            :key="i+'video'">
+            <video v-if="post.videos" class="postPhoto" :src="video" controls></video>
+          </div>
+        </div>
+        <div class="postMessage">
+          {{ post.body }}
+        </div>
+      </main>
+      <aside>
+        <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
+      </aside>
+      <footer>
+        <button
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 511.626 511.627"
+            icon-name="speech">
+            <icon-speech class="logoSpeech" />
+          </icon-base>
+          <p>{{ counterSpeech }}</p>
+        </button>
+        <button
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 64 64"
+            icon-name="write">
+            <icon-retweet class="logoRetweet" />
+          </icon-base>
+          <p>{{ counterRetweet }}</p>
+        </button>
+        <button
+          @click="increaseLikes(post.id)"
+          class="buttonLikes">
+          <icon-base
+            class="logoContainer"
+            viewBox="0 0 512 512"
+            icon-name="speech">
+            <icon-like class="logoLike" />
+          </icon-base>
+          <p>{{ post.likes }}</p>
+        </button>
+      </footer>
+  </div>
+      </modal>
   </div>
 </template>
 
@@ -74,7 +131,7 @@ import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
 import { HTTP } from '../utils/api'
-import Comments from './Comments'
+import Modal from './Modal'
 
 export default {
   name: 'TwitterPost',
@@ -86,8 +143,7 @@ export default {
       counterLikes: 0,
       counterSpeech: 0,
       counterRetweet: 0,
-      com: '',
-      show: false
+      showModal: false
     }
   },
   components: {
@@ -95,7 +151,7 @@ export default {
     IconRetweet,
     IconSpeech,
     IconLike,
-    Comments
+    Modal
   },
   mounted () {
     HTTP.get('/comments')
@@ -121,11 +177,6 @@ export default {
           console.log(error)
         })
       this.$emit('re-new')
-    },
-    commentsFilter: function (com, numb) {
-      return com.filter(function (el) {
-        return el.postId === numb
-      })
     }
   }
 }
