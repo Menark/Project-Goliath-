@@ -2,10 +2,10 @@
   <div class="profile">
     <div id='gridContainer'>
       <header class="top">
-        <div> Здесь просто пустое поле! </div>
+        <div> {{ $t('welcomM') }} </div>
       </header>
       <aside>
-        <p> Евгений Сегодня март 2019 </p>
+        <p> {{ $t('currentDate') }} </p>
       </aside>
       <article>
         <div>
@@ -27,7 +27,7 @@
         </div>
       </article>
       <aside>
-        Hello!
+        {{ $t('hello') }}
       </aside>
     </div>
   </div>

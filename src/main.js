@@ -6,6 +6,8 @@ import router from './router'
 import {store} from './store/index.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import {i18n} from './i18n.js'
+
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
@@ -13,6 +15,7 @@ Vue.config.productionTip = false
 //* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   axios,

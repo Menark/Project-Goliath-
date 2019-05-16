@@ -2,21 +2,27 @@
   <div id="app">
     <header>
       <div class="nameProject">
-        Project &#8810;GOLIATH&#8811;
+        {{ $t('project') }}&#8810;{{ $t('goliath') }}&#8811;
       </div>
       <div class="nav">
         <div class="threeButt">
+          <div>
+            <button @click="changeLocale('ru')">RU</button>
+          </div>
+          <div>
+            <button @click="changeLocale('en')">EN</button>
+          </div>
           <div  v-if="divLogOut">
             <button id="buttLOG" class="firstButt" @click="logOut">
-              Выйти
+              {{ $t('btnLogout') }}
             </button>
           </div>
           <div v-else class="twoButt">
               <div>
-                <router-link to="/login" class="firstButt roulink">LOGIN</router-link>
+                <router-link to="/login" class="firstButt roulink">{{ $t('btnLogin') }}</router-link>
               </div>
               <div>
-                <router-link to="/register" class="secondButt roulink">REGISTER</router-link>
+                <router-link to="/register" class="secondButt roulink">{{ $t('btnRegister') }}</router-link>
               </div>
           </div>
         </div>
@@ -48,31 +54,31 @@
               <li>
                 <router-link to="/choose">
                 <img src="../src/images/settings.svg" class="linkToSocial">
-                Future settings page
+                {{ $t('settingsPage') }}
                 </router-link>
               </li>
               <li>
                 <router-link to="/startpage">
                 <img src="../src/images/startpage.svg" class="linkToSocial">
-                Startpage
+                {{ $t('startPage') }}
                 </router-link>
               </li>
               <li>
                 <router-link to="/profile">
                   <img src="../src/images/userProfile.svg" class="linkToSocial">
-                  Профиль
+                  {{ $t('profile') }}
                 </router-link>
               </li>
               <li class="gridItem">
                 <a href="https://www.codewars.com/users/Menark" target="_blank">
                   <img src="../src/images/CodewarsMark.png" class="linkToSocial">
-                  CodeWars account
+                  {{ $t('codeWars') }}
                 </a>
               </li>
               <li class="gridItem">
                 <a href="https://github.com/Menark" target="_blank">
                   <img src="../src/images/GitHubMark.png" class="linkToSocial">
-                  Github account
+                  {{ $t('gitHub') }}
                 </a>
               </li>
             </ul>
@@ -106,6 +112,9 @@ export default {
         .then(() => {
           this.$router.push('/login')
         })
+    },
+    changeLocale: function (locale) {
+      this.$i18n.locale = locale
     }
   }
 }

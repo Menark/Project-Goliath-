@@ -1,7 +1,7 @@
 <template>
   <div class="reg">
     <form @submit.prevent="register" class="form" novalidate="true">
-      <router-link to="/login" class="labelSignIn">Авторизация</router-link>
+      <router-link to="/login" class="labelSignIn">{{ $t('authorization') }}</router-link>
       <div class="inputEmail">
         <input class="inputTreesome" type="email" v-model="email" required placeholder="Email Address">
       </div>
@@ -20,8 +20,8 @@
       <div class="tooltipConfirmPassword">
         {{ wrongConfirmPassword }}
       </div>
-      <button class="reset" type="button" @click="resetInputs">RESET</button>
-      <button class="vspishka" type="submit" @click.once="register">REGISTER</button>
+      <button class="reset" type="button" @click="resetInputs">{{ $t('reset') }}</button>
+      <button class="vspishka" type="submit" @click.once="register">{{ $t('btnRegister') }}</button>
     </form>
   </div>
 </template>

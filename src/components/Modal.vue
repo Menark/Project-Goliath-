@@ -12,7 +12,7 @@
               type="text"
               class="inputComment"
               v-model="commentMessage"/>
-            <button type="button" @click="sendComment">Send comment!</button>
+            <button type="button" @click="sendComment">{{ $t('sendComment') }}</button>
           </div>
           <div class="modal-body">
             <div v-if="show" >

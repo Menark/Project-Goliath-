@@ -1,7 +1,7 @@
 <template>
   <div class="formlogin">
     <form @submit.prevent="login" class="form1" novalidate="true">
-      <router-link to="/register" class="labelSignUp1">Регистрация</router-link>
+      <router-link to="/register" class="labelSignUp1">{{ $t('btnRegister') }}</router-link>
       <div class="inputEmail1">
         <input class="inputBoth1" required v-model="email" type="email" placeholder="Email Address"/><br>
       </div>
@@ -14,7 +14,7 @@
       <div class="tooltipPassword1">
         {{ misPassword }}
       </div>
-      <button class="vspishka1" type="submit" @click="logIn">LOGIN</button>
+      <button class="vspishka1" type="submit" @click="logIn">{{ $t('btnLogin') }}</button>
     </form>
   </div>
 </template>

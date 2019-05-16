@@ -32,10 +32,10 @@
           multiple
           v-on:change="handleFileUpload()"/>
       <br>
-      <p> Images: {{ this.base64OfImages.length }} </p>
-      <p> Videos: {{ this.base64OfVideos.length }} </p>
+      <p> {{ $t('images') }}: {{ this.base64OfImages.length }} </p>
+      <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
       <br>
-      <button type="button" @click="sendPost">Post</button>
+      <button type="button" @click="sendPost">{{ $t('sendPost') }}</button>
     </div>
     <br>
   </div>
