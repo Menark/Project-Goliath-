@@ -43,6 +43,7 @@
 
 <script>
 import { HTTP } from '../utils/api'
+import moment from 'moment'
 
 export default {
   name: 'FilePreview',
@@ -54,6 +55,11 @@ export default {
       base64OfVideos: [],
       maxImage: 2,
       vision: false
+    }
+  },
+  computed: {
+    currentD: function () {
+      return moment().format('LLL')
     }
   },
   methods: {
@@ -119,7 +125,8 @@ export default {
         'body': this.message,
         'photos': this.base64OfImages,
         'videos': this.base64OfVideos,
-        'likes': 0
+        'likes': 0,
+        'date': this.currentD
       }).then(response => {})
         .catch(function (error) {
           console.log(error)

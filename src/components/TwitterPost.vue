@@ -1,7 +1,7 @@
 <template>
   <div class="tweet">
       <header>
-        {{ post.id }}
+        {{ post.id }} -- {{ post.date }}
         <img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(post.id)"/>
       </header>
       <main class="main">

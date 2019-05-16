@@ -7,6 +7,7 @@ import {store} from './store/index.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import {i18n} from './i18n.js'
+import moment from 'moment'
 
 Vue.use(VueAxios, axios)
 
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   i18n,
+  moment,
   router,
   store,
   axios,
