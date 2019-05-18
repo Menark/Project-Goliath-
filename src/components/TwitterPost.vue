@@ -22,7 +22,7 @@
         </div>
       </main>
       <aside>
-        <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
+        <img src="../images/Мербиус.png" alt="Выбери свою таблетку!" class="icon">
       </aside>
       <footer>
         <button
@@ -46,7 +46,7 @@
           <p>{{ counterRetweet }}</p>
         </button>
         <button
-          @click="increaseLikes(post.id)"
+          @click="debouncedSave()"
           class="buttonLikes">
           <icon-base
             class="logoContainer"
@@ -54,7 +54,7 @@
             icon-name="speech">
             <icon-like class="logoLike" />
           </icon-base>
-          <p>{{ post.likes }}</p>
+          <p class="heart">{{ post.likes }}</p>
         </button>
         <button id="show-modal" @click="showModal = true">{{ $t('showModel') }}</button>
       </footer>
@@ -85,7 +85,7 @@
             </div>
           </main>
           <aside>
-            <img src="../images/МербиусСРамкой.jpg" alt="Выбери свою таблетку!" class="icon">
+            <img src="../images/Мербиус.png" alt="Выбери свою таблетку!" class="icon">
           </aside>
           <footer>
             <button
@@ -109,7 +109,7 @@
               <p>{{ counterRetweet }}</p>
             </button>
             <button
-              @click="increaseLikes(post.id)"
+              @click="debouncedSave()"
               class="buttonLikes">
               <icon-base
                 class="logoContainer"
@@ -132,6 +132,7 @@ import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
 import { HTTP } from '../utils/api'
 import Modal from './Modal'
+import debounce from '../debounce.js'
 
 export default {
   name: 'TwitterPost',
@@ -153,18 +154,25 @@ export default {
     IconLike,
     Modal
   },
+  computed: {
+    debouncedSave: function () {
+      let DELAY = 1500
+      return debounce(this.increaseLikes, DELAY)
+    }
+  },
   methods: {
-    deleteTheVeryPost: function (id) {
-      HTTP.delete('/posts/' + id)
+    deleteTheVeryPost: function () {
+      HTTP.delete('/posts/' + this.post.id)
         .then(response => {})
         .catch(function (error) {
           console.log(error)
         })
       this.$emit('re-new')
     },
-    increaseLikes: function (id) {
+    increaseLikes: function () {
+      // console.log('FUCJKHJFDKHGFHDG')
       let lk = this.post.likes + 1
-      HTTP.patch(('/posts/' + id), {
+      HTTP.patch(('/posts/' + this.post.id), {
         'likes': lk
       }).then(response => {})
         .catch(function (error) {
@@ -172,6 +180,10 @@ export default {
         })
       this.$emit('re-new')
     }
+    // debouncedSave: function (id) {
+    //   let DELAY = 1000
+    //   return debounce(this.increaseLikes(id), DELAY)
+    // }
   }
 }
 </script>

@@ -1,8 +1,22 @@
 <template>
-  <div id="app">
+  <div id="app" v-bind:class="{ dark: isNight }">
     <header>
       <div class="nameProject">
         {{ $t('project') }}&#8810;{{ $t('goliath') }}&#8811;
+      </div>
+      <div>
+        <transition>
+          <img
+            v-if="isNight"
+            src="../src/images/moonColor.svg"
+            class="linkToSocial"
+            @click="isNight=!isNight">
+          <img
+            v-else
+            src="../src/images/sunnyColor.svg"
+            class="linkToSocial"
+            @click="isNight=!isNight">
+        </transition>
       </div>
       <div class="nav">
         <div class="threeButt">
@@ -99,6 +113,7 @@ export default {
   name: 'App',
   data () {
     return {
+      isNight: false
     }
   },
   computed: {

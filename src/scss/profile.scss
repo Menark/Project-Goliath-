@@ -1,11 +1,9 @@
 .profile {
-  background-color: rgb(230, 236, 240);
   height: auto;
   width: 100%;
 }
 
 #gridContainer {
-  background-color: rgb(230, 236, 240);
   display: grid;
   grid-template-columns: 1fr 1.5fr 1fr;
   grid-template-rows: auto auto;

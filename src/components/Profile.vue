@@ -62,21 +62,21 @@ export default {
         console.log(this.info)
       })
   },
-  mounted () {
-    window.addEventListener('scroll', this.scroll)
-    console.log('scrolling Injected')
-  },
+  // mounted () {
+  //   window.addEventListener('scroll', this.scroll)
+  //   console.log('scrolling Injected')
+  // },
   created () {
     this.currentTime = moment().format('LTS')
     setInterval(() => this.updateCurrentTime(), 1 * 1000)
   },
-  watch: {
-    scrolling: function () {
-      if (document.getElementById('#sc').onscroll) {
-        console.log('This is SCROLLLLL')
-      }
-    }
-  },
+  // watch: {
+  //   scrolling: function () {
+  //     if (document.getElementById('#sc').onscroll) {
+  //       console.log('This is SCROLLLLL')
+  //     }
+  //   }
+  // },
   methods: {
     renewPosts: function () {
       HTTP.get('/posts')
@@ -85,12 +85,12 @@ export default {
           this.info.reverse()
         })
     },
-    scroll: function () {
-      HTTP.get('/posts')
-        .then(response => {
-          this.info.push(response.data[4])
-        })
-    },
+    // scroll: function () {
+    //   HTTP.get('/posts')
+    //     .then(response => {
+    //       this.info.push(response.data[4])
+    //     })
+    // },
     updateCurrentTime: function () {
       this.currentTime = moment().format('LTS')
     }

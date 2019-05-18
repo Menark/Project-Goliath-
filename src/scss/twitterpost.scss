@@ -1,6 +1,8 @@
+@import 'main';
+
 .tweet {
   border-bottom: 1px solid rgb(230, 227, 227);
-  background-color: rgb(255, 255, 255);
+  /*background-color: $backgroundColor;*/
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 7fr;
@@ -68,27 +70,28 @@ footer {
   font-size: 12px;
   outline: none;
   padding: 0 30px;
+  color: inherit;
   cursor: pointer;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   align-items: center;
       &:hover {
-      .logoSpeech {
-        fill: rgb(30, 51, 238);
+        .logoSpeech {
+          fill: rgb(30, 51, 238);
+        }
+        .logoRetweet {
+          fill: rgb(20, 192, 20);
+        }
+        .logoLike {
+          fill: rgb(226, 35, 35);
+        }
       }
-      .logoRetweet {
-        fill: rgb(20, 192, 20);
-      }
-      .logoLike {
-        fill: rgb(226, 35, 35);
-      }
-      .logoStat {
-        fill: rgb(44, 41, 228);
-      }
-    }
     .logoContainer {
       margin-right: 5px;
+    }
+    .logoSpeech, .logoRetweet, .logoLike {
+      fill: rgb(128, 128, 128);
     }
 }
 
