@@ -2,7 +2,9 @@
   <transition name="modal">
     <div class="modal-mask">
       <div class="modal-wrapper">
-        <div class="modal-container modal-container_dark">
+        <div
+          class="modal-container"
+          v-bind:class="isNight ? 'dark' : 'light'">
           <div class="modal-header">
             <slot name="header">
             </slot>
@@ -41,12 +43,14 @@
 <script>
 import { HTTP } from '../utils/api'
 import Comments from './Comments'
+import moment from 'moment'
 
 export default {
   name: 'Modal',
   props: {
     id: Number,
-    body: String
+    body: String,
+    isNight: Boolean
   },
   data () {
     return {
@@ -61,6 +65,11 @@ export default {
         this.com = response.data
       })
   },
+  computed: {
+    currentD: function () {
+      return moment().format('LLL')
+    }
+  },
   methods: {
     commentsFilter: function (com, numb) {
       return com.filter(function (el) {
@@ -71,7 +80,8 @@ export default {
       HTTP.post('/comments', {
         'body': this.commentMessage,
         'postId': this.id,
-        'likes': 0
+        'likes': 0,
+        'date': this.currentD
       }).then(response => {})
         .catch(function (error) {
           console.log(error)

@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:class="{ dark: isNight }">
+  <div id="app" v-bind:class="isNight ? 'dark' : 'light'">
     <header>
       <div class="nameProject">
         {{ $t('project') }}&#8810;{{ $t('goliath') }}&#8811;
@@ -10,12 +10,12 @@
             v-if="isNight"
             src="../src/images/moonColor.svg"
             class="linkToSocial"
-            @click="isNight=!isNight">
+            @click="changeModeL">
           <img
             v-else
             src="../src/images/sunnyColor.svg"
             class="linkToSocial"
-            @click="isNight=!isNight">
+            @click="changeModeD">
         </transition>
       </div>
       <div class="nav">
@@ -45,7 +45,7 @@
             MENU
           </button>-->
           <img src="../src/images/list.svg" class="svg">
-          <div class="hideMenu">
+          <div class="hideMenu" v-bind:class="isNight ? 'dark' : 'light'">
             <!--<div>
               <router-link to="/choose" class="roulink">CHOOSE</router-link>
             </div>
@@ -108,6 +108,7 @@
 
 <script>
 import { AUTH_LOGOUT } from './services/auth.js'
+import { DARK_MODE, LIGHT_MODE } from './services/changeMode.js'
 
 export default {
   name: 'App',
@@ -119,6 +120,12 @@ export default {
   computed: {
     divLogOut: function () {
       return this.$store.getters.isAuthenticated
+    },
+    classObject: function () {
+      return {
+        dark: this.$store.getters.isDarkModed,
+        light: this.$store.getters.isLightModed
+      }
     }
   },
   methods: {
@@ -130,6 +137,18 @@ export default {
     },
     changeLocale: function (locale) {
       this.$i18n.locale = locale
+    },
+    changeModeD: function () {
+      this.$store.dispatch(DARK_MODE)
+        .then(() => {
+          this.isNight = true
+        })
+    },
+    changeModeL: function () {
+      this.$store.dispatch(LIGHT_MODE)
+        .then(() => {
+          this.isNight = false
+        })
     }
   }
 }
