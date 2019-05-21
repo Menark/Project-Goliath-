@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-bind:class="isNight ? 'dark' : 'light'">
+  <div id="app" v-bind:class="classObject">
     <header>
       <div class="nameProject">
         {{ $t('project') }}&#8810;{{ $t('goliath') }}&#8811;
@@ -45,7 +45,7 @@
             MENU
           </button>-->
           <img src="../src/images/list.svg" class="svg">
-          <div class="hideMenu" v-bind:class="isNight ? 'dark' : 'light'">
+          <div class="hideMenu" v-bind:class="classObject">
             <!--<div>
               <router-link to="/choose" class="roulink">CHOOSE</router-link>
             </div>
@@ -114,7 +114,7 @@ export default {
   name: 'App',
   data () {
     return {
-      isNight: false
+      isNight: this.$store.getters.isDarkModed
     }
   },
   computed: {
@@ -122,10 +122,7 @@ export default {
       return this.$store.getters.isAuthenticated
     },
     classObject: function () {
-      return {
-        dark: this.$store.getters.isDarkModed,
-        light: this.$store.getters.isLightModed
-      }
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
@@ -140,15 +137,11 @@ export default {
     },
     changeModeD: function () {
       this.$store.dispatch(DARK_MODE)
-        .then(() => {
-          this.isNight = true
-        })
+      this.isNight = true
     },
     changeModeL: function () {
       this.$store.dispatch(LIGHT_MODE)
-        .then(() => {
-          this.isNight = false
-        })
+      this.isNight = false
     }
   }
 }

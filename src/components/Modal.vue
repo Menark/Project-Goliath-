@@ -4,7 +4,7 @@
       <div class="modal-wrapper">
         <div
           class="modal-container"
-          v-bind:class="isNight ? 'dark' : 'light'">
+          v-bind:class="classObject">
           <div class="modal-header">
             <slot name="header">
             </slot>
@@ -68,6 +68,9 @@ export default {
   computed: {
     currentD: function () {
       return moment().format('LLL')
+    },
+    classObject: function () {
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
