@@ -8,8 +8,10 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import {i18n} from './i18n.js'
 import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
 
 Vue.use(VueAxios, axios)
+Vue.use(InfiniteLoading)
 
 Vue.config.productionTip = false
 
@@ -18,6 +20,7 @@ new Vue({
   el: '#app',
   i18n,
   moment,
+  InfiniteLoading,
   router,
   store,
   axios,

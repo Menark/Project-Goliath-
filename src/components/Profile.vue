@@ -30,6 +30,10 @@
         {{ $t('hello') }}
       </aside>
     </div>
+    <infinite-loading
+      @infinite="infiniteHandler"
+      spinner="bubbles">
+    </infinite-loading>
   </div>
 </template>
 
@@ -38,30 +42,33 @@ import { HTTP } from '../utils/api'
 import TwitterPost from './TwitterPost'
 import FilePreview from './FilePreview'
 import moment from 'moment'
+import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   name: 'Profile',
   data () {
     return {
       info: [],
+      postsNew: [],
       currentTime: null
     }
   },
   components: {
     'twitter-post': TwitterPost,
-    'file-preview': FilePreview
+    'file-preview': FilePreview,
+    'infinite-loading': InfiniteLoading
   },
-  beforeMount () {
-    HTTP.get('/posts')
-      .then((response) => {
-        // for (var i = 0; i < 18; i++) {
-        //   this.info.push(response.data[i])
-        // }
-        this.info = response.data
-        this.info.reverse()
-        console.log(this.info)
-      })
-  },
+  // beforeMount () {
+  //   HTTP.get('/posts')
+  //     .then((response) => {
+  //       for (var i = 0; i < 4; i++) {
+  //         this.info.push(response.data[i])
+  //       }
+  //       // this.info = response.data
+  //       // this.info.reverse()
+  //       console.log(this.info)
+  //     })
+  // },
   // mounted () {
   //   window.addEventListener('scroll', this.scroll)
   //   console.log('scrolling Injected')
@@ -93,6 +100,26 @@ export default {
     // },
     updateCurrentTime: function () {
       this.currentTime = moment().format('LTS')
+    },
+    infiniteHandler: function ($state) {
+      HTTP.get('/posts'
+      ).then(response => {
+        for (var i = this.info.length; i < (this.info.length + 6); i++) {
+          let y = response.data[i]
+          if (y) {
+            this.postsNew.push(y)
+          }
+        }
+        console.log('postsNew ' + this.postsNew.length)
+        console.log('info ' + this.info.length)
+        if (this.postsNew.length > 0) {
+          this.info = this.info.concat(this.postsNew)
+          this.postsNew = []
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      })
     }
   }
 }
