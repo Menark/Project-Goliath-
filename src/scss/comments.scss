@@ -2,13 +2,20 @@
 
 .tweet1 {
   border-bottom: 1px solid rgb(230, 227, 227);
-  background-color: $backgroundColor;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: auto;
   font-family: "Segoe UI",Arial,sans-serif;
   font-size: 14px;
+}
+
+.dark {
+  background-color: $backgroundColor2;
+}
+
+.light {
+  background-color: $backgroundColor;
 }
 
 header, main, footer {
@@ -69,6 +76,7 @@ footer {
   box-sizing: border-box;
   font-size: 12px;
   outline: none;
+  color: inherit;
   padding: 0 30px;
   cursor: pointer;
   display: flex;

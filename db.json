@@ -19,35 +19,35 @@
     {
       "id": 4,
       "body": "Helo12",
-      "likes": 10
+      "likes": 11
     },
     {
-      "id": 7,
+      "id": 5,
       "body": "Helo1212121212",
       "likes": 11
     },
     {
-      "id": 8,
+      "id": 6,
       "body": "Helo121232441",
       "likes": 10
     },
     {
-      "id": 9,
+      "id": 7,
       "body": "Helo12121234",
-      "likes": 10
+      "likes": 11
     },
     {
-      "id": 10,
+      "id": 8,
       "body": "Helo121234557789",
-      "likes": 12
+      "likes": 13
     },
     {
-      "id": 11,
+      "id": 9,
       "body": "Helo12789789-9869309862578672590685b",
       "likes": 12
     },
     {
-      "id": 12,
+      "id": 10,
       "body": "Helo1254867vh4856787bq275867nb*6456/*45/*6b4",
       "likes": 10
     },
@@ -55,9 +55,9 @@
       "body": "Hello)",
       "photos": [],
       "videos": [],
-      "likes": 1,
+      "likes": 2,
       "date": "May 16th 2019, 10:38:33 pm",
-      "id": 13
+      "id": 11
     },
     {
       "body": "sdfsdfsfs",
@@ -65,55 +65,71 @@
       "videos": [],
       "likes": 5,
       "date": "May 16th 2019, 10:41:42 pm",
-      "id": 14
+      "id": 12
     },
     {
       "body": "Hrllo)))))))))))",
       "photos": [],
       "videos": [],
-      "likes": 3,
+      "likes": 4,
       "date": "May 18, 2019 8:23 PM",
-      "id": 16
+      "id": 13
     },
     {
       "body": "Ghbdtn) Nj pf theulf)",
       "photos": [],
       "videos": [],
-      "likes": 3,
+      "likes": 5,
       "date": "May 18, 2019 8:25 PM",
-      "id": 17
+      "id": 14
+    },
+    {
+      "body": "HEkuzdosj3453453453bijzdijvhzpdbgf",
+      "photos": [],
+      "videos": [],
+      "likes": 4345,
+      "date": "May 18, 2019 8:29 PM",
+      "id": 15
     },
     {
       "body": "HEkuzdosjfghuidfgijzdhbijzdijvhzpdbgf",
       "photos": [],
       "videos": [],
-      "likes": 3,
+      "likes": 4,
       "date": "May 18, 2019 8:29 PM",
-      "id": 19
+      "id": 16
     },
     {
       "body": "kdnhjnfxjbnfhn",
       "photos": [],
       "videos": [],
-      "likes": 3,
+      "likes": 4,
       "date": "May 18, 2019 8:37 PM",
-      "id": 21
+      "id": 17
     },
     {
-      "body": "dgdf th fth r56 6 56y 5h 5h5h5yh yt",
+      "body": "Привет, сегодня я доделываю косяки) Дубль 2)",
       "photos": [],
       "videos": [],
-      "likes": 1,
-      "date": "May 18, 2019 8:38 PM",
-      "id": 22
+      "likes": 0,
+      "date": "May 25, 2019 3:14 PM",
+      "id": 18
     },
     {
-      "body": "dgdf th ft2342332cfd hSGSGSGDFDF r56 6 56y 5h 5h5h5yh yt",
+      "body": "Привет) - 3",
       "photos": [],
       "videos": [],
-      "likes": 13,
-      "date": "May 18, 2019 9:38 PM",
-      "id": 23
+      "likes": 0,
+      "date": "May 25, 2019 3:15 PM",
+      "id": 19
+    },
+    {
+      "body": "Привет) - 44444",
+      "photos": [],
+      "videos": [],
+      "likes": 0,
+      "date": "May 25, 2019 3:16 PM",
+      "id": 20
     }
   ],
   "comments": [
@@ -129,6 +145,11 @@
     },
     {
       "id": 3,
+      "body": "fuck",
+      "postId": 1
+    },
+    {
+      "id": 4,
       "body": "some comment3",
       "postId": 1
     },
@@ -136,7 +157,49 @@
       "body": "HEllo daring) Thhis is first comment to 3 post)))",
       "postId": 3,
       "likes": 0,
-      "id": 4
+      "id": 5
+    },
+    {
+      "body": "Hello)",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 3:44 PM",
+      "id": 6
+    },
+    {
+      "body": "Hello again)",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 3:46 PM",
+      "id": 7
+    },
+    {
+      "body": "Ang again)",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 3:46 PM",
+      "id": 8
+    },
+    {
+      "body": "How are you))))",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 3:46 PM",
+      "id": 9
+    },
+    {
+      "body": "Bitch))",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 3:46 PM",
+      "id": 10
+    },
+    {
+      "body": "Руддщ",
+      "postId": 1,
+      "likes": 0,
+      "date": "May 25, 2019 4:00 PM",
+      "id": 11
     }
   ],
   "profile": [

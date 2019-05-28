@@ -12,13 +12,14 @@
           <div>
             <div>
               <file-preview
-                v-on:add-new="renewPosts()"
+                v-on:add-new="renewPosts"
                 >
               </file-preview>
             </div>
           </div>
           <twitter-post
-            v-on:re-new="renewPosts()"
+            v-on:re-like="reLikePosts"
+            v-on:delete-post="deletePost"
             v-for="(post,i) in info"
             :post="post"
             :key="i"
@@ -58,60 +59,47 @@ export default {
     'file-preview': FilePreview,
     'infinite-loading': InfiniteLoading
   },
-  // beforeMount () {
-  //   HTTP.get('/posts')
-  //     .then((response) => {
-  //       for (var i = 0; i < 4; i++) {
-  //         this.info.push(response.data[i])
-  //       }
-  //       // this.info = response.data
-  //       // this.info.reverse()
-  //       console.log(this.info)
-  //     })
-  // },
-  // mounted () {
-  //   window.addEventListener('scroll', this.scroll)
-  //   console.log('scrolling Injected')
-  // },
   created () {
     this.currentTime = moment().format('LTS')
     setInterval(() => this.updateCurrentTime(), 1 * 1000)
   },
-  // watch: {
-  //   scrolling: function () {
-  //     if (document.getElementById('#sc').onscroll) {
-  //       console.log('This is SCROLLLLL')
-  //     }
-  //   }
-  // },
   methods: {
     renewPosts: function () {
       HTTP.get('/posts')
         .then((response) => {
-          this.info = response.data
-          this.info.reverse()
+          this.info.unshift(response.data[response.data.length - 1])
+          console.log(response.data[response.data.length - 1])
         })
     },
-    // scroll: function () {
-    //   HTTP.get('/posts')
-    //     .then(response => {
-    //       this.info.push(response.data[4])
-    //     })
-    // },
+    deletePost: function (id) {
+      for (var i = 0; i < this.info.length; i++) {
+        if (this.info[i].id === id) {
+          this.info.splice(i, 1)
+        }
+      }
+    },
+    reLikePosts: function (id) {
+      HTTP.get('/posts/' + id)
+        .then((response) => {
+          for (var i = 0; i < this.info.length; i++) {
+            if (this.info[i].id === id) {
+              this.info[i].likes = response.data.likes
+            }
+          }
+        })
+    },
     updateCurrentTime: function () {
       this.currentTime = moment().format('LTS')
     },
     infiniteHandler: function ($state) {
       HTTP.get('/posts'
       ).then(response => {
-        for (var i = this.info.length; i < (this.info.length + 6); i++) {
+        for (var i = (response.data.length - this.info.length - 1); i > (response.data.length - 6 - this.info.length); i--) {
           let y = response.data[i]
           if (y) {
             this.postsNew.push(y)
           }
         }
-        console.log('postsNew ' + this.postsNew.length)
-        console.log('info ' + this.info.length)
         if (this.postsNew.length > 0) {
           this.info = this.info.concat(this.postsNew)
           this.postsNew = []

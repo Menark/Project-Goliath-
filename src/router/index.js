@@ -37,6 +37,10 @@ const router = new Router({
       meta: {
         requiredAuth: true
       }
+    },
+    {
+      path: '/profile/post:id',
+      component: () => import('@/components/Modal')
     }
   ]
 })

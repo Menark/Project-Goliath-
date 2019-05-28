@@ -1,8 +1,7 @@
 <template>
-  <div class="tweet1">
+  <div class="tweet1" v-bind:class="classObject">
       <header>
         {{ comment.id }}
-        <!--<img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(comment.id)"/>-->
       </header>
       <main class="main1">
         <div class="postMessage1">
@@ -59,6 +58,11 @@ export default {
     IconBase,
     IconRetweet,
     IconLike
+  },
+  computed: {
+    classObject: function () {
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
+    }
   },
   methods: {
     // deleteTheVeryPost: function (id) {
