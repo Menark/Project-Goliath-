@@ -2,6 +2,11 @@
   <div class="tweet1" v-bind:class="classObject">
       <header>
         {{ comment.id }}
+        <img
+          src="../images/remove.svg"
+          class="close1"
+          @click="deleteTheVeryComment(comment.id)"
+        />
       </header>
       <main class="main1">
         <div class="postMessage1">
@@ -13,7 +18,7 @@
       </aside>
       <footer>
         <button
-          class="buttonLikes1">
+          class="buttonLikes1 light-green">
           <icon-base
             class="logoContainer1"
             viewBox="0 0 64 64"
@@ -23,8 +28,8 @@
           <p>{{ counterRetweet }}</p>
         </button>
         <button
-          @click="increaseLikes(comment.id)"
-          class="buttonLikes1">
+          @click="debounceComment()"
+          class="buttonLikes1 light-red">
           <icon-base
             class="logoContainer1"
             viewBox="0 0 512 512"
@@ -41,7 +46,8 @@
 import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconLike from './icons/IconLike'
-// import { HTTP } from '../utils/api'
+import { HTTP } from '../utils/api'
+import debounce from '../debounce.js'
 
 export default {
   name: 'Comments',
@@ -60,29 +66,33 @@ export default {
     IconLike
   },
   computed: {
+    debounceComment: function () {
+      let DELAY = 1000
+      return debounce(this.increaseLikesComment, DELAY)
+    },
     classObject: function () {
       return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
-    // deleteTheVeryPost: function (id) {
-    //   HTTP.delete('/posts/' + id)
-    //     .then(response => {})
-    //     .catch(function (error) {
-    //       console.log(error)
-    //     })
-    //   this.$emit('re-new')
-    // },
-    // increaseLikes: function (id) {
-    //   let lk = this.post.likes++
-    //   HTTP.post('/posts/' + id, {
-    //     'likes': lk
-    //   }).then(response => {})
-    //     .catch(function (error) {
-    //       console.log(error)
-    //     })
-    //   this.$emit('re-new')
-    // },
+    deleteTheVeryComment: function () {
+      HTTP.delete('/comments/' + this.comment.id)
+        .then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$emit('delete-comment', this.comment.id)
+    },
+    increaseLikesComment: function () {
+      let lk = this.comment.likes + 1
+      HTTP.patch(('/comments/' + this.comment.id), {
+        'likes': lk
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$emit('re-like-comment', this.comment.id)
+    }
   }
 }
 </script>

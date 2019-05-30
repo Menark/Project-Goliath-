@@ -139,11 +139,6 @@
       "postId": 2
     },
     {
-      "id": 2,
-      "body": "some comment2",
-      "postId": 1
-    },
-    {
       "id": 3,
       "body": "fuck",
       "postId": 1
@@ -190,14 +185,14 @@
     {
       "body": "Bitch))",
       "postId": 1,
-      "likes": 0,
+      "likes": 1,
       "date": "May 25, 2019 3:46 PM",
       "id": 10
     },
     {
       "body": "Руддщ",
       "postId": 1,
-      "likes": 0,
+      "likes": 2,
       "date": "May 25, 2019 4:00 PM",
       "id": 11
     }

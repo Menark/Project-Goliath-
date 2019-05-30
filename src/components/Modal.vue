@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="tweet">
+  <div class="viewPost"  v-bind:class="classObject">
+    <div class="viewPost-tweet">
       <header>
         Ghbdtn {{ post.id }}
       </header>
@@ -26,7 +26,7 @@
       </aside>
       <footer>
         <button
-          class="buttonLikes">
+          class="buttonLikes light-blue">
           <icon-base
             class="logoContainer"
             viewBox="0 0 511.626 511.627"
@@ -36,7 +36,7 @@
           <p>{{ this.com.length }}</p>
         </button>
         <button
-          class="buttonLikes">
+          class="buttonLikes light-green">
           <icon-base
             class="logoContainer"
             viewBox="0 0 64 64"
@@ -47,7 +47,7 @@
         </button>
         <button
           @click="debouncedSave()"
-          class="buttonLikes">
+          class="buttonLikes light-red">
           <icon-base
             class="logoContainer"
             viewBox="0 0 512 512"
@@ -58,27 +58,29 @@
         </button>
       </footer>
     </div>
-    <div class="modal-body">
-      <div v-if="show">
-        <comments
-          v-for="(comment,i) in commentsFilter(com, post.id)"
-          :comment="comment"
-          :key="i"
-          >  {{ comment }}
-        </comments>
-      </div>
-    </div>
-    <div class="modal-body">
+    <!--<div class="viewPost-input">
       <input
         type="text"
         class="inputComment"
         v-model="commentMessage"/>
       <button type="button" @click="sendComment">{{ $t('sendComment') }}</button>
+    </div>-->
+    <div class="viewPost-comments">
+      <div v-if="show">
+        <comments
+          v-on:re-like-comment="reLikeComment"
+          v-on:delete-comment="deleteComment"
+          v-for="(comment,i) in commentsFilter(com, post.id)"
+          :comment="comment"
+          :key="i"
+          >  {{ comment }}
+        </comments>
+        <infinite-loading
+          @infinite="infiniteHandler"
+          spinner="bubbles">
+        </infinite-loading>
+      </div>
     </div>
-    <infinite-loading
-      @infinite="infiniteHandler"
-      spinner="bubbles">
-    </infinite-loading>
   </div>
 </template>
 
@@ -93,11 +95,6 @@ import InfiniteLoading from 'vue-infinite-loading'
 
 export default {
   name: 'Modal',
-  props: {
-    id: Number,
-    body: String,
-    isNight: Boolean
-  },
   components: {
     IconBase,
     IconRetweet,
@@ -123,16 +120,38 @@ export default {
         this.post = response.data
       })
   },
+  computed: {
+    classObject: function () {
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
+    }
+  },
   methods: {
     commentsFilter: function (com, numb) {
       return com.filter(function (el) {
         return el.postId === numb
       })
     },
+    deleteComment: function (id) {
+      for (var i = 0; i < this.com.length; i++) {
+        if (this.com[i].id === id) {
+          this.com.splice(i, 1)
+        }
+      }
+    },
+    reLikeComment: function (id) {
+      HTTP.get('/comments/' + id)
+        .then((response) => {
+          for (var i = 0; i < this.com.length; i++) {
+            if (this.com[i].id === id) {
+              this.com[i].likes = response.data.likes
+            }
+          }
+        })
+    },
     sendComment: function () {
       HTTP.post('/comments', {
         'body': this.commentMessage,
-        'postId': this.id,
+        'postId': this.post.id,
         'likes': 0,
         'date': this.currentD
       }).then(response => {})
@@ -164,5 +183,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import "../scss/twitterpost"
+  @import "../scss/modal"
 </style>

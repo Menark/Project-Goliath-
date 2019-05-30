@@ -1,5 +1,5 @@
 <template>
-  <div class="tweet">
+  <div class="tweet" v-bind:class="classObject">
     <header>
       {{ post.id }} -- {{ post.date }}
       <img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(post.id)"/>
@@ -26,7 +26,7 @@
     </aside>
     <footer>
       <button
-        class="buttonLikes">
+        class="buttonLikes light-blue">
         <icon-base
           class="logoContainer"
           viewBox="0 0 511.626 511.627"
@@ -36,7 +36,7 @@
         <p>{{ counterSpeech }}</p>
       </button>
       <button
-        class="buttonLikes">
+        class="buttonLikes light-green">
         <icon-base
           class="logoContainer"
           viewBox="0 0 64 64"
@@ -47,7 +47,7 @@
       </button>
       <button
         @click="debouncedSave()"
-        class="buttonLikes">
+        class="buttonLikes light-red">
         <icon-base
           class="logoContainer"
           viewBox="0 0 512 512"
@@ -91,7 +91,10 @@ export default {
   computed: {
     debouncedSave: function () {
       let DELAY = 1000
-      return debounce(this.increaseLikes, DELAY)
+      return debounce(this.increaseLikesPost, DELAY)
+    },
+    classObject: function () {
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
@@ -103,7 +106,7 @@ export default {
         })
       this.$emit('delete-post', this.post.id)
     },
-    increaseLikes: function () {
+    increaseLikesPost: function () {
       let lk = this.post.likes + 1
       HTTP.patch(('/posts/' + this.post.id), {
         'likes': lk
@@ -111,7 +114,7 @@ export default {
         .catch(function (error) {
           console.log(error)
         })
-      this.$emit('re-like', this.post.id)
+      this.$emit('re-like-post', this.post.id)
     }
   }
 }

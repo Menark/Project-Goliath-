@@ -18,7 +18,7 @@
             </div>
           </div>
           <twitter-post
-            v-on:re-like="reLikePosts"
+            v-on:re-like-post="reLikePost"
             v-on:delete-post="deletePost"
             v-for="(post,i) in info"
             :post="post"
@@ -78,7 +78,7 @@ export default {
         }
       }
     },
-    reLikePosts: function (id) {
+    reLikePost: function (id) {
       HTTP.get('/posts/' + id)
         .then((response) => {
           for (var i = 0; i < this.info.length; i++) {

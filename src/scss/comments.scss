@@ -1,21 +1,26 @@
 @import 'main';
 
 .tweet1 {
-  border-bottom: 1px solid rgb(230, 227, 227);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 1fr 7fr;
   grid-template-rows: auto;
   font-family: "Segoe UI",Arial,sans-serif;
   font-size: 14px;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  padding-top: 10px;
+    &:hover {
+      box-shadow: 0 0 10px rgb(40, 63, 68);
+    }
 }
 
 .dark {
-  background-color: $backgroundColor2;
+  background-color: $backgroundColor2-2;
 }
 
 .light {
-  background-color: $backgroundColor;
+  background-color: $backgroundColor-2;
 }
 
 header, main, footer {
@@ -58,10 +63,10 @@ footer {
   padding-bottom: 10px;
     &
     :first-child {
-      padding-left: 0;
+      margin-left: 0;
     }
     :last-child {
-      padding-right: 0;
+      margin-right: 0;
     }
 }
 
@@ -76,8 +81,9 @@ footer {
   box-sizing: border-box;
   font-size: 12px;
   outline: none;
+  border-radius: 25px;
   color: inherit;
-  padding: 0 30px;
+  margin: 0 30px;
   cursor: pointer;
   display: flex;
   flex-flow: row wrap;
@@ -94,6 +100,17 @@ footer {
     .logoContainer1 {
       margin-right: 5px;
     }
+    .logoRetweet1, .logoLike1 {
+      fill: rgb(128, 128, 128);
+    }
+}
+
+.light-green:hover {
+  background: rgba(20, 192, 20, 0.1);
+}
+
+.light-red:hover {
+  background: rgba(226, 35, 35, 0.1);
 }
 
 .postPhoto1 {
