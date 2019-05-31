@@ -5,13 +5,15 @@
         <div> {{ $t('welcomM') }} </div>
       </header>
       <aside>
-        <p> {{ $t('currentDate') + this.currentTime }} </p>
+        <p class="sticky-date"> {{ $t('currentDate') + this.currentTime }} </p>
       </aside>
       <article>
         <div class="scrolling">
           <div>
             <div>
               <file-preview
+                v-if="showModal"
+                @close="showModal = false"
                 v-on:add-new="renewPosts"
                 >
               </file-preview>
@@ -28,7 +30,9 @@
         </div>
       </article>
       <aside>
-        {{ $t('hello') }}
+        <div class="add-tweet-button" @click="showModal = true">
+          <p>{{ $t('addTweetButton') }}</p>
+        </div>
       </aside>
     </div>
     <infinite-loading
@@ -44,6 +48,7 @@ import TwitterPost from './TwitterPost'
 import FilePreview from './FilePreview'
 import moment from 'moment'
 import InfiniteLoading from 'vue-infinite-loading'
+import Modal from './Modal'
 
 export default {
   name: 'Profile',
@@ -51,13 +56,15 @@ export default {
     return {
       info: [],
       postsNew: [],
-      currentTime: null
+      currentTime: null,
+      showModal: false
     }
   },
   components: {
     'twitter-post': TwitterPost,
     'file-preview': FilePreview,
-    'infinite-loading': InfiniteLoading
+    'infinite-loading': InfiniteLoading,
+    Modal
   },
   created () {
     this.currentTime = moment().format('LTS')

@@ -1,3 +1,5 @@
+$addbutton: 120px;
+
 .profile {
   height: auto;
   width: 100%;
@@ -32,4 +34,43 @@ aside, article {
   height: 25vh;
   background-color: rgb(29, 161, 242);
   border: 1px solid black;
+}
+
+.sticky-date {
+  position: sticky;
+  top: 20vh;
+}
+
+.add-tweet-button {
+  position: fixed;
+  bottom: 15vh;
+  right: 20vh;
+  width: $addbutton;
+  height: $addbutton;
+  background-color: rgb(45, 123, 187);
+  border-radius: $addbutton/2;
+  box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+    p {
+      line-height: $addbutton;
+      padding: 0;
+      margin: 0;
+    }
+}
+
+.add-tweet-button::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: $addbutton/2;
+  box-shadow: 0px 0px 8px 6px rgba(163, 161, 161, 0.75);
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.add-tweet-button:hover::before {
+  opacity: 1;
 }

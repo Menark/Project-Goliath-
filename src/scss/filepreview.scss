@@ -1,12 +1,72 @@
 @import 'main';
 
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.dark {
+  background-color: $backgroundColor2-2;
+    .imagePreview {
+      background-color: $backgroundColor2;
+    }
+    .newTweet {
+      background-color: $backgroundColor2;
+      color: rgb(255, 255, 255);
+    }
+}
+
+.light {
+  background-color: $backgroundColor-2;
+  .imagePreview {
+    background-color: $backgroundColor;
+  }
+  .newTweet {
+    background-color: $backgroundColor;
+    color: rgb(0, 0, 0);
+  }
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 500px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+}
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
 .container {
   padding: 0;
-  /*background-color: $backgroundColor;*/
   margin: 0;
   border: none;
   width: 100%;
-  border: 1px solid black;
   box-sizing: border-box;
 }
 
@@ -25,7 +85,6 @@
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  background-color: rgb(53, 51, 59);
     .previewImages {
       width: 100px;
       height: inherit;
@@ -77,18 +136,18 @@ video::-webkit-media-controls-panel {
 }
 
 .newTweet {
-  padding: 10px;
+  padding: 10px 15px;
   width: 100%;
-  height: 30px;
+  height: 40px;
   border: none;
+  border-radius: 25px;
+  outline: none;
   transition: 1s;
   box-sizing: border-box;
-  background-color: rgb(203, 236, 206);
   overflow: hidden;
   resize: none;
     &:focus {
-      height: 60px;
-      background-color: rgb(248, 248, 248);
+      height: 80px;
         &::placeholder {
           color: transparent;
         }
@@ -96,6 +155,6 @@ video::-webkit-media-controls-panel {
 }
 
 ::placeholder {
-  color: rgb(112, 112, 112);
   text-align: center;
+  line-height: 20px;
 }

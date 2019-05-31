@@ -1,44 +1,55 @@
 <template>
-  <div class="container">
-    <div>
-      <div>
-        <textarea
-          class="newTweet"
-          v-model="message"
-          placeholder="Write your fabulous tweet!"
-          maxlength="140">
-        </textarea>
-      </div>
-      <br>
-      <div v-if="vision">
-        <div class="imagePreview">
-          <div
-            v-for="(file, key) in arrayOfFiles"
-            :key="key">
-            <img v-if="file.type.startsWith('image')" class="previewImages" :ref="'image'+parseInt( key )"/>
-            <video v-else class="previewVideos" :ref="'video'+parseInt( key )" controls></video>
-            <img src="../images/remove.svg" class="close" @click="removeImage(key)"/>
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container" v-bind:class="classObject">
+          <div class="container">
+            <div>
+              <div>
+                <textarea
+                  class="newTweet"
+                  v-model="message"
+                  placeholder="Write your fabulous tweet!"
+                  maxlength="140">
+                </textarea>
+              </div>
+              <br>
+              <div v-if="vision">
+                <div class="imagePreview">
+                  <div
+                    v-for="(file, key) in arrayOfFiles"
+                    :key="key">
+                    <img v-if="file.type.startsWith('image')" class="previewImages" :ref="'image'+parseInt( key )"/>
+                    <video v-else class="previewVideos" :ref="'video'+parseInt( key )" controls></video>
+                    <img src="../images/remove.svg" class="close" @click="removeImage(key)"/>
+                  </div>
+                </div>
+              </div>
+              <label for="fileses">
+                <img class="uploadImageButton" src="../images/photo.svg"/>
+              </label>
+                <input
+                  type="file"
+                  id="fileses"
+                  ref="previewFiles"
+                  accept="image/*, video/*"
+                  multiple
+                  v-on:change="handleFileUpload()"/>
+              <br>
+              <p> {{ $t('images') }}: {{ this.base64OfImages.length }} </p>
+              <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
+              <br>
+              <div class="modal-buttons">
+                <button class="modal-default-button" type="button" @click="sendPost">{{ $t('sendPost') }}</button>
+                <button class="modal-default-button" @click="$emit('close')">OK</button>
+              </div>
+            </div>
+            <br>
           </div>
         </div>
       </div>
-      <label for="fileses">
-        <img class="uploadImageButton" src="../images/photo.svg"/>
-      </label>
-        <input
-          type="file"
-          id="fileses"
-          ref="previewFiles"
-          accept="image/*, video/*"
-          multiple
-          v-on:change="handleFileUpload()"/>
-      <br>
-      <p> {{ $t('images') }}: {{ this.base64OfImages.length }} </p>
-      <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
-      <br>
-      <button type="button" @click="sendPost">{{ $t('sendPost') }}</button>
     </div>
-    <br>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -60,6 +71,9 @@ export default {
   computed: {
     currentD: function () {
       return moment().format('LLL')
+    },
+    classObject: function () {
+      return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
@@ -132,6 +146,21 @@ export default {
           console.log(error)
         })
       this.$emit('add-new')
+      this.$emit('close')
+    },
+    sendComment: function () {
+      HTTP.post('/comments', {
+        'body': this.message,
+        'photos': this.base64OfImages,
+        'videos': this.base64OfVideos,
+        'likes': 0,
+        'date': this.currentD
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.$emit('add-new')
+      this.$emit('close')
     },
     deleteItemsAll: function () {
       this.arrayOfFiles.splice(0)

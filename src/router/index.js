@@ -40,7 +40,7 @@ const router = new Router({
     },
     {
       path: '/profile/post:id',
-      component: () => import('@/components/Modal')
+      component: () => import('@/components/ViewPost')
     }
   ]
 })
