@@ -1,26 +1,49 @@
 @import 'main';
+$addbutton: 120px;
 
-.tweet {
+.viewPost {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 1fr 7fr;
-  grid-template-rows: auto;
-  font-family: "Segoe UI",Arial,sans-serif;
-  font-size: 14px;
-  border-radius: 15px;
-  margin-bottom: 10px;
-  padding-top: 10px;
-    &:hover {
-      box-shadow: 0 0 10px rgb(40, 63, 68);
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-row-gap: 20px;
+  font-size: 15px;
+    .viewPost-tweet {
+      grid-column: 2/3;
+      grid-row: 1/2;
+    }
+    .viewPost-modal {
+      grid-column: 3/4;
+    }
+    .viewPost-comments {
+      grid-column: 2/3;
+      grid-row: 3/4;
     }
 }
 
 .dark {
-  background-color: $backgroundColor2-2;
+  .viewPost-tweet {
+    background-color: $backgroundColor2-2;
+  }
 }
 
 .light {
-  background-color: $backgroundColor-2;
+  .viewPost-tweet {
+    background-color: $backgroundColor-2;
+  }
+}
+
+.viewPost-tweet {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 7fr;
+  grid-template-rows: auto;
+  border-radius: 15px;
+  padding-top: 10px;
+  margin-top: 10px;
+    &:hover {
+      box-shadow: 0 0 10px rgb(40, 63, 68);
+    }
 }
 
 header, main, footer {
@@ -43,9 +66,6 @@ header, main, footer {
   flex-flow: row wrap;
   align-self: flex-start;
     .postPhotoAndVideo_Video, .postPhotoAndVideo_Image {
-      display:table-cell;
-      vertical-align:middle;
-      text-align:center;
       padding-right: 5px;
     }
 }
@@ -83,8 +103,8 @@ footer {
   border: none;
   box-sizing: border-box;
   font-size: 12px;
-  border-radius: 25px;
   outline: none;
+  border-radius: 25px;
   margin: 0 30px;
   color: inherit;
   cursor: pointer;
@@ -143,3 +163,37 @@ footer {
   cursor: pointer;
 }
 
+.add-tweet-button {
+  font-size: 20px;
+  position: fixed;
+  bottom: 15vh;
+  right: 20vh;
+  width: $addbutton;
+  height: $addbutton;
+  background-color: rgb(45, 123, 187);
+  border-radius: $addbutton/2;
+  box-shadow: 0px 0px 8px 6px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+    p {
+      line-height: $addbutton;
+      padding: 0;
+      margin: 0;
+    }
+}
+
+.add-tweet-button::before {
+  content: ' ';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: $addbutton/2;
+  box-shadow: 0px 0px 8px 6px rgba(163, 161, 161, 0.75);
+  transition: 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.add-tweet-button:hover::before {
+  opacity: 1;
+}

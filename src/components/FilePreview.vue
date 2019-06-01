@@ -40,8 +40,17 @@
               <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
               <br>
               <div class="modal-buttons">
-                <button class="modal-default-button" type="button" @click="sendPost">{{ $t('sendPost') }}</button>
-                <button class="modal-default-button" @click="$emit('close')">OK</button>
+                <button
+                  class="modal-default-button"
+                  @click="choicePostOrCommentMethod"
+                  :disabled="isDisabledButton">
+                    {{ $t('sendPost') }}
+                </button>
+                <button
+                  class="modal-default-button"
+                  @click="$emit('close')">
+                    OK
+                </button>
               </div>
             </div>
             <br>
@@ -58,6 +67,11 @@ import moment from 'moment'
 
 export default {
   name: 'FilePreview',
+  props: {
+    TRX: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       message: '',
@@ -74,6 +88,12 @@ export default {
     },
     classObject: function () {
       return this.$store.getters.isDarkModed ? 'dark' : 'light'
+    },
+    choicePostOrCommentMethod: function () {
+      return this.TRX ? this.sendComment : this.sendPost
+    },
+    isDisabledButton: function () {
+      return this.message.length === 0 && this.arrayOfFiles.length === 0
     }
   },
   methods: {
@@ -154,7 +174,8 @@ export default {
         'photos': this.base64OfImages,
         'videos': this.base64OfVideos,
         'likes': 0,
-        'date': this.currentD
+        'date': this.currentD,
+        'postId': +this.$route.params.id
       }).then(response => {})
         .catch(function (error) {
           console.log(error)

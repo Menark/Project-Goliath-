@@ -1,7 +1,7 @@
 <template>
   <div class="tweet1" v-bind:class="classObject">
       <header>
-        {{ comment.id }}
+        {{ comment.id }} -- {{ comment.date }}
         <img
           src="../images/remove.svg"
           class="close1"
@@ -9,7 +9,19 @@
         />
       </header>
       <main class="main1">
-        <div class="postMessage1">
+        <div class="postPhotoAndVideo1">
+          <div class="postPhotoAndVideo_Image1"
+            v-for="(photo, y) in comment.photos"
+            :key="y+'photo'">
+            <img v-if="comment.photos" class="postPhoto1" :src="photo"/>
+          </div>
+          <div class="postPhotoAndVideo_Video1"
+            v-for="(video, i) in comment.videos"
+            :key="i+'video'">
+            <video v-if="comment.videos" class="postPhoto1" :src="video" controls></video>
+          </div>
+        </div>
+        <div v-if="comment.body"  class="postMessage1">
           {{ comment.body }}
         </div>
       </main>
