@@ -79,7 +79,8 @@ export default {
       counterLikes: 0,
       counterSpeech: 0,
       counterRetweet: 0,
-      showModal: false
+      showModal: false,
+      numberCommentsOfPost: []
     }
   },
   components: {
@@ -87,6 +88,15 @@ export default {
     IconRetweet,
     IconSpeech,
     IconLike
+  },
+  mounted () {
+    HTTP.get('/comments')
+      .then((response) => {
+        let commNumb = this.post.id
+        this.counterSpeech = response.data.filter(function (el) {
+          return el.postId === commNumb
+        }).length
+      })
   },
   computed: {
     debouncedSave: function () {

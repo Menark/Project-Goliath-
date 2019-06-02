@@ -33,7 +33,7 @@
             icon-name="speech">
             <icon-speech class="logoSpeech" />
           </icon-base>
-          <p>{{ counterLikes }}</p>
+          <p>{{ counterSpeech }}</p>
         </button>
         <button
           class="buttonLikes light-green">
@@ -96,6 +96,7 @@ import IconSpeech from './icons/IconSpeech'
 import IconLike from './icons/IconLike'
 import InfiniteLoading from 'vue-infinite-loading'
 import FilePreview from './FilePreview'
+import debounce from '../debounce.js'
 
 export default {
   name: 'ViewPost',
@@ -119,31 +120,63 @@ export default {
       post: [],
       com: [],
       comNew: [],
-      counterLikes: 0,
+      counterSpeech: 0,
       counterRetweet: 0,
       show: true,
       commentMessage: '',
-      shoWModal: false
+      shoWModal: false,
+      hello: []
     }
   },
-  mounted () {
+  created () {
     HTTP.get('/posts/' + this.$route.params.id)
       .then((response) => {
         this.post = response.data
       })
+    this.getCommmNumbers()
   },
   computed: {
+    debouncedSave: function () {
+      let DELAY = 1000
+      return debounce(this.increaseLikesPost, DELAY)
+    },
     classObject: function () {
       return this.$store.getters.isDarkModed ? 'dark' : 'light'
     }
   },
   methods: {
+    getCommmNumbers: function () {
+      HTTP.get('/comments')
+        .then((response) => {
+          let commNumber = +this.$route.params.id
+          this.counterSpeech = response.data.filter(function (el) {
+            return el.postId === commNumber
+          }).length
+        })
+    },
+    increaseLikesPost: function () {
+      let lk = this.post.likes + 1
+      HTTP.patch(('/posts/' + this.post.id), {
+        'likes': lk
+      }).then(response => {})
+        .catch(function (error) {
+          console.log(error)
+        })
+      this.reLikePost(this.post.id)
+    },
+    reLikePost: function (id) {
+      HTTP.get('/posts/' + this.$route.params.id)
+        .then((response) => {
+          this.post.likes = response.data.likes
+        })
+    },
     renewComment: function () {
       HTTP.get('/comments')
         .then((response) => {
           this.com.unshift(response.data[response.data.length - 1])
           console.log(response.data[response.data.length - 1])
         })
+      this.getCommmNumbers()
     },
     commentsFilter: function (com, numb) {
       return com.filter(function (el) {

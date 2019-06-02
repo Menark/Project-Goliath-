@@ -48,7 +48,6 @@ import TwitterPost from './TwitterPost'
 import FilePreview from './FilePreview'
 import moment from 'moment'
 import InfiniteLoading from 'vue-infinite-loading'
-import Modal from './Modal'
 
 export default {
   name: 'Profile',
@@ -63,8 +62,7 @@ export default {
   components: {
     'twitter-post': TwitterPost,
     'file-preview': FilePreview,
-    'infinite-loading': InfiniteLoading,
-    Modal
+    'infinite-loading': InfiniteLoading
   },
   created () {
     this.currentTime = moment().format('LTS')
