@@ -137,3 +137,20 @@ $backgroundColor2-2: rgb(62, 56, 56);
   left: 10%;
   width: 80%;
 }
+
+%closesvg {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+    .close {
+      &:hover .close-img{
+        fill: rgb(0, 0, 0);
+      }
+    .close-img{
+      fill: rgb(128, 128, 128);
+    }
+    }
+}

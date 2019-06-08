@@ -2,7 +2,14 @@
   <div class="tweet" v-bind:class="classObject">
     <header>
       {{ post.id }} -- {{ post.date }}
-      <img src="../images/remove.svg" class="close" @click="deleteTheVeryPost(post.id)"/>
+      <div @click="deleteTheVeryPost()" class="close-div">
+        <icon-base
+          class="close"
+          viewBox="0 0 512 512"
+          icon-name="close">
+          <icon-close class="close-img"/>
+        </icon-base>
+      </div>
     </header>
     <main class="main">
       <div class="postPhotoAndVideo">
@@ -65,6 +72,7 @@
 import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconSpeech from './icons/IconSpeech'
+import IconClose from './icons/IconClose'
 import IconLike from './icons/IconLike'
 import { HTTP } from '../utils/api'
 import debounce from '../debounce.js'
@@ -87,7 +95,8 @@ export default {
     IconBase,
     IconRetweet,
     IconSpeech,
-    IconLike
+    IconLike,
+    IconClose
   },
   mounted () {
     HTTP.get('/comments')

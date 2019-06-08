@@ -123,14 +123,7 @@ footer {
   background: rgba(226, 35, 35, 0.1);
 }
 
-.close1 {
-  position: absolute;
-  top: 0%;
-  background-color: rgb(114, 31, 31);
-  border-radius: 25px;
-  right: 0%;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
+.close-div {
+  @extend %closesvg;
 }
 

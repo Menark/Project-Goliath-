@@ -3,58 +3,57 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container" v-bind:class="classObject">
+          <header>
+            <div @click="$emit('close')" class="close-div">
+              <icon-base
+                class="close"
+                viewBox="0 0 512 512"
+                icon-name="close">
+                <icon-close class="close-img"/>
+              </icon-base>
+            </div>
+          </header>
           <div class="container">
             <div>
-              <div>
                 <textarea
                   class="newTweet"
                   v-model="message"
                   placeholder="Write your fabulous tweet!"
                   maxlength="140">
                 </textarea>
-              </div>
-              <br>
-              <div v-if="vision">
+            </div>
+            <div v-if="vision">
                 <div class="imagePreview">
                   <div
                     v-for="(file, key) in arrayOfFiles"
                     :key="key">
                     <img v-if="file.type.startsWith('image')" class="previewImages" :ref="'image'+parseInt( key )"/>
                     <video v-else class="previewVideos" :ref="'video'+parseInt( key )" controls></video>
-                    <img src="../images/remove.svg" class="close" @click="removeImage(key)"/>
+                    <img src="../images/remove.svg" class="closeh" @click="removeImage(key)"/>
                   </div>
                 </div>
-              </div>
-              <label for="fileses">
-                <img class="uploadImageButton" src="../images/photo.svg"/>
-              </label>
-                <input
+            </div>
+            <label for="fileses">
+              <img class="uploadImageButton" src="../images/photo.svg"/>
+            </label>
+              <input
                   type="file"
                   id="fileses"
                   ref="previewFiles"
                   accept="image/*, video/*"
                   multiple
                   v-on:change="handleFileUpload()"/>
-              <br>
-              <p> {{ $t('images') }}: {{ this.base64OfImages.length }} </p>
-              <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
-              <br>
-              <div class="modal-buttons">
-                <button
-                  class="modal-default-button"
-                  @click="choicePostOrCommentMethod"
-                  :disabled="isDisabledButton">
-                    {{ $t('sendPost') }}
-                </button>
-                <button
-                  class="modal-default-button"
-                  @click="$emit('close')">
-                    OK
-                </button>
-              </div>
-            </div>
-            <br>
+            <p> {{ $t('images') }}: {{ this.base64OfImages.length }} </p>
+            <p> {{ $t('video') }}: {{ this.base64OfVideos.length }} </p>
           </div>
+          <footer>
+            <button
+              class="modal-default-button"
+              @click="choicePostOrCommentMethod"
+              :disabled="isDisabledButton">
+                {{ $t('sendPost') }}
+            </button>
+          </footer>
         </div>
       </div>
     </div>
@@ -64,6 +63,8 @@
 <script>
 import { HTTP } from '../utils/api'
 import moment from 'moment'
+import IconClose from './icons/IconClose'
+import IconBase from './IconBase'
 
 export default {
   name: 'FilePreview',
@@ -81,6 +82,10 @@ export default {
       maxImage: 2,
       vision: false
     }
+  },
+  components: {
+    IconBase,
+    IconClose
   },
   computed: {
     currentD: function () {

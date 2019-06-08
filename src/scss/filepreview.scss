@@ -21,6 +21,12 @@
       background-color: $backgroundColor2;
       color: rgb(255, 255, 255);
     }
+    .modal-default-button {
+      background-color: inherit;
+      border: 3px solid $backgroundColor2;
+      box-shadow: 0 0 4px 2px black;
+      color: rgb(255, 255, 255);
+    }
 }
 
 .light {
@@ -32,6 +38,12 @@
     background-color: $backgroundColor;
     color: rgb(0, 0, 0);
   }
+  .modal-default-button {
+    background-color: inherit;
+    border: 3px solid $backgroundColor;
+    box-shadow: 0 0 4px 2px rgb(137, 162, 214);
+    color: rgb(0, 0, 0);
+  }
 }
 
 .modal-wrapper {
@@ -40,12 +52,21 @@
 }
 
 .modal-container {
+  display: grid;
+  grid-template-rows: auto;
+  row-gap: 1vh;
+  padding: 1vh;
   width: 500px;
+  height: auto;
   margin: 0px auto;
-  padding: 20px 30px;
-  border-radius: 2px;
+  border-radius: 15px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
   transition: all .3s ease;
+}
+
+header {
+  position: relative;
+  height: 25px;
 }
 
 .modal-enter {
@@ -63,17 +84,15 @@
 }
 
 .container {
-  padding: 0;
+  display: grid;
+  grid-template-columns: 100%;
+  row-gap: 2vh;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh 2vh;
   margin: 0;
-  border: none;
   width: 100%;
   box-sizing: border-box;
-}
-
-.remove-file{
-  color: red;
-  cursor: pointer;
-  float: right;
 }
 
 .imagePreview {
@@ -81,12 +100,13 @@
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-content: center;
+  border-radius: 25px;
   margin: 0;
   width: 100%;
   height: auto;
   box-sizing: border-box;
     .previewImages {
-      width: 100px;
+      width: 120px;
       height: inherit;
       object-fit: cover;
       border-radius: 10px;
@@ -101,14 +121,12 @@
       cursor: pointer;
       outline: none;
     }
-    .close {
+    .closeh {
       position: absolute;
       top: 5%;
-      background-color: rgb(114, 31, 31);
-      border-radius: 15px;
       right: 5%;
-      width: 15px;
-      height: 15px;
+      width: 10px;
+      height: 10px;
       cursor: pointer;
     }
     div {
@@ -157,4 +175,22 @@ video::-webkit-media-controls-panel {
 ::placeholder {
   text-align: center;
   line-height: 20px;
+}
+
+.modal-default-button {
+  width: 105px;
+  height: 45px;
+  border-radius: 55px;
+  cursor: pointer;
+  font-size: 20px;
+  outline: none;
+}
+
+.close-div {
+  @extend %closesvg
+}
+
+p {
+  padding: 0;
+  margin: 0;
 }

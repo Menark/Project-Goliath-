@@ -16,11 +16,17 @@ body {
 .dark {
   color: rgb(255, 255, 255);
   background-color: $backgroundColor2;
+    .menu-svg_dif {
+      fill: rgb(255, 255, 255);
+    }
 }
 
 .light {
   color: rgb(0, 0, 0);
   background-color: $backgroundColor;
+    .menu-svg_dif {
+      fill: rgb(0, 0, 0);
+    }
 }
 
 #app {
@@ -67,20 +73,11 @@ main {
   overflow: auto;
 }
 
-.linkToSocial {
+.menu-svg {
   width: 20px;
   height: 20px;
+  padding-right: 5px;
 }
-
-// .gridItem {
-//   background-color: rgb(113, 184, 130);
-//   display: flex;
-//   flex-flow: row wrap;
-//   justify-content: space-between;
-//   align-items: center;
-//   font-size: $header-font-size;
-//   // line-height: 0%;
-// }
 
 .roulink {
   text-decoration: none;
@@ -152,11 +149,13 @@ li a::before {
   position: absolute;
   top: 0;
   width: 3px;
+  background-color: aqua;
   height: 100%;
 }
 
-a img {
-  vertical-align: middle;
+.router {
+  display: flex;
+  align-items: center;
 }
 
 li:hover {
@@ -164,6 +163,9 @@ li:hover {
     a {
       color: rgb(5, 6, 110);
       text-shadow: 2px 3px 3px;
+    }
+    .menu-svg_dif {
+      fill: rgb(0, 0, 0);
     }
 }
 

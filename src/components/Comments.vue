@@ -2,11 +2,14 @@
   <div class="tweet1" v-bind:class="classObject">
       <header>
         {{ comment.id }} -- {{ comment.date }}
-        <img
-          src="../images/remove.svg"
-          class="close1"
-          @click="deleteTheVeryComment(comment.id)"
-        />
+        <div @click="$emit('close')" class="close-div">
+          <icon-base
+            class="close"
+            viewBox="0 0 512 512"
+            icon-name="close">
+            <icon-close class="close-img"/>
+          </icon-base>
+        </div>
       </header>
       <main class="main1">
         <div class="postPhotoAndVideo1">
@@ -58,6 +61,7 @@
 import IconBase from './IconBase'
 import IconRetweet from './icons/IconRetweet'
 import IconLike from './icons/IconLike'
+import IconClose from './icons/IconClose'
 import { HTTP } from '../utils/api'
 import debounce from '../debounce.js'
 
@@ -75,7 +79,8 @@ export default {
   components: {
     IconBase,
     IconRetweet,
-    IconLike
+    IconLike,
+    IconClose
   },
   computed: {
     debounceComment: function () {

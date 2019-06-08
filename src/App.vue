@@ -9,12 +9,12 @@
           <img
             v-if="isNight"
             src="../src/images/moonColor.svg"
-            class="linkToSocial"
+            class="menu-svg"
             @click="changeModeL">
           <img
             v-else
             src="../src/images/sunnyColor.svg"
-            class="linkToSocial"
+            class="menu-svg"
             @click="changeModeD">
         </transition>
       </div>
@@ -41,57 +41,61 @@
           </div>
         </div>
         <div class="buttMenu">
-          <!--<button class="thirdButt">
-            MENU
-          </button>-->
           <img src="../src/images/list.svg" class="svg">
           <div class="hideMenu" v-bind:class="classObject">
-            <!--<div>
-              <router-link to="/choose" class="roulink">CHOOSE</router-link>
-            </div>
-            <div>
-              <router-link to="/profile" class="roulink">Профиль</router-link>
-            </div>
-            <div class="gridItem">
-              <a href="https://www.codewars.com/users/Menark" target="_blank">
-                <img src="../src/images/CodewarsMark.png" alt="CODEWARS ACCOUNT" class="linkToSocial">
-              </a>
-              <p>CodeWars account</p>
-            </div>
-            <div class="gridItem">
-              <a href="https://github.com/Menark" target="_blank">
-                <img src="../src/images/GitHubMark.png" alt="GITHUB ACCOUNT" class="linkToSocial">
-              </a>
-              <p>Github account</p>
-            </div> -->
             <ul>
               <li>
-                <router-link to="/choose">
-                <img src="../src/images/settings.svg" class="linkToSocial">
+                <router-link to="/choose" class="router">
+                <icon-base
+                  class="menu-svg"
+                  viewBox="0 0 481.763 481.763"
+                  icon-name="settings">
+                    <icon-settings class="menu-svg_dif"/>
+                </icon-base>
                 {{ $t('settingsPage') }}
                 </router-link>
               </li>
               <li>
-                <router-link to="/startpage">
-                <img src="../src/images/startpage.svg" class="linkToSocial">
+                <router-link to="/startpage" class="router">
+                  <icon-base
+                    class="menu-svg"
+                    viewBox="0 0 60 60"
+                    icon-name="home">
+                      <icon-home class="menu-svg_dif"/>
+                  </icon-base>
                 {{ $t('startPage') }}
                 </router-link>
               </li>
               <li>
-                <router-link to="/profile">
-                  <img src="../src/images/userProfile.svg" class="linkToSocial">
+                <router-link to="/profile" class="router">
+                  <icon-base
+                    class="menu-svg"
+                    viewBox="0 0 299.997 299.997"
+                    icon-name="profile">
+                      <icon-profile class="menu-svg_dif"/>
+                  </icon-base>
                   {{ $t('profile') }}
                 </router-link>
               </li>
-              <li class="gridItem">
-                <a href="https://www.codewars.com/users/Menark" target="_blank">
-                  <img src="../src/images/CodewarsMark.png" class="linkToSocial">
+              <li>
+                <a href="https://www.codewars.com/users/Menark" target="_blank" class="router">
+                  <icon-base
+                    class="menu-svg"
+                    viewBox="0 0 24 24"
+                    icon-name="home">
+                      <icon-codewars class="menu-svg_dif"/>
+                  </icon-base>
                   {{ $t('codeWars') }}
                 </a>
               </li>
-              <li class="gridItem">
-                <a href="https://github.com/Menark" target="_blank">
-                  <img src="../src/images/GitHubMark.png" class="linkToSocial">
+              <li>
+                <a href="https://github.com/Menark" target="_blank" class="router">
+                  <icon-base
+                    class="menu-svg"
+                    viewBox="0 0 438.549 438.549"
+                    icon-name="home">
+                      <icon-github class="menu-svg_dif"/>
+                  </icon-base>
                   {{ $t('gitHub') }}
                 </a>
               </li>
@@ -109,6 +113,12 @@
 <script>
 import { AUTH_LOGOUT } from './services/auth.js'
 import { DARK_MODE, LIGHT_MODE } from './services/changeMode.js'
+import IconBase from './components/IconBase'
+import IconHome from './components/icons/IconHome'
+import IconProfile from './components/icons/IconProfile'
+import IconSettings from './components/icons/IconSettings'
+import IconGithub from './components/icons/IconGithub'
+import IconCodewars from './components/icons/IconCodewars'
 
 export default {
   name: 'App',
@@ -116,6 +126,14 @@ export default {
     return {
       isNight: this.$store.getters.isDarkModed
     }
+  },
+  components: {
+    IconBase,
+    IconHome,
+    IconProfile,
+    IconSettings,
+    IconGithub,
+    IconCodewars
   },
   computed: {
     divLogOut: function () {
