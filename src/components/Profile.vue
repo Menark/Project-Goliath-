@@ -77,7 +77,7 @@ export default {
         })
     },
     deletePost: function (id) {
-      for (var i = 0; i < this.info.length; i++) {
+      for (let i = 0; i < this.info.length; i++) {
         if (this.info[i].id === id) {
           this.info.splice(i, 1)
         }
@@ -86,7 +86,7 @@ export default {
     reLikePost: function (id) {
       HTTP.get('/posts/' + id)
         .then((response) => {
-          for (var i = 0; i < this.info.length; i++) {
+          for (let i = 0; i < this.info.length; i++) {
             if (this.info[i].id === id) {
               this.info[i].likes = response.data.likes
             }
@@ -99,7 +99,7 @@ export default {
     infiniteHandler: function ($state) {
       HTTP.get('/posts'
       ).then(response => {
-        for (var i = (response.data.length - this.info.length - 1); i > (response.data.length - 6 - this.info.length); i--) {
+        for (let i = (response.data.length - this.info.length - 1); i > (response.data.length - 6 - this.info.length); i--) {
           let y = response.data[i]
           if (y) {
             this.postsNew.push(y)

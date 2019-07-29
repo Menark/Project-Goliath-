@@ -184,7 +184,7 @@ export default {
       })
     },
     deleteComment: function (id) {
-      for (var i = 0; i < this.com.length; i++) {
+      for (let i = 0; i < this.com.length; i++) {
         if (this.com[i].id === id) {
           this.com.splice(i, 1)
         }
@@ -193,7 +193,7 @@ export default {
     reLikeComment: function (id) {
       HTTP.get('/comments/' + id)
         .then((response) => {
-          for (var i = 0; i < this.com.length; i++) {
+          for (let i = 0; i < this.com.length; i++) {
             if (this.com[i].id === id) {
               this.com[i].likes = response.data.likes
             }
@@ -215,7 +215,7 @@ export default {
     infiniteHandler: function ($state) {
       HTTP.get('/comments'
       ).then(response => {
-        for (var i = (response.data.length - this.com.length - 1); i > (response.data.length - 7 - this.com.length); i--) {
+        for (let i = (response.data.length - this.com.length - 1); i > (response.data.length - 7 - this.com.length); i--) {
           let y = response.data[i]
           if (y) {
             this.comNew.push(y)

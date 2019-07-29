@@ -104,7 +104,7 @@ export default {
   methods: {
     handleFileUpload: function () {
       let uploadedFiles = this.$refs.previewFiles.files
-      for (var i = 0; i < uploadedFiles.length; i++) {
+      for (let i = 0; i < uploadedFiles.length; i++) {
         if (uploadedFiles[i].size > 1024 * 1024 * 5) {
           console.log('File is too big!')
         } else {
