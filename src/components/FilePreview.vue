@@ -80,7 +80,8 @@ export default {
       base64OfImages: [],
       base64OfVideos: [],
       maxImage: 2,
-      vision: false
+      vision: false,
+      maxUploadedSize: 1024 * 1024 * 5
     }
   },
   components: {
@@ -104,25 +105,23 @@ export default {
   methods: {
     handleFileUpload: function () {
       let uploadedFiles = this.$refs.previewFiles.files
-      for (let i = 0; i < uploadedFiles.length; i++) {
-        if (uploadedFiles[i].size > 1024 * 1024 * 5) {
-          console.log('File is too big!')
-        } else {
-          this.arrayOfFiles.push(uploadedFiles[i])
+      uploadedFiles.forEach((item) => {
+        item.length > this.maxUploadedSize
+        ? console.log('Some file is too big!')
+        : this.arrayOfFiles.push(item)
           this.vision = true
-        }
-      }
+      })
       this.getImagePreviews()
     },
     getImagePreviews: function () {
-      for (let i = 0; i < this.arrayOfFiles.length; i++) {
-        if (this.arrayOfFiles.length > this.maxImage) {
-          this.arrayOfFiles.splice(this.maxImage + 1)
-          document.getElementById('fileses').disabled = true
-        } else {
-          document.getElementById('fileses').disabled = false
-        }
-        if (this.arrayOfFiles[i].type.startsWith('image')) {
+      if (this.arrayOfFiles.length > this.maxImage) {
+        this.arrayOfFiles.splice(this.maxImage + 1)
+        document.getElementById('fileses').disabled = true
+      } else {
+        document.getElementById('fileses').disabled = false
+      }
+      this.arrayOfFiles.forEach((item) => {
+        if (item.type.startsWith('image')) {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
             this.$refs['image' + parseInt(i)][0].src = reader.result
@@ -131,7 +130,7 @@ export default {
               console.log(reader.result)
             }
           }.bind(this), false)
-          reader.readAsDataURL(this.arrayOfFiles[i])
+          reader.readAsDataURL(item)
         } else {
           let reader = new FileReader()
           reader.addEventListener('load', function () {
@@ -141,9 +140,9 @@ export default {
               console.log(reader.result)
             }
           }.bind(this), false)
-          reader.readAsDataURL(this.arrayOfFiles[i])
+          reader.readAsDataURL(item)
         }
-      }
+      })
     },
     removeImage: function (key) {
       if (this.arrayOfFiles[key].type.startsWith('image')) {
@@ -167,9 +166,7 @@ export default {
         'likes': 0,
         'date': this.currentD
       }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.$emit('add-new')
       this.$emit('close')
     },
@@ -182,9 +179,7 @@ export default {
         'date': this.currentD,
         'postId': +this.$route.params.id
       }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.$emit('add-new')
       this.$emit('close')
     },

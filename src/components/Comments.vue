@@ -95,9 +95,7 @@ export default {
     deleteTheVeryComment: function () {
       HTTP.delete('/comments/' + this.comment.id)
         .then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.$emit('delete-comment', this.comment.id)
     },
     increaseLikesComment: function () {
@@ -105,9 +103,7 @@ export default {
       HTTP.patch(('/comments/' + this.comment.id), {
         'likes': lk
       }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.$emit('re-like-comment', this.comment.id)
     }
   }

@@ -149,9 +149,7 @@ export default {
       HTTP.get('/comments')
         .then((response) => {
           let commNumber = +this.$route.params.id
-          this.counterSpeech = response.data.filter(function (el) {
-            return el.postId === commNumber
-          }).length
+          this.counterSpeech = response.data.filter(el => el.postId === commNumber).length
         })
     },
     increaseLikesPost: function () {
@@ -193,11 +191,11 @@ export default {
     reLikeComment: function (id) {
       HTTP.get('/comments/' + id)
         .then((response) => {
-          for (let i = 0; i < this.com.length; i++) {
-            if (this.com[i].id === id) {
-              this.com[i].likes = response.data.likes
-            }
-          }
+          this.com.forEach((item) => {
+            item.id === id
+            ? item.likes = response.data.likes
+            : console.log('Error')
+          })
         })
     },
     sendComment: function () {
@@ -207,9 +205,7 @@ export default {
         'likes': 0,
         'date': this.currentD
       }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.commentMessage = ''
     },
     infiniteHandler: function ($state) {
@@ -217,17 +213,13 @@ export default {
       ).then(response => {
         for (let i = (response.data.length - this.com.length - 1); i > (response.data.length - 7 - this.com.length); i--) {
           let y = response.data[i]
-          if (y) {
-            this.comNew.push(y)
-          }
+          y ? this.comNew.push(y) : console.log('Error')
         }
-        if (this.comNew.length > 0) {
-          this.com = this.com.concat(this.comNew)
-          this.comNew = []
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
+        this.comNew.length > 0
+        ? ( this.com = [...this.com, ...this.comNew],
+          this.comNew = [],
+          $state.loaded() )
+        : $state.complete()
       })
     }
   }

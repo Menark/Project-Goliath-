@@ -102,9 +102,7 @@ export default {
     HTTP.get('/comments')
       .then((response) => {
         let commNumb = this.post.id
-        this.counterSpeech = response.data.filter(function (el) {
-          return el.postId === commNumb
-        }).length
+        this.counterSpeech = response.data.filter(el => el.postId === commNumb).length
       })
   },
   computed: {
@@ -120,9 +118,8 @@ export default {
     deleteTheVeryPost: function () {
       HTTP.delete('/posts/' + this.post.id)
         .then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
+      this.commentMessage = ''
       this.$emit('delete-post', this.post.id)
     },
     increaseLikesPost: function () {
@@ -130,9 +127,7 @@ export default {
       HTTP.patch(('/posts/' + this.post.id), {
         'likes': lk
       }).then(response => {})
-        .catch(function (error) {
-          console.log(error)
-        })
+        .catch(error => console.log(error))
       this.$emit('re-like-post', this.post.id)
     }
   }

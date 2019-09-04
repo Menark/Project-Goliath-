@@ -86,11 +86,9 @@ export default {
     reLikePost: function (id) {
       HTTP.get('/posts/' + id)
         .then((response) => {
-          for (let i = 0; i < this.info.length; i++) {
-            if (this.info[i].id === id) {
-              this.info[i].likes = response.data.likes
-            }
-          }
+          this.info.forEach((item) =>{
+            item.id === id ? item.likes = response.data.likes : console.log('Nothing')
+          })
         })
     },
     updateCurrentTime: function () {
@@ -99,19 +97,17 @@ export default {
     infiniteHandler: function ($state) {
       HTTP.get('/posts'
       ).then(response => {
-        for (let i = (response.data.length - this.info.length - 1); i > (response.data.length - 6 - this.info.length); i--) {
-          let y = response.data[i]
-          if (y) {
-            this.postsNew.push(y)
-          }
+        for (
+          let i = (response.data.length - this.info.length - 1);
+          i > (response.data.length - 6 - this.info.length); i--) {
+            let y = response.data[i]
+            y ? this.postsNew.push(y) : console.log('Error')
         }
-        if (this.postsNew.length > 0) {
-          this.info = this.info.concat(this.postsNew)
-          this.postsNew = []
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
+        this.postsNew.length > 0
+        ? ( this.info = [...this.info, ...this.postsNew],
+          this.postsNew = [],
+          $state.loaded() )
+        : $state.complete()
       })
     }
   }
